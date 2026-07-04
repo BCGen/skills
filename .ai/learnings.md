@@ -8,9 +8,10 @@ See the task-retrospective skill.
 
 - 2026-07-05 · task: add-ai-harness-skills implementation · evidence: over-budget acceptance seeded 144/150 lines; the agent legitimately wrote a 3-line rule (147/150) and the refusal path went unexercised until the seed was recalibrated to exactly 150
 
-## [candidate] Publish via the develop branch; main stays merge-only
+## [promoted 2026-07-05 → .claude/rules/publishing.md] Publish via the develop branch; main stays merge-only
 
 - 2026-07-05 · task: add-ai-harness-skills implementation · evidence: direct push to main was denied and the user redirected publication to a develop branch
+- 2026-07-05 · task: add-ai-harness-skills publication · evidence: `git push origin develop` from main pushed a stale develop; had to `git branch -f develop main` and re-push — the branch policy has no documented procedure
 
 ## [candidate] Templates with placeholders must state how to resolve them
 
