@@ -1,0 +1,24 @@
+schema: spec-driven
+
+context: |
+  This repo is a collection of agent skills (skills/<name>/SKILL.md layout)
+  distributed via the Vercel skills CLI (`npx skills add <owner>/<repo>`).
+  Deliverables are markdown skill instructions, not application code.
+
+  Conventions (decided, non-negotiable):
+  - All skill bodies and frontmatter are written in English.
+  - Cross-platform first: skills must work on any agent that supports the
+    Agent Skills spec; platform-specific behavior (Claude Code, Cursor) is
+    isolated in clearly-marked sections. Phase 1 agent matrix: Claude Code
+    (.claude/rules/*.md), Cursor (.cursor/rules/*.mdc), AGENTS.md fallback.
+  - Frontmatter name must equal the skill directory name.
+  - Description format: first sentence = capability, second = "Use when ..."
+    triggers, max 1024 chars.
+  - SKILL.md bodies stay under ~100 lines; split details into references/.
+
+rules:
+  proposal:
+    - Always include a "Non-goals" section
+  design:
+    - Cite research evidence (papers, competitor repos) where a decision
+      rests on it
