@@ -1,6 +1,6 @@
 ---
 name: ai-init
-description: Initializes a project's AI instruction surface — entry file, per-rule directories, cross-agent interop glue, and the harness learning-loop files — with idempotent, diff-first, marker-managed writes. Use when setting up AI collaboration for a new or existing project, or when asked to install the AI harness.
+description: Initializes a project's AI instruction surface — entry file, per-rule directories, cross-agent interop glue, and the learning-loop files — with idempotent, diff-first, marker-managed writes. Use when setting up AI collaboration or AI configuration for a new or existing project.
 ---
 
 # AI Init
