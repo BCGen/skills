@@ -10,4 +10,4 @@
 
 - [x] 2.1 Migrate this repo's `.ai/learnings.md` and `.ai/backlog.md` to the new directories (preserve statuses and provenance) and update `CLAUDE.md` harness block
 - [x] 2.2 Update acceptance test READMEs and preseed assets; re-run affected task-retrospective scenarios (correction, recurrence-approve, recurrence-decline) and one ai-init fixture; verify mechanically — all passed; found and fixed a fallback defect (premature `status: promoted` without destination write), retested
-- [ ] 2.3 Lint, commit, sync develop and push per the publishing rule
+- [x] 2.3 Lint, commit, sync develop and push per the publishing rule
