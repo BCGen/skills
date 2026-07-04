@@ -19,8 +19,8 @@ answer (AGENTS.md is the portable default). Never guess.
 
 ## Step 2 — Inventory
 
-List what already exists: entry file, rules directory, `.ai/learnings.md`,
-`.ai/backlog.md`, harness block, interop glue. The plan covers ONLY the
+List what already exists: entry file, rules directory, `.ai/learnings/`,
+`.ai/backlog/`, harness block, interop glue. The plan covers ONLY the
 missing pieces — re-running on an initialized project must be a no-op.
 
 ## Step 3 — Discover (new entry file only)
@@ -43,7 +43,8 @@ modified, then wait for approval:
 - Interop glue when applicable (e.g. `CLAUDE.md` starting with `@AGENTS.md`).
 - Rules directory for the target agent (empty — rules are written later,
   only via the add-rule skill).
-- `.ai/learnings.md` and `.ai/backlog.md` from the playbook templates.
+- `.ai/learnings/` and `.ai/backlog/` directories, each with its README,
+  per the playbook.
 - Coexisting framework detected → one reference line instead of duplicate
   content, per the playbook.
 

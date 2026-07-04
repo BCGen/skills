@@ -21,34 +21,36 @@ minimal prompt, mechanical verification only).
 ### 1. clean (`scenarios/clean.md`)
 
 - `report.md` has ≤ 2 non-empty lines
-- `.ai/learnings.md` does NOT exist
-- `.ai/backlog.md` does NOT exist
+- `.ai/` does NOT exist in the sandbox
 
 ### 2. correction, first occurrence (`scenarios/correction.md`)
 
-- `.ai/learnings.md` exists and contains exactly 1 `[candidate]` heading
-- the entry has exactly 1 provenance line (`- ` bullet with a date)
-- no `[promoted` marker anywhere
+- `.ai/learnings/` contains exactly 1 lesson file (excluding README)
+- that file has `status: candidate` and exactly 1 provenance bullet
+- no file has `status: promoted`
 
-### 3. recurrence + pre-approved (`scenarios/recurrence-approve.md`, preseed `preseed-learnings.md` → `.ai/learnings.md`)
+### 3. recurrence + pre-approved (`scenarios/recurrence-approve.md`, preseed `preseed-learnings.md` → `.ai/learnings/name-python-helpers-camelcase.md`)
 
-- the camelCase entry has 2 provenance lines after the run
+- the preseeded lesson file has 2 provenance bullets after the run
 - `report.md` contains a drafted rule (fenced block or quoted rule text)
 - `report.md` mentions `npx skills add` (add-rule not installed → fallback)
 - no rule file was created (no `.claude/`, `.cursor/`, or `AGENTS.md` in sandbox)
+- the preseeded file still has `status: candidate` — the fallback printed a
+  draft, so no destination write happened and no promotion may be recorded
 
 ### 4. recurrence + declined (`scenarios/recurrence-decline.md`, same preseed)
 
-- the camelCase entry still has marker `[candidate]` (not `[promoted`, not `[dismissed`)
-- no `.ai/backlog.md`, no rule files created
+- the preseeded file still has `status: candidate` (not promoted, not dismissed)
+- no `.ai/backlog/` entries, no rule files created
 
 ## Verification snippets
 
 ```sh
-grep -c '^## \[candidate\]' .ai/learnings.md
-grep -c '^- ' .ai/learnings.md          # provenance lines (per entry: check section)
+ls .ai/learnings/ | grep -v README | wc -l
+grep -c 'status: candidate' .ai/learnings/<slug>.md
+grep -c '^- ' .ai/learnings/<slug>.md   # provenance bullets
 grep -c 'npx skills add' report.md
-test ! -e .ai/learnings.md && echo absent
+test ! -e .ai && echo absent
 ```
 
 Not mechanically verifiable (manual spot-check): ranking by impact,

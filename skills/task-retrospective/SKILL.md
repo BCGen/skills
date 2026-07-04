@@ -29,11 +29,15 @@ Evidence rules:
 
 For each evidenced lesson (formats in [references/loop-file-formats.md](references/loop-file-formats.md)):
 
-1. Read `.ai/learnings.md` (create it from the template if missing).
-2. **New lesson** → append a `[candidate]` entry with date, task, evidence. Staged, not proposed.
-3. **Matches an existing candidate** → recurrence: append the new provenance
-   line and carry it into Step 3 as a promotion proposal.
-4. The user explicitly asking to make something a rule also qualifies for Step 3.
+1. Scan `.ai/learnings/` filenames and H1 titles for a match (create the
+   directory with its README first if missing). Wording differences do not
+   defeat a match.
+2. **New lesson** → create `.ai/learnings/<slug>.md` (`status: candidate`,
+   provenance bullet). Staged, not proposed.
+3. **Matches an existing candidate file** → recurrence: append a provenance
+   bullet to that file and carry it into Step 3 as a promotion proposal.
+   Two files describing the same lesson → a merge proposal.
+4. The user explicitly asking to promote something also qualifies for Step 3.
 
 ## Step 3 — Build proposals (max 3, ranked by impact)
 
@@ -41,7 +45,7 @@ For each evidenced lesson (formats in [references/loop-file-formats.md](referenc
 | --- | --- |
 | Recurring project-shared convention | Rule, via the **add-rule** skill (draft the exact rule text) |
 | Personal preference (how this user works, not project truth) | The agent's native memory |
-| Missing capability or workflow repeated across tasks | `.ai/backlog.md` |
+| Missing capability or workflow repeated across tasks | New file under `.ai/backlog/` |
 | An existing skill's gap caused the problem | Update that skill's mistakes/notes section |
 
 Also check rules touched during this task for staleness, overlap, or
@@ -56,10 +60,14 @@ content, and the destination. Then:
   If add-rule is not installed, print the draft for manual use and note:
   `npx skills add <owner>/<repo>`.
 - **Approved memory** → save via the agent's native memory feature.
-- **Approved backlog / skill update** → append or edit, showing the diff.
-- **Declined** → the candidate stays `[candidate]` in `.ai/learnings.md`;
-  nothing else happens. Mark `[dismissed]` only if the user says so.
-- **Promoted** → update the entry's marker to `[promoted <date> → <rule path>]`.
+- **Approved backlog / skill update** → create or edit the file, showing the diff.
+- **Declined** → the candidate file keeps `status: candidate`; nothing else
+  happens. Set `status: dismissed` only if the user says so.
+- **Promoted** → only after the destination write actually happened, update
+  the candidate's frontmatter: `status: promoted`, `promoted_to:
+  <destination>` (rule path, `memory`, or `skill:<name>`), `promoted_on:
+  <date>`. An approval whose write could not happen (e.g. the add-rule
+  fallback printed a draft instead) leaves the file at `status: candidate`.
 
 ## Honesty rules
 
