@@ -1,0 +1,9 @@
+{
+  // Lint scope: the installable skills only (openspec docs excluded by design).
+  "globs": ["skills/**/*.md"],
+  "config": {
+    "default": true,
+    "MD013": false, // line length — prose-heavy instructions
+    "MD033": false  // inline HTML — allowed for markers
+  }
+}

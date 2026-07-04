@@ -2,17 +2,17 @@
 
 ## 1. Repo scaffolding and quality checks
 
-- [ ] 1.1 Create `skills/` layout, README skeleton (product pitch, install command, `openspec/` vs `.ai/` roles), and `.gitignore`
-- [ ] 1.2 Write the lint script (frontmatter parse, name == dir, description shape/length, body line cap, no-CJK, markdownlint) runnable via one local command
-- [ ] 1.3 Add GitHub Actions workflow running the lint on push
+- [x] 1.1 Create `skills/` layout, README skeleton (product pitch, install command, `openspec/` vs `.ai/` roles), and `.gitignore`
+- [x] 1.2 Write the lint script (frontmatter parse, name == dir, description shape/length, body line cap, no-CJK, markdownlint) runnable via one local command
+- [x] 1.3 Add GitHub Actions workflow running the lint on push
 
 ## 2. task-retrospective (build first — D3)
 
-- [ ] 2.1 Draft `skills/task-retrospective/SKILL.md`: signal-gated trigger, in-context evidence rules, ≤ 2-line clean report, carried-over scaffolding (routing digraph, anti-rationalization table, max-3 ranked proposals)
-- [ ] 2.2 Define `.ai/learnings.md` and `.ai/backlog.md` entry formats (provenance lines) in a references file shared by the flow
-- [ ] 2.3 Implement two-stage promotion logic (stage on first occurrence, propose on recurrence or explicit confirmation) and the four routing destinations incl. add-rule delegation and its missing-fallback
-- [ ] 2.4 Write skill-test acceptance cases: clean task → 2 lines; correction → staged candidate with provenance; recurrence → promotion proposal; rejection → no writes
-- [ ] 2.5 Pass acceptance, then execute the personal-environment hard cutover (archive old skill, update global CLAUDE.md, `npx skills add -g`)
+- [x] 2.1 Draft `skills/task-retrospective/SKILL.md`: signal-gated trigger, in-context evidence rules, ≤ 2-line clean report, carried-over scaffolding (routing digraph, anti-rationalization table, max-3 ranked proposals)
+- [x] 2.2 Define `.ai/learnings.md` and `.ai/backlog.md` entry formats (provenance lines) in a references file shared by the flow
+- [x] 2.3 Implement two-stage promotion logic (stage on first occurrence, propose on recurrence or explicit confirmation) and the four routing destinations incl. add-rule delegation and its missing-fallback
+- [x] 2.4 Write skill-test acceptance cases: clean task → 2 lines; correction → staged candidate with provenance; recurrence → promotion proposal; rejection → no writes
+- [x] 2.5 Pass acceptance, then execute the personal-environment hard cutover (archive old skill, update global CLAUDE.md, `npx skills add -g`) — installed via symlink until the repo is published (5.1), then switch to `npx skills add -g`
 
 ## 3. add-rule and the rule format spec
 
