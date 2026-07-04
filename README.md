@@ -38,13 +38,14 @@ proposals.
 
 ## How this differs from similar projects
 
-- **AGENTS.md generators** (create-agentsmd, mcollina/init): they scan and
-  emit one file, once. These skills write each agent's *native* per-rule
-  format and keep rules alive through the retrospective loop.
-- **Self-improving skills** (self-learning-skills, Claudeception): they
-  harvest lessons opportunistically. Here, promotion is consent-gated,
-  evidence-based, staged across tasks — and budget-enforced, because rule
-  accumulation measurably degrades agents.
+- **AGENTS.md generators** (GitHub's create-agentsmd, the built-in `/init`
+  commands): they scan and emit one file, once. These skills write each
+  agent's *native* per-rule format and keep rules alive through the
+  retrospective loop.
+- **Continuous-learning systems** (everything-claude-code's instinct
+  system): they capture lessons automatically via hooks. Here, promotion is
+  consent-gated, evidence-based, staged across tasks — and budget-enforced,
+  because rule accumulation measurably degrades agents.
 - **Methodology frameworks** (compound-engineering, Agent OS, BMAD): they
   ask you to adopt a workflow. These are standalone skills that work with
   whatever workflow you already have, and write to standard locations you
