@@ -31,8 +31,22 @@ Status: in development — see `openspec/changes/add-ai-harness-skills/`.
 ## Install
 
 ```sh
-npx skills add <owner>/<repo>        # published slug TBD
+npx skills add BCGen/skills
 ```
+
+## How this differs from similar projects
+
+- **AGENTS.md generators** (create-agentsmd, mcollina/init): they scan and
+  emit one file, once. This harness writes each agent's *native* per-rule
+  format and keeps rules alive through the retrospective loop.
+- **Self-improving skills** (self-learning-skills, Claudeception): they
+  harvest lessons opportunistically. Here, promotion is consent-gated,
+  evidence-based, staged across tasks — and budget-enforced, because rule
+  accumulation measurably degrades agents.
+- **Methodology frameworks** (compound-engineering, Agent OS, BMAD): they
+  ask you to adopt a workflow. These are three standalone skills that work
+  with whatever workflow you already have, and write to standard locations
+  you keep even if you uninstall.
 
 ## Repo layout
 
