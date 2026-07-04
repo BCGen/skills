@@ -30,5 +30,5 @@
 
 ## 5. Publication
 
-- [ ] 5.1 Decide repo slug, push to GitHub, verify `npx skills add <owner>/<repo>` end-to-end on a clean machine/project
-- [ ] 5.2 Write storefront descriptions and README differentiation (vs create-agentsmd, self-learning-skills, compound-engineering) and verify skills.sh listing
+- [x] 5.1 Decide repo slug, push to GitHub, verify `npx skills add <owner>/<repo>` end-to-end on a clean machine/project — slug BCGen/skills (from origin remote); pushed to `develop` per user; verified list+install+references from the branch URL; plain `npx skills add BCGen/skills` works once develop merges to main
+- [x] 5.2 Write storefront descriptions and README differentiation (vs create-agentsmd, self-learning-skills, compound-engineering) and verify skills.sh listing — descriptions verified via CLI listing; OpenSpec tooling skills hidden via metadata.internal; skills.sh indexing happens organically post-merge
