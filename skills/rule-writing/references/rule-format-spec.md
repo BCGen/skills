@@ -64,6 +64,9 @@ Verified against vendor docs 2026-07-05. Caveats to honor:
 - Claude Code path-scoped rules trigger on **Read** of matching files, not
   when a new matching file is created; and path-scoping in `~/.claude/rules`
   is unreliable. Must-follow rules therefore stay resident (unscoped).
+- Prefer a single unquoted `paths: <glob>` line; the multi-line YAML-list
+  form has silently failed to load in some Claude Code versions
+  (anthropics/claude-code#17204). Verify a path-scoped rule actually loads.
 - `AGENTS.md` is freeform: keep all harness rules inside one marker-managed
   block, one `###` heading per rule:
 

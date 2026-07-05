@@ -13,7 +13,7 @@ Never touch execution settings (settings.json, hooks, MCP, CI).
 ## Step 1 — Detect
 
 Check for agent artifacts (`.claude/`, `CLAUDE.md`, `.cursor/`, `AGENTS.md`)
-and coexisting frameworks (`.specify/`, `agent-os/`, `.kiro/steering/`) per
+and coexisting frameworks (`.specify/`, `.agent-os/`, `.kiro/steering/`) per
 the playbook. Zero or multiple agents → ask one question with a recommended
 answer (AGENTS.md is the portable default). Never guess.
 

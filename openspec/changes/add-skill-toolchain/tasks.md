@@ -15,10 +15,10 @@
 
 ## 3. skill-auditing
 
-- [ ] 3.1 Draft `skills/skill-auditing/SKILL.md`: two layers, generic target, fix routing, unverifiable honesty
-- [ ] 3.2 Acceptance: audit a fixture directory containing one clean skill, one format-stale skill, one content-stale skill; verify per-layer findings and source citations
-- [ ] 3.3 Dogfood: audit this collection's own `skills/` and act on findings
+- [x] 3.1 Draft `skills/skill-auditing/SKILL.md`: two layers, generic target, fix routing, unverifiable honesty
+- [x] 3.2 Acceptance: audit a fixture directory containing one clean skill, one format-stale skill, one content-stale skill; verify per-layer findings and source citations
+- [x] 3.3 Dogfood: audit this collection's own `skills/` and act on findings
 
 ## 4. Wrap-up
 
-- [ ] 4.1 Retire the three backlog entries; update README skills table; lint; archive change; sync develop and push
+- [x] 4.1 Retire the three backlog entries; update README skills table; lint; archive change; sync develop and push

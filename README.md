@@ -13,10 +13,15 @@ improvements. Works with Claude Code, Cursor, and any agent that reads
 | `ai-init` | Initializes a project's AI instruction surface — entry file, per-rule directories, cross-agent interop glue, and the `.ai/` learning-loop files — with idempotent, diff-first, marker-managed writes. |
 | `rule-writing` | The single write path for rule files. Owns the cross-agent rule format spec, enforces a non-discoverability admission filter and the rule budget, stamps provenance. |
 | `retro` | Post-task retrospective: mines user corrections and failures, stages lesson candidates in `.ai/learnings/`, and routes approved proposals to their fittest destination (rule, entry-file fact, memory, backlog, skill update). |
+| `skill-writing` | Authors a new skill to this collection's standard: gather requirements, draft with enforced conventions, collision-check the name, scaffold an acceptance test plan. |
+| `skill-testing` | Acceptance-tests any skill via a minimal-prompt subagent, then verifies the output with mechanical checks only (grep/regex/count/diff) so tester bias is isolated. |
+| `skill-auditing` | Audits any skills directory on two layers — format against the authoring conventions, and content facts against live documentation — reporting per-layer findings with sources. |
 
-Each skill installs and works independently. Together they form a loop:
-initialize once, stage lessons after each task, and promote recurring ones
-into rules — with consent at every step.
+The first three form the **setup + learning loop** (initialize once, stage
+lessons after each task, promote recurring ones into rules); the last three
+form the **skill toolchain** (write, test, audit skills). Each skill installs
+and works independently; toolchain siblings cooperate when co-installed and
+degrade gracefully when not.
 
 ## Install
 

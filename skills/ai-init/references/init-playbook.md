@@ -10,7 +10,7 @@ Templates and tables for initializing a project's AI instruction surface.
 | `.cursor/` | Cursor |
 | `AGENTS.md` | AGENTS.md-reading agent (portable) |
 | `.specify/` | spec-kit — defer (see coexistence) |
-| `agent-os/` | Agent OS — defer |
+| `.agent-os/` (or legacy `agent-os/`) | Agent OS — defer |
 | `.kiro/steering/` | Kiro — defer |
 
 Zero or multiple agents detected → ask ONE question with a recommendation
