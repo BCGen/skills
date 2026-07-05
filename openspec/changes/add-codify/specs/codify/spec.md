@@ -38,26 +38,58 @@ carry assumptions from one project to another.
 ### Requirement: Enforcement-class routing
 
 codify SHALL classify each observed convention and route it: discoverable
-facts → nothing (leave for the agent to read); mechanically enforceable
-conventions → a declarative config artifact; non-discoverable judgment
-conventions → a rule via rule-writing; must-never / procedures / structural
-defaults / executable wiring → a paste-ready pointer snippet. Its success
-is measured by first-execution accuracy, not by the number of rules created.
+facts → nothing; mechanically enforceable and not yet enforced → a
+declarative config artifact (already enforced by existing config →
+nothing); non-discoverable judgment → a rule via rule-writing; multi-step
+procedures and build-step-expressible structural defaults → skill-writing;
+file-generator structure and must-never / agent-behavior settings → a
+paste-ready pointer snippet. Its success is measured by first-execution
+accuracy, not by the number of rules created.
 
-#### Scenario: Lint-fixable style routes to config
+#### Scenario: Lint-fixable style not yet enforced routes to config
 
-- **WHEN** the detected convention is a formatter/linter-expressible style (e.g. quote style, import order)
+- **WHEN** a formatter/linter-expressible style (e.g. quote style) is detected and no existing config enforces it
 - **THEN** codify proposes a config artifact, not a rule
 
-#### Scenario: Tribal convention routes to a rule
+#### Scenario: Already-enforced style routes to nothing
 
-- **WHEN** the detected convention is non-discoverable judgment (e.g. "use the internal http client, never fetch directly")
-- **THEN** codify drafts a rule and routes it through rule-writing
+- **WHEN** the detected style is already enforced by an existing lint/format config
+- **THEN** codify proposes no artifact for it
 
 #### Scenario: Discoverable fact routes to nothing
 
 - **WHEN** the detected convention is discoverable by reading the repo (e.g. directory layout)
 - **THEN** codify proposes no artifact for it
+
+### Requirement: Judgment rules only from doc text or user confirmation
+
+codify SHALL NOT infer a rule from a code pattern alone. When a code
+pattern suggests a possible convention, codify SHALL ask the user whether
+it is a rule; only a documented judgment convention (tool-unenforceable) or
+the user's confirmation qualifies it to be drafted as a rule.
+
+#### Scenario: Pattern confirmed as a rule
+
+- **WHEN** codify observes a code pattern (e.g. all HTTP via an internal client) not covered by any config or doc
+- **THEN** it asks the user, and drafts a rule only if the user confirms it is a required convention
+
+#### Scenario: Pattern not confirmed
+
+- **WHEN** the user says the observed pattern is incidental, not a rule
+- **THEN** codify drafts no rule for it
+
+### Requirement: Procedures and build-step structure hand to skill-writing
+
+codify SHALL route a multi-step procedure convention, and a structural
+default expressible as build steps, to the skill-writing skill to author a
+project-local skill (on user consent). Structure requiring an executable
+file generator SHALL be a pointer. If skill-writing is not installed,
+codify SHALL summarize the procedure as a pointer.
+
+#### Scenario: Release procedure becomes a project skill
+
+- **WHEN** a documented multi-step procedure (e.g. release checklist) is detected and approved
+- **THEN** codify hands it to skill-writing to create a project-local skill
 
 ### Requirement: Declarative config generation, executable pointers only
 
@@ -80,15 +112,29 @@ it outputs a paste-ready snippet only.
 
 ### Requirement: Conflicts resolved at source with the user
 
-On conflicting conventions codify SHALL surface the conflict, have the user
-pick the winner and its scope, resolve at source, and back the winner with a
-tool. It MUST NOT arbitrate conflicts in prose (e.g. writing "this rule
-takes precedence").
+codify SHALL distinguish drift from conflict by authority order. A
+cross-tier disagreement the order settles (e.g. config vs code) SHALL be
+auto-resolved and flagged as drift without interrupting the user. Only a
+same-tier conflict the order cannot break SHALL be surfaced for the user to
+pick winner and scope. codify MUST NOT arbitrate in prose (never write "this
+rule takes precedence"). On resolution the loser is written by its carrier:
+config → codify edits it; rule → via rule-writing; drifting CODE → flagged
+only, never edited by codify.
 
-#### Scenario: Conflicting style settings
+#### Scenario: Cross-tier drift auto-resolves
 
-- **WHEN** two sources specify incompatible conventions
+- **WHEN** an explicit config disagrees with what most code does
+- **THEN** codify treats the config as the winner and flags the code drift without asking
+
+#### Scenario: Same-tier conflict asks the user
+
+- **WHEN** two same-authority sources specify incompatible conventions
 - **THEN** codify asks the user to choose and does not write a prose precedence rule
+
+#### Scenario: Loser code is not edited
+
+- **WHEN** the losing side of a resolved conflict is source code
+- **THEN** codify flags it for later fixing and does not modify the code
 
 ### Requirement: Delegates rule writes to rule-writing
 

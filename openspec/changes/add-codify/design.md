@@ -52,31 +52,37 @@ codify applies it across convention domains, not just commits.
 | Observed convention | Route |
 | --- | --- |
 | Discoverable fact (versions, layout, existing pattern) | nothing — let the agent read |
-| Mechanically enforceable (format, imports, lint-fixable naming, strict-null) | declarative config artifact |
-| Non-discoverable judgment / tribal | rule, via rule-writing (filter+budget unchanged) |
-| Must-never / event-gated | pointer: paste-ready hook/permission/CI snippet |
-| Multi-step procedure | pointer/point at a skill |
-| Structural default | pointer: template/scaffold |
-| Conflicting | surface → user picks winner+scope → back with a tool |
+| Mechanically enforceable AND not already enforced | generate declarative config artifact |
+| Mechanically enforceable AND already enforced by existing config | nothing (already prevented) |
+| Non-discoverable judgment / tribal | rule, via rule-writing (only from doc text or user confirmation — see D9) |
+| Multi-step procedure | hand to skill-writing → project-local procedure skill (D10) |
+| Structural default expressible as build steps | hand to skill-writing → "build X" skill (D10) |
+| Structural default needing a file generator (plop/hygen) | pointer: paste-ready generator snippet |
+| Must-never / agent-behavior setting (hooks, permissions, CI) | pointer: paste-ready snippet (D5) |
+| Conflicting | same authority tier → ask user to pick; cross-tier → auto-resolve by authority order + flag drift (D11) |
 
-### D5. Produce declarative config; only point at executable artifacts
+### D5. codify produces "code-convention config"; points at "agent-behavior settings"
 
-Extends ai-init's declarative-vs-executable line. codify MAY generate
-declarative, diff-first, idempotent, cross-platform config (`.editorconfig`,
-eslint/prettier/ruff stanza, tsconfig flag) — same safety properties as the
-markdown the collection already produces, and without it the collection has
-NO preventive enforcement for the largest convention class. It MUST NOT wire
-executable, high-blast-radius, platform-specific artifacts (git hooks, CI,
-settings.json, MCP); those get a paste-ready snippet, and real wiring lives
-in a separate opt-in skill (backlog).
+The output boundary is drawn by what a convention governs, from codify's own
+job (make the CODE follow conventions) — NOT borrowed from ai-init. codify
+MAY generate declarative config that constrains the CODE itself
+(`.editorconfig`, eslint/prettier/ruff stanza, tsconfig flag) — diff-first,
+idempotent, useful to any agent or human on the project. It MUST NOT write
+settings that govern AGENT BEHAVIOR (git hooks, `settings.json`
+permissions, CI) — those are a different layer (agent/workflow governance),
+platform-specific and security-sensitive; codify points at them with a
+paste-ready snippet. `permissions.deny` is a pointer even though it is
+declarative, because it governs the agent, not the code.
 
-### D6. Conflicts resolved at source, never in prose
+### D6. Conflicts: authority order first, ask only same-tier ties (D11)
 
-Prose arbitration ("this rule wins") is unreliable. On conflict codify
-surfaces it, has the user choose the winner and scope, then resolves at
-source (converge on one config / delete the loser) and backs it with a
-tool. This makes codify the owner of the "conflicting conventions"
-north-star situation.
+Prose arbitration ("this rule wins") is unreliable, so codify never writes a
+precedence sentence. A cross-tier disagreement the authority order settles
+(config beats code drift) is auto-resolved and flagged as drift without
+interrupting the user. Only a same-tier mutual conflict the order cannot
+break (two lint configs; project doc vs the user's in-session answer) is
+surfaced for the user to pick winner + scope. Source resolution then writes
+per D11.
 
 ### D7. Delegates rule writes to rule-writing
 
@@ -92,6 +98,37 @@ reactive per-task pass (fix what slipped). A future consistency-checking
 skill is the drift backstop and must also route hard/mechanical findings to
 enforcement and flag rules a new config/test made redundant so budget can
 be reclaimed. All three route through rule-writing for rule writes.
+
+### D9. Judgment rules come only from doc text or user confirmation
+
+A judgment rule may NOT be inferred from a code pattern — a pattern is
+discoverable by definition and would be rejected by rule-writing's filter
+(and is net-negative per the research). A detected code pattern is a CLUE,
+not a source. codify observes the pattern, then ASKS the user "is this a
+team rule?"; only a documented judgment rule (a doc text a tool can't
+enforce) or the user's confirmation makes it a rule. The "it's a rule"
+fact is the non-discoverable part rule-writing's filter needs. Example:
+all HTTP calls use `internalClient` (a pattern) → ask → user confirms
+"required, has retry+tracing" → draft rule via rule-writing. Counter:
+camelCase → eslint-expressible → config; components under `src/components/`
+→ discoverable → nothing.
+
+### D10. codify is a full router: procedures/structure hand to skill-writing
+
+Symmetric to handing rules to rule-writing: a multi-step procedure (release,
+add-migration) and a structural default expressible as build steps are
+handed to skill-writing to author a PROJECT-LOCAL skill (in the project's
+`.claude/skills/`), on user consent. Structure that needs a real file
+generator (plop/hygen, executable) is a pointer instead. skill-writing
+absent → codify degrades to summarizing the procedure as a pointer.
+
+### D11. Source-resolution writes match the output boundary
+
+When a conflict/drift is resolved, the loser is handled by its carrier:
+loser is config → codify edits it (its own output); loser is a rule → hand
+to rule-writing to delete/edit; the drifting artifact is CODE → codify does
+NOT touch code (a dev action, out of scope) — it flags it for the user or a
+later agent to fix.
 
 ## Risks / Trade-offs
 
