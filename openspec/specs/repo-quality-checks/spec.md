@@ -3,7 +3,9 @@
 ## Purpose
 
 TBD - created by archiving change add-ai-harness-skills. Update Purpose after archive.
+
 ## Requirements
+
 ### Requirement: Skill lint
 
 A validation script SHALL check every `skills/*/SKILL.md`: frontmatter
@@ -44,4 +46,3 @@ The lint SHALL run in GitHub Actions on every push and be runnable locally with 
 
 - **WHEN** a commit with a lint violation is pushed
 - **THEN** the workflow fails and reports each violation
-
