@@ -24,9 +24,13 @@ majority. Never carry assumptions from another project.
 
 Apply the routing table in the reference. Key decisions:
 
+- **Already placed** → if a convention already lives in a rule/doc/config
+  (e.g. a rule retro promoted), respect it: no migration, no duplicate.
 - **Discoverable fact** (layout, versions, existing pattern) → nothing.
-- **Mechanically enforceable** → if already enforced by config, nothing; if
-  not, propose a declarative config artifact (not a rule).
+- **Mechanically enforceable** → decide "already enforced?" by probing the
+  effective config when it extends a preset (`eslint --print-config`), not
+  from the file text; if enforced → nothing; if genuinely not → propose
+  extending the existing config (never stand up a new toolchain — pointer).
 - **Judgment / tribal** → a code pattern is only a CLUE. ASK the user
   whether it is a required convention. Once confirmed, prefer a project doc
   over a rule (see Step 3).

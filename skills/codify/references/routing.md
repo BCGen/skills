@@ -20,6 +20,17 @@ When sources disagree: explicit config files (commitlint, eslint, tsconfig,
 editorconfig) > project docs (CONTRIBUTING, README, entry file) >
 code/history majority. Never carry assumptions across projects.
 
+## Probe preset-extended configs before deciding "already enforced"
+
+A config that `extends` a shared preset (e.g. `@antfu/eslint-config`,
+`@commitlint/config-conventional`) enforces rules that are NOT visible in
+the repo's own files. codify MUST NOT decide "already enforced → nothing"
+or "not enforced → propose config" from the config file text alone for
+anything a preset may cover. Probe the effective config first — run the
+tool's resolver (e.g. `eslint --print-config <file>`) or the linter once —
+to see what is actually enforced. If probing is impossible, ASK rather than
+generate a config that may duplicate a preset rule.
+
 ## Routing table
 
 | Observed convention | Route |
@@ -53,12 +64,22 @@ It POINTS at (never wires) settings that govern AGENT BEHAVIOR — git hooks,
 snippet. `permissions.deny` is a pointer despite being declarative: it
 governs the agent, not the code.
 
+## Reconciliation: respect an existing placement first
+
+Before placing ANY convention, check whether it already has a home — an
+existing rule (`.claude/rules`, e.g. one retro/rule-writing already
+promoted), a doc, or a config. If it does, codify RESPECTS that placement:
+it does not migrate it (never rule→doc or doc→rule) and does not write a
+duplicate. Doc-first/rule-last below governs only conventions with NO
+existing home. This keeps codify from fighting the retro loop.
+
 ## Judgment conventions: doc first, rule last
 
 A judgment convention is never inferred from a code pattern alone (a pattern
 is discoverable; rule-writing would reject it). The pattern is a CLUE →
 codify ASKS "is this a team rule?"; only documented guidance or user
-confirmation makes it load-bearing. Then place it by preference:
+confirmation makes it load-bearing. For a convention with no existing home,
+place it by preference:
 
 1. **Existing fitting doc** → add to / correct it; write no rule (a copy in
    `.claude/rules` would double-maintain and drift). A doc-vs-code conflict

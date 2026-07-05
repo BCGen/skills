@@ -10,5 +10,5 @@
 
 - [x] 2.1 Build a fixture project mixing a lint-fixable style, a non-discoverable tribal convention, a conflicting pair, and a commit convention; write `tests/codify/README.md` with mechanical checks (config artifact emitted for the style; rule drafted for the tribal one; nothing for a discoverable fact; conflict surfaced not arbitrated)
 - [x] 2.2 Acceptance via skill-testing over the fixture; verify routing mechanically
-- [ ] 2.3 Dogfood codify on a real project; act on findings
+- [x] 2.3 Dogfood codify on a real project; act on findings
 - [x] 2.4 Retire the commit-migration backlog entry; update README skills table; lint; archive change; sync develop and push per the publishing rule
