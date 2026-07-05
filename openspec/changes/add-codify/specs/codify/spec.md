@@ -61,6 +61,25 @@ accuracy, not by the number of rules created.
 - **WHEN** the detected convention is discoverable by reading the repo (e.g. directory layout)
 - **THEN** codify proposes no artifact for it
 
+### Requirement: Project-layer scope only
+
+codify SHALL operate only on project-layer, version-controlled files. It
+MUST NOT read or write personal-layer files — auto memory or the global
+`~/.claude/CLAUDE.md`. The project entry file (`CLAUDE.md`/`AGENTS.md`) is
+in scope only as a pointer surface (`@import`/short pointers within its
+budget), not a container for detailed conventions. `README.md` is not a
+default conventions target.
+
+#### Scenario: Personal files untouched
+
+- **WHEN** codify runs on a project
+- **THEN** it neither reads nor writes auto memory or the global user CLAUDE.md
+
+#### Scenario: Entry file gets a pointer, not detail
+
+- **WHEN** a detailed judgment convention is placed in a doc
+- **THEN** codify may add an `@import`/pointer in the entry file but does not write the detailed convention into the entry file
+
 ### Requirement: Judgment conventions prefer project docs, rule is last resort
 
 codify SHALL NOT infer a judgment convention from a code pattern alone; a

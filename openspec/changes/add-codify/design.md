@@ -149,6 +149,28 @@ to rule-writing to delete/edit; the drifting artifact is CODE → codify does
 NOT touch code (a dev action, out of scope) — it flags it for the user or a
 later agent to fix.
 
+### D12. Config-file scope: project layer only; entry file is a pointer
+
+codify operates on the PROJECT layer (shared, version-controlled). It does
+NOT touch personal-layer files — auto memory (`~/.claude/projects/.../memory`)
+or the global `~/.claude/CLAUDE.md` — which are personal, cross-project, and
+are retro's "personal preference" destination, not project practice. In
+scope: the project entry file (`CLAUDE.md`/`AGENTS.md`), `CONTRIBUTING`, and
+`docs/`. These are both scan sources (authority order, D3) and write targets.
+
+The project entry file is a POINTER, not a detailed container: it has the
+≤60-line budget (harness-conventions), so codify writes `@import`/short
+pointers there toward budget-free detail docs, never detailed judgment
+conventions. `README.md` is a human-facing overview, not a conventions home;
+it is only a discussion option under D9 step 2 when a project has no other
+fitting doc.
+
+Placement for judgment-convention docs (D9 step 2): use the project's
+existing location if present; otherwise recommend by the convention's nature
+— code conventions → `docs/conventions.md`; contribution/workflow →
+`CONTRIBUTING.md`; reasoned architecture decision → an ADR (`docs/adr/`) —
+and let the user pick.
+
 ## Risks / Trade-offs
 
 - [Scope creep into a rule generator] → hard rule: most observed practice
