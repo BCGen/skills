@@ -1,9 +1,15 @@
 {
-  // Lint scope: the installable skills only (openspec docs excluded by design).
-  "globs": ["skills/**/*.md"],
+  // All authored markdown; generated files are ignored below.
+  "globs": ["**/*.md"],
+  "ignores": [
+    "node_modules/**",
+    ".claude/**" // OpenSpec-generated tooling — overwritten on `openspec update`
+  ],
   "config": {
     "default": true,
     "MD013": false, // line length — prose-heavy instructions
-    "MD033": false  // inline HTML — allowed for markers
+    "MD033": false, // inline HTML — allowed for markers
+    "MD036": false, // bold pseudo-headings are our deliberate spec style
+    "MD024": { "siblings_only": true }
   }
 }
