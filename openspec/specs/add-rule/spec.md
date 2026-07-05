@@ -39,6 +39,6 @@ add-rule SHALL compute the resident budget (per harness-conventions) before writ
 Every written rule SHALL carry a provenance line (origin: retrospective date/task/evidence, init, or manual) sufficient to later justify deletion decisions.
 
 #### Scenario: Rule from retrospective
-- **WHEN** add-rule writes a rule promoted by task-retrospective
+- **WHEN** add-rule writes a rule promoted by the retro skill
 - **THEN** the rule includes the originating date, task, and evidence reference
 

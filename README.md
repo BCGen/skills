@@ -12,7 +12,7 @@ improvements. Works with Claude Code, Cursor, and any agent that reads
 |---|---|
 | `ai-init` | Initializes a project's AI instruction surface — entry file, per-rule directories, cross-agent interop glue, and the `.ai/` learning-loop files — with idempotent, diff-first, marker-managed writes. |
 | `add-rule` | The single write path for rule files. Owns the cross-agent rule format spec, enforces a non-discoverability admission filter and the rule budget, stamps provenance. |
-| `task-retrospective` | Post-task review: mines user corrections and failures, stages lesson candidates in `.ai/learnings/`, and routes approved proposals to their fittest destination (rule, memory, backlog, skill update). |
+| `retro` | Post-task retrospective: mines user corrections and failures, stages lesson candidates in `.ai/learnings/`, and routes approved proposals to their fittest destination (rule, entry-file fact, memory, backlog, skill update). |
 
 Each skill installs and works independently. Together they form a loop:
 initialize once, stage lessons after each task, and promote recurring ones

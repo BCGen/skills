@@ -9,7 +9,7 @@ enforced by lint). Product specs and change proposals live in `openspec/`
 Acceptance tests and fixtures live in `tests/`.
 
 <!-- harness:begin -->
-AI learning loop: lessons are staged in `.ai/learnings/`, ideas in `.ai/backlog/` (one file per entry; see the task-retrospective skill).
+AI learning loop: lessons are staged in `.ai/learnings/`, ideas in `.ai/backlog/` (one file per entry; see the retro skill).
 Rules live in `.claude/rules/`; write them only via the add-rule skill (budget: entry ≤60, resident ≤150 lines).
 Install the skills: `npx skills add BCGen/skills`
 <!-- harness:end -->

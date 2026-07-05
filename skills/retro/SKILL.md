@@ -1,12 +1,12 @@
 ---
-name: task-retrospective
-description: Reviews a completed task for user corrections, failures, and repeated mistakes, stages the lessons as candidates, and proposes consent-gated improvements routed to project rules, personal memory, or a skill backlog. Use when a task is complete or about to be marked done.
+name: retro
+description: Runs a post-task retrospective - detects user corrections, failures, and repeated mistakes, stages lessons as candidates, and proposes consent-gated improvements routed to their fittest destination (project rule, entry-file fact, memory, backlog, or skill update). Use when a task is complete or about to be marked done.
 ---
 
-# Task Retrospective
+# Retro
 
 Turn what went wrong this task into durable improvements — without letting
-one-off noise become permanent rules. Never act without user consent.
+one-off noise become permanent settings. Never act without user consent.
 
 ## Step 1 — Detect signals
 
@@ -16,14 +16,11 @@ Scan the current conversation (the whole task, not just the last steps) for:
 - **Failure**: a command failed, or an edit was reverted or redone.
 - **Repetition**: the same mistake surfaced twice or more within this task.
 
-**No signals → output at most 2 lines** (e.g. "Retrospective: clean task — no
-corrections, failures, or repeats.") **and stop. Write nothing.**
+**No signals → output at most 2 lines and stop. Write nothing.**
 
-Evidence rules:
-
-- Only externally observable evidence counts. A hunch that something "could be
-  better" with no correction or failure behind it is NOT a lesson — drop it.
-- Use only the current conversation. Do not read platform transcript files.
+Evidence rules: only externally observable evidence counts — a hunch with
+no correction or failure behind it is NOT a lesson. Use only the current
+conversation; do not read platform transcript files.
 
 ## Step 2 — Stage candidates
 
@@ -41,9 +38,16 @@ For each evidenced lesson (formats in [references/loop-file-formats.md](referenc
 
 ## Step 3 — Build proposals (max 3, ranked by impact)
 
+Before proposing any promotion, scan the project's rule locations
+(`.claude/rules/`, `.cursor/rules/`, the AGENTS.md managed block): if an
+existing rule already covers the lesson — whoever wrote it — propose
+marking the candidate promoted (pointing at that rule) instead of
+creating a duplicate.
+
 | Finding | Destination |
 | --- | --- |
 | Recurring project-shared convention | Rule, via the **add-rule** skill (draft the exact rule text) |
+| Corrected project fact (build command, layout) | Entry-file edit, shown as a diff first |
 | Personal preference (how this user works, not project truth) | The agent's native memory |
 | Missing capability or workflow repeated across tasks | New file under `.ai/backlog/` |
 | An existing skill's gap caused the problem | Update that skill's mistakes/notes section |
@@ -54,25 +58,26 @@ never-triggered content — deletion and merge proposals count toward the 3.
 ## Step 4 — Present and execute with consent
 
 Present one proposal at a time: the finding, its evidence, the pre-drafted
-content, and the destination. Then:
+content, the destination, one line on why this destination beats the other
+routes, and one line on what declining means — phrased for the user's
+technical background. Then:
 
-- **Approved rule** → hand the draft to add-rule (the only rule write path).
-  If add-rule is not installed, print the draft for manual use and note:
-  `npx skills add <owner>/<repo>`.
-- **Approved memory** → save via the agent's native memory feature.
-- **Approved backlog / skill update** → create or edit the file, showing the diff.
+- **Approved rule** → hand the draft to add-rule when installed (the
+  mandatory rule write path). Not installed → print the draft for the
+  user's own tooling; mention `npx skills add <owner>/<repo>` at most once
+  per retrospective, never repeatedly.
+- **Approved fact** → apply the entry-file edit exactly as the shown diff.
+- **Approved memory / backlog / skill update** → save or edit, showing diffs.
 - **Declined** → the candidate file keeps `status: candidate`; nothing else
   happens. Set `status: dismissed` only if the user says so.
 - **Promoted** → only after the destination write actually happened, update
-  the candidate's frontmatter: `status: promoted`, `promoted_to:
-  <destination>` (rule path, `memory`, or `skill:<name>`), `promoted_on:
-  <date>`. An approval whose write could not happen (e.g. the add-rule
-  fallback printed a draft instead) leaves the file at `status: candidate`.
+  frontmatter: `status: promoted`, `promoted_to: <destination>` (rule path,
+  entry file, `memory`, or `skill:<name>`), `promoted_on: <date>`. A
+  printed draft is not a write — the file stays `candidate`.
 
 ## Honesty rules
 
-Be brutally honest about your own violations — "I skipped the check because it
-looked simple" is a violation, not judgment. Rationalizations to reject:
+Be brutally honest about your own violations. Rationalizations to reject:
 
 | Thought | Reality |
 | --- | --- |
@@ -81,7 +86,5 @@ looked simple" is a violation, not judgment. Rationalizations to reject:
 | "Nothing went wrong" | Then say exactly that in 2 lines and stop |
 | "I'll remember next time" | You won't. The next conversation starts from zero |
 
-## Report style
-
-Proportional to findings: clean task → 2 lines; findings → short bullets with
-evidence, never essays. Deep-dive only where a proposal needs justification.
+Reports stay proportional: clean task → 2 lines; findings → short evidence
+bullets, never essays.

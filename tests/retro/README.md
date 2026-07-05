@@ -1,4 +1,4 @@
-# Acceptance tests: task-retrospective
+# Acceptance tests: retro
 
 Run each scenario with a fresh-context subagent (skill-test pattern:
 minimal prompt, mechanical verification only).
@@ -11,7 +11,7 @@ minimal prompt, mechanical verification only).
 
    > You just completed the task whose transcript is in `<scenario file>`.
    > The project root is `<sandbox>`. Follow the skill at
-   > `<repo>/skills/task-retrospective/SKILL.md` now, acting on that
+   > `<repo>/skills/retro/SKILL.md` now, acting on that
    > transcript as the current conversation. Write your retrospective
    > report to `<sandbox>/report.md`. If anything needs user interaction,
    > honor what the transcript already says.
@@ -42,6 +42,19 @@ minimal prompt, mechanical verification only).
 
 - the preseeded file still has `status: candidate` (not promoted, not dismissed)
 - no `.ai/backlog/` entries, no rule files created
+
+### 5. reconciliation (`scenarios/reconciliation.md`, preseed candidate + an existing `.claude/rules/` rule covering the lesson)
+
+- no new file under `.claude/rules/` (count unchanged)
+- the candidate's frontmatter becomes `status: promoted` with `promoted_to` pointing at the existing rule path
+- the report proposes bookkeeping, not a duplicate rule
+
+### 6. entry-file fact (`scenarios/entry-fact.md`, preseed `CLAUDE.md` containing the outdated `npm test` note)
+
+- `CLAUDE.md` now names `make check` and no longer instructs `npm test`
+- content outside the corrected line is unchanged
+- the lesson file's `promoted_to` records the entry file
+- no rule files created
 
 ## Verification snippets
 

@@ -59,7 +59,7 @@ lines only). Then:
 
 One short confirmation: rule path, scope (resident or path-scoped), and
 budget usage after the write (e.g. "resident 92/150 lines"). If invoked by
-another skill (e.g. task-retrospective), also return the rule path so the
+another skill (e.g. retro), also return the rule path so the
 caller can update its records.
 
 ## Mistakes to refuse

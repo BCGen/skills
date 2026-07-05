@@ -44,10 +44,10 @@ Every rule carries an HTML comment (token-free in entry files — Claude Code
 strips block comments before injection):
 
 ```html
-<!-- provenance: 2026-07-05 · task: order list page · evidence: user corrected timezone twice · via: task-retrospective -->
+<!-- provenance: 2026-07-05 · task: order list page · evidence: user corrected timezone twice · via: retro -->
 ```
 
-`via:` is one of `task-retrospective`, `ai-init`, `manual`.
+`via:` is one of `retro`, `ai-init`, `manual`.
 
 ## Dialect mapping
 

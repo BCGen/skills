@@ -46,7 +46,7 @@ Directory README template (also keeps the directory git-tracked):
 One lesson per file, kebab-case slug filename, frontmatter status.
 A candidate is promoted to its fittest destination (rule, memory, skill
 update) only after it recurs or the user confirms.
-See the task-retrospective skill.
+See the retro skill.
 ```
 
 ## `.ai/backlog/` — pre-proposal ideas
@@ -69,5 +69,5 @@ Directory README template:
 # Backlog
 
 One idea per file. Capabilities worth building later, recorded by the
-task-retrospective skill.
+retro skill.
 ```

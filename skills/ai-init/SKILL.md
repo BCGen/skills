@@ -59,8 +59,8 @@ Apply the approved plan, then self-check:
 ## Step 6 — Report
 
 Short summary: what was created/modified, the detected target, budget
-status (entry file lines / 60), and next steps (install the harness
-skills; run task-retrospective at task end).
+status (entry file lines / 60), and next steps (install the skills; run
+retro at task end).
 
 ## Mistakes to refuse
 

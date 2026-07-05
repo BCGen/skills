@@ -1,4 +1,4 @@
-# task-retrospective Specification
+# retro (renamed from task-retrospective, 2026-07-05) Specification
 
 ## Purpose
 TBD - created by archiving change add-ai-harness-skills. Update Purpose after archive.

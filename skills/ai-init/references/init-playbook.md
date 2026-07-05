@@ -35,7 +35,7 @@ entry file:
 
 ```markdown
 <!-- harness:begin -->
-AI learning loop: lessons are staged in `.ai/learnings/`, ideas in `.ai/backlog/` (one file per entry; see the task-retrospective skill).
+AI learning loop: lessons are staged in `.ai/learnings/`, ideas in `.ai/backlog/` (one file per entry; see the retro skill).
 Rules live in <rules location>; write them only via the add-rule skill (budget: entry ≤60, resident ≤150 lines).
 Install the skills: `npx skills add <owner>/<repo>`
 <!-- harness:end -->
@@ -49,9 +49,9 @@ and tell the user to fill it in — never invent a slug.
 
 Create `.ai/learnings/` and `.ai/backlog/`, each containing only its
 `README.md` (format doc + git tracking placeholder). README templates live
-in the task-retrospective skill's `references/loop-file-formats.md`
+in the retro skill's `references/loop-file-formats.md`
 (canonical source — keep any local copy in sync). Lesson/idea files are
-one-per-entry, added later by task-retrospective, never by ai-init.
+one-per-entry, added later by the retro skill, never by ai-init.
 
 ## Entry-file content policy (near-empty baseline)
 
