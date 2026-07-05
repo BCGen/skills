@@ -57,6 +57,8 @@ proposals.
 ## Repo layout
 
 - `skills/<name>/SKILL.md` — the skills (installable units)
+- `shared/` — canonical files synced byte-identical into skills (e.g.
+  `routing.md`, the mechanism-routing logic shared by codify and retro)
 - `openspec/` — product specs and change proposals (what to build and why)
 - `.ai/` — this repo's own learning-loop files (lessons staged while
   building the toolkit)
@@ -66,9 +68,13 @@ proposals.
 ## Development
 
 ```sh
-pnpm install
-pnpm lint    # skill lint + markdownlint
+pnpm install        # also installs a pre-commit hook that runs lint
+pnpm lint           # skill lint (incl. shared-copy drift check) + markdownlint
+pnpm sync-routing   # after editing shared/routing.md, re-sync the skill copies
 ```
+
+Lint is enforced by a versioned pre-commit hook (`.githooks/`, wired by
+`pnpm install`), so a lint failure blocks the commit.
 
 Specs and changes are managed with [OpenSpec](https://github.com/Fission-AI/OpenSpec)
 (`/opsx:propose`, `/opsx:apply`, `/opsx:archive`).
