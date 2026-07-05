@@ -2,9 +2,9 @@
 
 ## 1. skill-testing (build first — D2)
 
-- [ ] 1.1 Draft `skills/skill-testing/SKILL.md` + references (sandbox patterns, git idempotency proof, scenario transcripts) from the local skill-test base
-- [ ] 1.2 Acceptance: run skill-testing against a known-good and a deliberately broken target skill; verify mechanical verdicts and not-verified listing
-- [ ] 1.3 Retire the local `~/.claude/skills/skill-test` (archive + no coexistence)
+- [x] 1.1 Draft `skills/skill-testing/SKILL.md` + references (sandbox patterns, git idempotency proof, scenario transcripts) from the local skill-test base
+- [x] 1.2 Acceptance: run skill-testing against a known-good and a deliberately broken target skill; verify mechanical verdicts and not-verified listing
+- [x] 1.3 Retire the local `~/.claude/skills/skill-test` (archive + no coexistence)
 
 ## 2. skill-writing
 
