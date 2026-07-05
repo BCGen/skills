@@ -1,7 +1,7 @@
 ---
-status: candidate
-promoted_to:
-promoted_on:
+status: promoted
+promoted_to: .claude/rules/lint-gates-commits.md
+promoted_on: 2026-07-05
 ---
 
 # Lint exit codes must gate commits — never pipe them away
