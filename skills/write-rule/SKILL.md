@@ -1,9 +1,9 @@
 ---
-name: add-rule
+name: write-rule
 description: Creates, edits, or removes a single project rule in the agent's native rule format, enforcing a non-discoverability admission filter and a hard rule budget with provenance stamping. Use when the user asks to add, change, or delete a project rule, or when another skill hands over a drafted rule.
 ---
 
-# Add Rule
+# Write Rule
 
 The single write path for rule files. One invocation = one rule added,
 edited, or removed. Full format details, budgets, and dialect mapping live

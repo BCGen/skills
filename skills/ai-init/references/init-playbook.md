@@ -36,7 +36,7 @@ entry file:
 ```markdown
 <!-- harness:begin -->
 AI learning loop: lessons are staged in `.ai/learnings/`, ideas in `.ai/backlog/` (one file per entry; see the retro skill).
-Rules live in <rules location>; write them only via the add-rule skill (budget: entry ≤60, resident ≤150 lines).
+Rules live in <rules location>; write them only via the write-rule skill (budget: entry ≤60, resident ≤150 lines).
 Install the skills: `npx skills add <owner>/<repo>`
 <!-- harness:end -->
 ```
@@ -65,7 +65,7 @@ A NEW entry file contains only:
 It contains NO generic rules ("write clean code", "follow best practices",
 persona preambles) — evidence shows generated boilerplate context reduces
 task success. Discovered *conventions* the user wants enforced become rules
-via the add-rule skill, not entry-file prose. Where the agent offers a
+via the write-rule skill, not entry-file prose. Where the agent offers a
 native bootstrap (e.g. Claude Code `/init`), prefer suggesting it for
 discovery and then trim its output to the policy above.
 

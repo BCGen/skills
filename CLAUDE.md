@@ -10,6 +10,6 @@ Acceptance tests and fixtures live in `tests/`.
 
 <!-- harness:begin -->
 AI learning loop: lessons are staged in `.ai/learnings/`, ideas in `.ai/backlog/` (one file per entry; see the retro skill).
-Rules live in `.claude/rules/`; write them only via the add-rule skill (budget: entry ≤60, resident ≤150 lines).
+Rules live in `.claude/rules/`; write them only via the write-rule skill (budget: entry ≤60, resident ≤150 lines).
 Install the skills: `npx skills add BCGen/skills`
 <!-- harness:end -->

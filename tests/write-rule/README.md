@@ -1,10 +1,10 @@
-# Acceptance tests: add-rule
+# Acceptance tests: write-rule
 
 Minimal-prompt subagent per scenario; mechanical verification only.
 Subagent prompt template:
 
 > Project root: `<sandbox>`. Follow the skill at
-> `<repo>/skills/add-rule/SKILL.md` for this request: "Add a project rule:
+> `<repo>/skills/write-rule/SKILL.md` for this request: "Add a project rule:
 > `<draft>`." Evidence: `<evidence>`. Current task: `<task>`.
 > Report files created or modified.
 

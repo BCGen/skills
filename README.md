@@ -11,7 +11,7 @@ improvements. Works with Claude Code, Cursor, and any agent that reads
 | Skill | What it does |
 | --- | --- |
 | `ai-init` | Initializes a project's AI instruction surface — entry file, per-rule directories, cross-agent interop glue, and the `.ai/` learning-loop files — with idempotent, diff-first, marker-managed writes. |
-| `add-rule` | The single write path for rule files. Owns the cross-agent rule format spec, enforces a non-discoverability admission filter and the rule budget, stamps provenance. |
+| `write-rule` | The single write path for rule files. Owns the cross-agent rule format spec, enforces a non-discoverability admission filter and the rule budget, stamps provenance. |
 | `retro` | Post-task retrospective: mines user corrections and failures, stages lesson candidates in `.ai/learnings/`, and routes approved proposals to their fittest destination (rule, entry-file fact, memory, backlog, skill update). |
 
 Each skill installs and works independently. Together they form a loop:
@@ -22,7 +22,7 @@ into rules — with consent at every step.
 
 ```sh
 npx skills add BCGen/skills                       # all skills
-npx skills add BCGen/skills --skill add-rule      # just one
+npx skills add BCGen/skills --skill write-rule      # just one
 ```
 
 ## Why
