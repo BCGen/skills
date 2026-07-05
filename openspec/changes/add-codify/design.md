@@ -65,14 +65,17 @@ codify applies it across convention domains, not just commits.
 
 The output boundary is drawn by what a convention governs, from codify's own
 job (make the CODE follow conventions) — NOT borrowed from ai-init. codify
-MAY generate declarative config that constrains the CODE itself
-(`.editorconfig`, eslint/prettier/ruff stanza, tsconfig flag) — diff-first,
-idempotent, useful to any agent or human on the project. It MUST NOT write
-settings that govern AGENT BEHAVIOR (git hooks, `settings.json`
-permissions, CI) — those are a different layer (agent/workflow governance),
-platform-specific and security-sensitive; codify points at them with a
-paste-ready snippet. `permissions.deny` is a pointer even though it is
-declarative, because it governs the agent, not the code.
+MAY produce two declarative artifact classes: (1) config that constrains the
+CODE itself (`.editorconfig`, eslint/prettier/ruff stanza, tsconfig flag);
+(2) project convention DOCS that are the shared human+agent source of truth
+(add to an existing CONTRIBUTING/docs, or a consent-created conventions doc
+per D9) — both diff-first, consent-gated, and edited surgically (never
+clobber the user's hand-written content). It MUST NOT write settings that
+govern AGENT BEHAVIOR (git hooks, `settings.json` permissions, CI) — a
+different layer (agent/workflow governance), platform-specific and
+security-sensitive; codify points at them with a paste-ready snippet.
+`permissions.deny` is a pointer even though it is declarative, because it
+governs the agent, not the code.
 
 ### D6. Conflicts: authority order first, ask only same-tier ties (D11)
 
@@ -99,19 +102,35 @@ skill is the drift backstop and must also route hard/mechanical findings to
 enforcement and flag rules a new config/test made redundant so budget can
 be reclaimed. All three route through rule-writing for rule writes.
 
-### D9. Judgment rules come only from doc text or user confirmation
+### D9. Judgment conventions: project doc first, rule as last resort
 
-A judgment rule may NOT be inferred from a code pattern — a pattern is
-discoverable by definition and would be rejected by rule-writing's filter
-(and is net-negative per the research). A detected code pattern is a CLUE,
-not a source. codify observes the pattern, then ASKS the user "is this a
-team rule?"; only a documented judgment rule (a doc text a tool can't
-enforce) or the user's confirmation makes it a rule. The "it's a rule"
-fact is the non-discoverable part rule-writing's filter needs. Example:
-all HTTP calls use `internalClient` (a pattern) → ask → user confirms
-"required, has retry+tracing" → draft rule via rule-writing. Counter:
-camelCase → eslint-expressible → config; components under `src/components/`
-→ discoverable → nothing.
+A judgment convention is never inferred from a code pattern alone — a
+pattern is discoverable by definition and rule-writing would reject it. The
+pattern is a CLUE; codify ASKS "is this a team rule?" and only a documented
+judgment convention (tool-unenforceable) or the user's confirmation makes it
+load-bearing. Once confirmed, the preference order for WHERE it lives —
+because the north star is following the project's own practice and keeping a
+single source of truth — is:
+
+1. **The project already has a fitting doc** (CONTRIBUTING/docs/README) →
+   add to or correct that doc; do NOT also write a rule (a copy in
+   `.claude/rules` would double-maintain and drift). A doc-vs-code conflict
+   where the doc is right also resolves here (edit the doc; the code is
+   flagged as drift per D11).
+2. **No fitting doc but the convention is worth persisting** → codify
+   PROPOSES creating a conventions doc and DISCUSSES with the user where it
+   belongs (CONTRIBUTING / `docs/conventions.md` / an ADR) and how to
+   organize it, offering a recommendation; on consent it creates the doc and
+   writes the convention there. codify does not unilaterally create docs.
+3. **A short, pure agent-behavior constraint not worth a project doc** →
+   draft a rule via rule-writing.
+
+So the rule path is the LAST resort, not the default: most confirmed
+judgment conventions belong in the project's own docs (human + agent shared,
+off the resident budget), with an entry-file pointer/`@import` so the agent
+loads them. Example: all HTTP via `internalClient` → ask → user confirms →
+if CONTRIBUTING exists, add it there; else discuss creating a conventions
+doc; a rule only if it is a short agent-only constraint.
 
 ### D10. codify is a full router: procedures/structure hand to skill-writing
 

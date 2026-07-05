@@ -61,22 +61,39 @@ accuracy, not by the number of rules created.
 - **WHEN** the detected convention is discoverable by reading the repo (e.g. directory layout)
 - **THEN** codify proposes no artifact for it
 
-### Requirement: Judgment rules only from doc text or user confirmation
+### Requirement: Judgment conventions prefer project docs, rule is last resort
 
-codify SHALL NOT infer a rule from a code pattern alone. When a code
-pattern suggests a possible convention, codify SHALL ask the user whether
-it is a rule; only a documented judgment convention (tool-unenforceable) or
-the user's confirmation qualifies it to be drafted as a rule.
-
-#### Scenario: Pattern confirmed as a rule
-
-- **WHEN** codify observes a code pattern (e.g. all HTTP via an internal client) not covered by any config or doc
-- **THEN** it asks the user, and drafts a rule only if the user confirms it is a required convention
+codify SHALL NOT infer a judgment convention from a code pattern alone; a
+pattern only prompts codify to ask the user whether it is a required
+convention. Once confirmed (or found as documented tool-unenforceable
+guidance), codify SHALL place it by this order: (1) if a fitting project doc
+exists, add to or correct that doc and write no rule; (2) if no fitting doc
+exists but the convention is worth persisting, propose creating a
+conventions doc, discuss with the user where it belongs and how to organize
+it, and create it only on consent; (3) only a short pure agent-behavior
+constraint is drafted as a rule via rule-writing. codify MUST NOT
+unilaterally create project docs, and MUST NOT write a rule that duplicates
+a convention already living in a project doc.
 
 #### Scenario: Pattern not confirmed
 
-- **WHEN** the user says the observed pattern is incidental, not a rule
-- **THEN** codify drafts no rule for it
+- **WHEN** the user says an observed pattern is incidental, not a rule
+- **THEN** codify persists nothing for it
+
+#### Scenario: Fitting doc exists
+
+- **WHEN** a confirmed judgment convention belongs in an existing CONTRIBUTING/docs file
+- **THEN** codify proposes editing that doc (diff-first) and does not also write a rule
+
+#### Scenario: No doc, worth persisting
+
+- **WHEN** a confirmed judgment convention has no fitting project doc
+- **THEN** codify proposes creating a conventions doc, discusses its location with the user, and creates it only on consent
+
+#### Scenario: Short agent-only constraint
+
+- **WHEN** a confirmed convention is a short pure agent-behavior constraint not worth a project doc
+- **THEN** codify drafts a rule via rule-writing
 
 ### Requirement: Procedures and build-step structure hand to skill-writing
 
