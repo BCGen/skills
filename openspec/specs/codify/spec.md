@@ -1,8 +1,11 @@
 # codify Specification
 
 ## Purpose
+
 TBD - created by archiving change add-codify. Update Purpose after archive.
+
 ## Requirements
+
 ### Requirement: Explicit, one-time, non-init invocation
 
 codify SHALL run only when explicitly invoked, never on the ai-init path.
@@ -180,4 +183,3 @@ option at most once.
 
 - **WHEN** a rule is approved but rule-writing is not installed
 - **THEN** codify prints the drafted rule for manual use, with at most one mention of the install option
-
