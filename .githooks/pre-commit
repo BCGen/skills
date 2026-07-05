@@ -1,0 +1,5 @@
+#!/bin/sh
+# Deterministic gate: lint must pass before a commit lands.
+# Promoted from .claude/rules/lint-gates-commits.md after the rule (advisory)
+# failed to stop the mistake three times.
+exec pnpm lint
