@@ -25,6 +25,15 @@ npx skills add BCGen/skills                       # all skills
 npx skills add BCGen/skills --skill add-rule      # just one
 ```
 
+Testing from a local checkout: pass the agent and skills explicitly —
+the interactive flow may otherwise land in the generic `.agents/` dir,
+and `--skill '*'` bypasses the internal-skill filter:
+
+```sh
+npx skills add /path/to/skills --agent claude-code \
+  --skill retro --skill add-rule --skill ai-init -y
+```
+
 ## Why
 
 AI coding agents repeat the same mistakes across tasks because lessons
