@@ -33,7 +33,7 @@ minimal prompt, mechanical verification only).
 
 - the preseeded lesson file has 2 provenance bullets after the run
 - `report.md` contains a drafted rule (fenced block or quoted rule text)
-- `report.md` mentions `npx skills add` (write-rule not installed → fallback)
+- `report.md` mentions `npx skills add` (rule-writing not installed → fallback)
 - no rule file was created (no `.claude/`, `.cursor/`, or `AGENTS.md` in sandbox)
 - the preseeded file still has `status: candidate` — the fallback printed a
   draft, so no destination write happened and no promotion may be recorded

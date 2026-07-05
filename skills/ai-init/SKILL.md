@@ -42,7 +42,7 @@ modified, then wait for approval:
   one — never edit outside your `harness:begin/end` markers).
 - Interop glue when applicable (e.g. `CLAUDE.md` starting with `@AGENTS.md`).
 - Rules directory for the target agent (empty — rules are written later,
-  only via the write-rule skill).
+  only via the rule-writing skill).
 - `.ai/learnings/` and `.ai/backlog/` directories, each with its README,
   per the playbook.
 - Coexisting framework detected → one reference line instead of duplicate
@@ -67,5 +67,5 @@ retro at task end).
 | Request | Response |
 | --- | --- |
 | "Also set up permissions/hooks/MCP" | Out of scope — instruction surface only |
-| "Generate a full set of best-practice rules" | Near-empty baseline by design; rules come from evidence via write-rule |
+| "Generate a full set of best-practice rules" | Near-empty baseline by design; rules come from evidence via rule-writing |
 | "Rewrite my existing CLAUDE.md" | Only the managed block is yours to write |

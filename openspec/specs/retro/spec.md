@@ -66,7 +66,7 @@ pre-drafted content, at most 3 proposals per retrospective ranked by
 impact. Each proposal SHALL include one line of reasoning (why this
 destination over the others) and one line stating the consequence of
 declining, phrased to match the user's technical background. Approved
-proposals route by type: project-shared convention → write-rule; personal
+proposals route by type: project-shared convention → rule-writing; personal
 preference → the agent's native memory; corrected project fact (e.g.
 build command, layout) → an entry-file edit shown as a diff before
 writing; missing capability → a new file under `.ai/backlog/`; recurring
@@ -109,12 +109,12 @@ Each full retrospective SHALL review existing rules for staleness, overlap, and 
 ### Requirement: No direct rule writes
 
 The skill MUST NOT write rule files itself. Rule writes go through
-write-rule when it is installed; if write-rule is not installed, the skill
+rule-writing when it is installed; if rule-writing is not installed, the skill
 SHALL output the drafted rule text for the user to apply with their own
-tooling, MAY mention the write-rule install option at most once per
+tooling, MAY mention the rule-writing install option at most once per
 retrospective, and MUST NOT repeat the suggestion.
 
-#### Scenario: write-rule missing
+#### Scenario: rule-writing missing
 
-- **WHEN** a rule promotion is approved but write-rule is not installed
+- **WHEN** a rule promotion is approved but rule-writing is not installed
 - **THEN** the drafted rule is printed for manual use, with at most one mention of the install option

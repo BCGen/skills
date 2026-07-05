@@ -46,7 +46,7 @@ creating a duplicate.
 
 | Finding | Destination |
 | --- | --- |
-| Recurring project-shared convention | Rule, via the **write-rule** skill (draft the exact rule text) |
+| Recurring project-shared convention | Rule, via the **rule-writing** skill (draft the exact rule text) |
 | Corrected project fact (build command, layout) | Entry-file edit, shown as a diff first |
 | Personal preference (how this user works, not project truth) | The agent's native memory |
 | Missing capability or workflow repeated across tasks | New file under `.ai/backlog/` |
@@ -62,7 +62,7 @@ content, the destination, one line on why this destination beats the other
 routes, and one line on what declining means — phrased for the user's
 technical background. Then:
 
-- **Approved rule** → hand the draft to write-rule when installed (the
+- **Approved rule** → hand the draft to rule-writing when installed (the
   mandatory rule write path). Not installed → print the draft for the
   user's own tooling; mention `npx skills add <owner>/<repo>` at most once
   per retrospective, never repeatedly.

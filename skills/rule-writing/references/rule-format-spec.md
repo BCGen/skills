@@ -1,7 +1,7 @@
 # Rule format spec (cross-agent)
 
 The single source of truth for how harness rules are written. Only the
-write-rule skill writes rule files; other skills hand it drafts.
+rule-writing skill writes rule files; other skills hand it drafts.
 
 ## Rule shape
 
