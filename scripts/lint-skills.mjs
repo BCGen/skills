@@ -86,6 +86,18 @@ for (const file of walkMarkdown(SKILLS_DIR)) {
   }
 }
 
+// Shared routing.md must be byte-identical across consuming skills.
+const sharedRouting = join(ROOT, "shared", "routing.md");
+if (existsSync(sharedRouting)) {
+  const canonical = readFileSync(sharedRouting, "utf8");
+  for (const dir of skillDirs) {
+    const copy = join(SKILLS_DIR, dir, "references", "routing.md");
+    if (!existsSync(copy)) continue;
+    if (readFileSync(copy, "utf8") !== canonical)
+      fail(copy, "differs from shared/routing.md — run `pnpm sync-routing`");
+  }
+}
+
 if (violations.length) {
   console.error(`lint-skills: ${violations.length} violation(s)`);
   for (const v of violations) console.error(`  ✗ ${v}`);

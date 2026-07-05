@@ -38,6 +38,12 @@ Apply the routing table in the reference. Key decisions:
 - **Must-never / agent-behavior / file-generator** → paste-ready pointer.
 - **Conflict** → authority order settles cross-tier drift silently; ask the
   user only on a same-tier tie. Never write a prose precedence rule.
+- **Evidence-bounded upgrade** → for a convention that already has evidence
+  (documented / code-consistent / user-stated) but is carried sub-optimally
+  (e.g. doc- or verbally-enforced yet a tool could enforce it), propose the
+  better mechanism for discussion. Only for conventions with existing
+  evidence — never pitch a best practice the project shows no sign of caring
+  about.
 
 ## Step 3 — Place judgment conventions (doc first, rule last)
 

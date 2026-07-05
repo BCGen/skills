@@ -38,16 +38,17 @@ For each evidenced lesson (formats in [references/loop-file-formats.md](referenc
 
 ## Step 3 — Build proposals (max 3, ranked by impact)
 
-Before proposing any promotion, scan the project's rule locations
-(`.claude/rules/`, `.cursor/rules/`, the AGENTS.md managed block): if an
-existing rule already covers the lesson — whoever wrote it — propose
-marking the candidate promoted (pointing at that rule) instead of
-creating a duplicate.
+For a project-shared lesson, decide its mechanism with the shared routing
+in [references/routing.md](references/routing.md) — the SAME logic codify
+uses, so a lesson routes to config / project doc / rule / tool-upgrade /
+pointer at full parity, not just "a rule." Reconciliation applies first: if
+the lesson already lives in a rule/doc/config, respect it (propose marking
+the candidate promoted to it, no duplicate).
+
+retro-specific routes, on top of the shared table:
 
 | Finding | Destination |
 | --- | --- |
-| Recurring project-shared convention | Rule, via the **rule-writing** skill (draft the exact rule text) |
-| Corrected project fact (build command, layout) | Entry-file edit, shown as a diff first |
 | Personal preference (how this user works, not project truth) | The agent's native memory |
 | Missing capability or workflow repeated across tasks | New file under `.ai/backlog/` |
 | An existing skill's gap caused the problem | Update that skill's mistakes/notes section |

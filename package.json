@@ -5,6 +5,7 @@
   "packageManager": "pnpm@10.33.2",
   "scripts": {
     "lint": "node scripts/lint-skills.mjs && markdownlint-cli2",
+    "sync-routing": "node scripts/sync-routing.mjs",
     "prepare": "git config core.hooksPath .githooks"
   },
   "devDependencies": {
