@@ -16,6 +16,7 @@ standard; unblock personal-skills migration. **Non-Goals:** see proposal.
 ## Decisions
 
 ### D1. Names: gerund family, collision-checked
+
 `skill-writing` / `skill-testing` / `skill-auditing`, alongside the
 renamed `rule-writing` — per Anthropic authoring guidance; `ai-init` and
 `retro` keep their short names (two deliberate styles: gerund for
@@ -23,17 +24,20 @@ managed-unit tools, short names for standalone acts). All exact-match
 clean on skills.sh (2026-07-05).
 
 ### D2. Build order: testing → writing → auditing
+
 The measuring stick first (it has the strongest existing base and verifies
 the other two), the highest-value generator second, the auditor last (its
 format layer depends on the authoring spec skill-writing formalizes).
 
 ### D3. Toolchain interlink with fallback (harness pattern)
+
 skill-writing hands its output to skill-testing when installed and offers
 a manual verification checklist otherwise; skill-auditing routes fixes to
 skill-writing when installed, otherwise prints them. Zero-awareness keeps
 binding generic skills only.
 
 ### D4. skill-testing carries the proven discipline
+
 Minimal-prompt subagent execution (no rule restating), mechanical-only
 verification (grep/regex/count/diff), plus Phase 1 field patterns as
 references: sandbox + preseed setup, git `fixture`/`pass1` tagging for
@@ -41,6 +45,7 @@ additions-only and zero-diff idempotency proofs, scenario-transcript
 files for conversational skills.
 
 ### D5. skill-writing bakes the collection standard
+
 Conventions enforced at authoring time: frontmatter (name == directory,
 capability sentence + "Use when" ≤1024 chars), ≤100-line body with
 references split, English-only, no-vendoring, naming philosophy including
@@ -49,6 +54,7 @@ Also scaffolds `tests/<name>/README.md` with scenarios so acceptance is
 designed with the skill, not after it.
 
 ### D6. skill-auditing: two layers, any target directory
+
 Carried from the Phase 1 interview: format layer (offline, against the
 current authoring spec) and content layer (commands/APIs/versions verified
 against live docs via web), reported separately. Generic: defaults to the
