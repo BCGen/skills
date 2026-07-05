@@ -4,7 +4,7 @@
 
 Given a convention or lesson, decide which mechanism should carry it. Shared
 byte-identical across the harness skills (codify, retro, and
-consistency-checking) so the decision is identical whoever reaches it.
+checkup) so the decision is identical whoever reaches it.
 Success is the RIGHT mechanism, not "N rules created" — routing most things
 to config/docs/nothing is correct.
 

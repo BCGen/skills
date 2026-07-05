@@ -8,13 +8,13 @@ import { join } from "node:path";
 
 const ROOT = new URL("..", import.meta.url).pathname;
 const SOURCE = join(ROOT, "shared", "routing.md");
-const CONSUMERS = ["codify", "retro", "consistency-checking"];
+const CONSUMERS = ["codify", "retro", "checkup"];
 
 const canonical = readFileSync(SOURCE, "utf8");
 let synced = 0;
 for (const skill of CONSUMERS) {
   const dest = join(ROOT, "skills", skill, "references", "routing.md");
-  // Only sync skills that exist (consistency-checking is future/backlog).
+  // Only sync skills that exist (checkup is future/backlog).
   if (!existsSync(join(ROOT, "skills", skill))) continue;
   writeFileSync(dest, canonical);
   synced++;

@@ -2,7 +2,7 @@
 status: open
 ---
 
-# consistency-checking skill (drift + redundancy backstop)
+# checkup skill (drift + redundancy backstop)
 
 - 2026-07-05 · task: add-skill-toolchain planning · why: detect drift between
   rules/settings and the project's actual practice, route hard/mechanical
