@@ -4,8 +4,8 @@
 
 ### Requirement: Evidence-bounded mechanism upgrade proposal
 
-For a convention that already has evidence in the project (documented,
-consistent in code, or user-stated), codify SHALL evaluate its current
+codify SHALL, for a convention that already has evidence in the project
+(documented, consistent in code, or user-stated), evaluate its current
 carrier against the best available enforcement mechanism and propose an
 upgrade when the current carrier is sub-optimal (e.g. a doc- or
 verbally-enforced convention a linter/tool could enforce deterministically),
