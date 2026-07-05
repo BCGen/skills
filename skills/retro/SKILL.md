@@ -52,8 +52,11 @@ creating a duplicate.
 | Missing capability or workflow repeated across tasks | New file under `.ai/backlog/` |
 | An existing skill's gap caused the problem | Update that skill's mistakes/notes section |
 
-Also check rules touched during this task for staleness, overlap, or
-never-triggered content — deletion and merge proposals count toward the 3.
+Also check rules touched during this task for staleness, overlap,
+never-triggered content, or redundancy with a tool/hook now enforcing the
+same thing — when you escalate a lesson to deterministic enforcement,
+propose retiring the advisory rule it replaces. Deletions and merges count
+toward the 3.
 
 ## Step 4 — Present and execute with consent
 

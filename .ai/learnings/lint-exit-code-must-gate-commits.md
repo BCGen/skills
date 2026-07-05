@@ -1,6 +1,6 @@
 ---
 status: promoted
-promoted_to: .claude/rules/lint-gates-commits.md (advisory) + .githooks/pre-commit (deterministic enforcement)
+promoted_to: .githooks/pre-commit (deterministic enforcement; the advisory rule was retired as redundant once the hook existed)
 promoted_on: 2026-07-06
 ---
 
