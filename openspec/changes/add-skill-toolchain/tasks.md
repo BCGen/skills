@@ -8,10 +8,10 @@
 
 ## 2. skill-writing
 
-- [ ] 2.1 Write the collection conventions references file (single source shared with skill-auditing)
-- [ ] 2.2 Draft `skills/skill-writing/SKILL.md`: gather→draft→review, convention enforcement, naming discipline with collision check, acceptance scaffold + skill-testing handoff
-- [ ] 2.3 Acceptance via skill-testing: author a sample skill end-to-end (conventions hold, test plan scaffolded, collision check ran)
-- [ ] 2.4 Retire the personal `write-a-skill` (archive; symlinked collection copy noted)
+- [x] 2.1 Write the collection conventions references file (single source shared with skill-auditing)
+- [x] 2.2 Draft `skills/skill-writing/SKILL.md`: gather→draft→review, convention enforcement, naming discipline with collision check, acceptance scaffold + skill-testing handoff
+- [x] 2.3 Acceptance via skill-testing: author a sample skill end-to-end (conventions hold, test plan scaffolded, collision check ran)
+- [x] 2.4 Retire the personal `write-a-skill` (archive; symlinked collection copy noted)
 
 ## 3. skill-auditing
 
