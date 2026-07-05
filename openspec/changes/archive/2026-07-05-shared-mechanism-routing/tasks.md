@@ -16,4 +16,4 @@
 
 - [x] 3.1 Add the byte-identical routing-copy check to `scripts/lint-skills.mjs`
 - [x] 3.2 Acceptance via skill-testing: same convention → same mechanism decision from codify and retro; codify proposes a tool upgrade for an evidence-backed doc convention; no proposal without evidence
-- [ ] 3.3 Lint, archive change, sync develop and push per the publishing rule
+- [x] 3.3 Lint, archive change, sync develop and push per the publishing rule

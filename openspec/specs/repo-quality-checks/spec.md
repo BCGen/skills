@@ -46,3 +46,15 @@ The lint SHALL run in GitHub Actions on every push and be runnable locally with 
 
 - **WHEN** a commit with a lint violation is pushed
 - **THEN** the workflow fails and reports each violation
+
+### Requirement: Shared routing copies must be byte-identical
+
+The repo lint SHALL verify that every skill shipping a copy of the shared
+routing logic (`skills/*/references/routing.md` among the consuming skills)
+is byte-identical to the others. Any difference SHALL fail the lint, so the
+canonical routing cannot drift across skills.
+
+#### Scenario: Drift fails the lint
+
+- **WHEN** one skill's `references/routing.md` differs from another's
+- **THEN** the lint fails and names the diverging files
