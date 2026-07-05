@@ -1,0 +1,68 @@
+# Acceptance tests: codify
+
+Run codify over the `codify-sample` fixture with pre-authorized consent;
+verify the routing decisions mechanically. The fixture mixes one convention
+per route.
+
+## Fixture routes
+
+| Signal in fixture | Expected route |
+| --- | --- |
+| `src/components/` layout (Button, Card) | discoverable → nothing |
+| Consistent single-quote style, no config enforcing it | mechanically enforceable, not enforced → propose config artifact |
+| CONTRIBUTING already states "errors bubble to the boundary" | judgment already in a doc → no rule |
+| `internalClient`-only HTTP pattern (added below), undocumented | judgment clue → ASK before any rule |
+| `commitlint.config.json` present | commit convention already enforced → point at it, no new rule |
+
+## Subagent prompt
+
+Minimal, with pre-authorization so the run completes:
+
+> Follow the skill at `<repo>/skills/codify/SKILL.md` to codify the project
+> at `<sandbox>`. I pre-approve your proposed config/doc writes; for any
+> convention needing my confirmation, state the question and assume it IS a
+> team convention. rule-writing and skill-writing are not installed. Write
+> your routing report to `<sandbox>/codify-report.md`.
+
+## Mechanical checks (on the report and the sandbox)
+
+```sh
+grep -ci 'components' codify-report.md      # layout mentioned as discoverable/nothing
+grep -ciE 'quote|config' codify-report.md   # style routed to a config artifact
+grep -ci 'boundary' codify-report.md        # error-to-boundary recognized as already documented
+grep -ci 'commitlint' codify-report.md      # commit convention pointed at, not re-ruled
+test ! -d "$SANDBOX/.claude/rules"          # no rule written (rule-writing absent; doc/config preferred)
+```
+
+Route verdicts to confirm from the report:
+
+- layout → nothing (no artifact proposed for `src/components/`)
+- single-quote style → a config artifact proposed (not a rule)
+- error-to-boundary → recognized as already in CONTRIBUTING, no rule
+- `internalClient` → asked before acting (a clue, not auto-ruled)
+- commit → existing commitlint pointed at, no new commit rule
+
+Not mechanically verifiable (human spot-check): the quality of the
+recommended doc location, the phrasing of the confirmation question.
+
+## Second fixture: `codify-config-gap` (the "generate config" route)
+
+`codify-sample` has no formatter toolchain, so a style convention correctly
+routes to a POINTER (standing up a new toolchain is out of scope). To
+exercise the config-generation route, `codify-config-gap` has an existing
+`.editorconfig` (charset only) and code that is unanimously 2-space
+indented.
+
+Expected: codify extends the EXISTING `.editorconfig` with
+`indent_style`/`indent_size = 2`, surgically (keeps `root`/`charset`), and
+writes no rule.
+
+```sh
+grep -c 'indent_size = 2' .editorconfig   # added
+grep -c 'charset = utf-8' .editorconfig   # pre-existing line intact
+test ! -d .claude/rules                    # no rule
+```
+
+Rule of thumb this proves: codify only extends config for a mechanism
+ALREADY present; introducing a new linter/formatter is a pointer, not a
+codify write.
