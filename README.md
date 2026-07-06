@@ -84,7 +84,7 @@ this Stop hook (Claude Code, with your consent) — or paste it into
         "hooks": [
           {
             "type": "command",
-            "command": "grep -q '\"stop_hook_active\"[[:space:]]*:[[:space:]]*true' && exit 0; echo '{\"decision\":\"block\",\"reason\":\"A turn just ended. If a task was completed in this conversation and no retrospective has run for it, run the retro skill now; otherwise just stop.\"}'"
+            "command": "grep -q '\"stop_hook_active\"[[:space:]]*:[[:space:]]*true' && exit 0; echo '{\"decision\":\"block\",\"reason\":\"retro checkpoint: if a task was completed in this conversation and no retrospective has run for it, run the retro skill now; otherwise just stop.\"}'"
           }
         ]
       }
@@ -94,7 +94,9 @@ this Stop hook (Claude Code, with your consent) — or paste it into
 ```
 
 It costs one short check per turn end; retro's built-in guard makes a
-duplicate fire harmless.
+duplicate fire harmless. When it blocks a stop, the UI shows a
+`Stop hook error:` prefix — that is the normal rendering of the block,
+not a failure.
 
 ## Why
 

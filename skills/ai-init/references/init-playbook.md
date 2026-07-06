@@ -108,7 +108,7 @@ present as a no-op.
         "hooks": [
           {
             "type": "command",
-            "command": "grep -q '\"stop_hook_active\"[[:space:]]*:[[:space:]]*true' && exit 0; echo '{\"decision\":\"block\",\"reason\":\"A turn just ended. If a task was completed in this conversation and no retrospective has run for it, run the retro skill now; otherwise just stop.\"}'"
+            "command": "grep -q '\"stop_hook_active\"[[:space:]]*:[[:space:]]*true' && exit 0; echo '{\"decision\":\"block\",\"reason\":\"retro checkpoint: if a task was completed in this conversation and no retrospective has run for it, run the retro skill now; otherwise just stop.\"}'"
           }
         ]
       }
@@ -120,7 +120,9 @@ present as a no-op.
 Behavior: the hook fires at every turn end; the `stop_hook_active` guard
 lets the follow-up stop through, so it costs at most one short extra
 evaluation per turn, and retro's own idempotency guard makes any
-double-fire harmless. The command needs a POSIX shell. Verified
+double-fire harmless. A blocked stop renders with a `Stop hook error:`
+prefix in the UI — that is the normal display of `decision: block`, not
+a failure. The command needs a POSIX shell. Verified
 2026-07-06 against code.claude.com/docs plus the running Claude Code
 (2.1.201): the nested structure matches a live working config, and the
 `stop_hook_active` flag exists in the binary even though the current
