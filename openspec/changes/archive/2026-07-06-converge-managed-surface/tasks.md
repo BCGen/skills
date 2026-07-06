@@ -20,4 +20,4 @@
       block converged, user prose untouched, pass 2 zero diff
 - [x] 2.2 Adversarial review; `pnpm lint`;
       `openspec validate converge-managed-surface`
-- [ ] 2.3 Archive keeping the delta; sync develop and main
+- [x] 2.3 Archive keeping the delta; sync develop and main
