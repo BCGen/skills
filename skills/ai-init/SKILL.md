@@ -8,9 +8,7 @@ description: Initializes a project's AI instruction surface — entry file, per-
 Set up the files agents read ("instruction surface") plus the harness loop.
 Tables and templates live in
 [references/init-playbook.md](references/init-playbook.md) — read it first.
-Never touch execution settings (settings.json, hooks, MCP, CI) — the one
-exception is the opt-in retro Stop hook in the playbook, written only on
-explicit consent.
+Never touch execution settings (settings.json, hooks, MCP, CI).
 
 ## Step 1 — Detect
 
@@ -49,8 +47,6 @@ modified, then wait for approval:
   per the playbook.
 - Coexisting framework detected → one reference line instead of duplicate
   content, per the playbook.
-- Claude Code target → offer the opt-in retro Stop hook (one question,
-  yes recommended; decline or non-interactive → skip), per the playbook.
 
 ## Step 5 — Write and verify
 
@@ -70,6 +66,6 @@ retro at task end).
 
 | Request | Response |
 | --- | --- |
-| "Also set up permissions/hooks/MCP" | Out of scope — only the consent-gated retro Stop hook, nothing else |
+| "Also set up permissions/hooks/MCP" | Out of scope — instruction surface only |
 | "Generate a full set of best-practice rules" | Near-empty baseline by design; rules come from evidence via rule-writing |
 | "Rewrite my existing CLAUDE.md" | Only the managed block is yours to write |
