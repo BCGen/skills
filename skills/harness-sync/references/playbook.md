@@ -71,8 +71,9 @@ discovery and then trim its output to the policy above.
 
 ## Idempotency algorithm
 
-1. Inventory what already exists (entry file, rules dir, `.ai/` files,
-   harness block, interop glue).
+1. Inventory what already exists (entry file, `.ai/` files,
+   harness block, interop glue). Never pre-create a rules directory —
+   rule-writing creates it with the first rule.
 2. Plan the missing pieces plus any managed piece that drifted from the
    current template (harness block content, loop README content) —
    regenerate ONLY the managed surface, and only on drift.

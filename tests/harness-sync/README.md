@@ -41,7 +41,7 @@ awk '/Plan as presented/,0' report.md | grep -c 'harness:begin'   # > 0
 | Fixture | Target | Extra checks |
 | --- | --- | --- |
 | `empty` | asks (zero detected) → AGENTS.md recommended | AGENTS.md created; any commands quoted exist in package.json |
-| `existing-claudemd` | Claude Code | CLAUDE.md original lines intact (additions only); `.claude/rules/` present |
+| `existing-claudemd` | Claude Code | CLAUDE.md original lines intact (additions only); no `.claude/rules/` created (`test ! -d .claude/rules`) |
 | `existing-cursor` | Cursor | `style.mdc` byte-identical; entry file is AGENTS.md |
 | `existing-agentsmd` | fallback | AGENTS.md gains only the harness block |
 | `multi-agent` | asks (two detected) | interop glue present (`@AGENTS.md` import in CLAUDE.md); preseeded rules byte-identical |

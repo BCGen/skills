@@ -20,7 +20,7 @@ answer (AGENTS.md is the portable default). Never guess.
 
 ## Step 2 — Inventory
 
-List what already exists: entry file, rules directory, `.ai/learnings/`,
+List what already exists: entry file, `.ai/learnings/`,
 `.ai/backlog/`, harness block, interop glue. The plan covers the missing
 pieces AND any managed piece that drifted from the current template (the
 harness block, the loop READMEs) — re-running on an up-to-date project
@@ -49,8 +49,8 @@ covers:
   one, or update a drifted block in place — never edit outside your
   `harness:begin/end` markers).
 - Interop glue when applicable (e.g. `CLAUDE.md` starting with `@AGENTS.md`).
-- Rules directory for the target agent (empty — rules are written later,
-  only via the rule-writing skill).
+- No rules directory — git cannot track an empty directory; rule-writing
+  creates it with the first rule.
 - `.ai/learnings/` and `.ai/backlog/` directories, each with its README
   (created, or updated on drift), per the playbook.
 - Coexisting framework detected → one reference line instead of duplicate
