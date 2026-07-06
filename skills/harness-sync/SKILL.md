@@ -65,11 +65,16 @@ Apply the approved plan, then self-check:
 2. User-authored content outside markers is byte-identical.
 3. A hypothetical second run would change nothing (report this).
 
-## Step 6 — Report
+## Step 6 — Report and hand off
 
-Short summary: what was created/modified, the detected target, budget
-status (entry file lines / 60), and next steps (install the skills; run
-retro at task end).
+Short summary: what was created/modified, the detected target, and the
+budget status (entry file lines / 60). Then point at the next move, in
+order:
+
+1. Commit the new files — the loop is team-shared through git.
+2. Existing project → run the codify skill next, so the agent's first
+   real task already follows the project's conventions.
+3. Then just work; retro picks up each task's lessons when it ends.
 
 ## Mistakes to refuse
 
