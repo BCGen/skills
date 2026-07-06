@@ -41,27 +41,12 @@ npx skills@latest add BCGen/skills -s harness-sync codify retro rule-writing
 
 Skills trigger automatically when your task matches, or run one on demand
 (`/codify`, `/retro`, or just ask). Every skill runs standalone — none
-requires another. A full pass over a project's life:
-
-1. **Adopt** — optionally run `harness-sync`: entry file, rules
-   directory, and the `.ai/` learning-loop files in one pass, plus an
-   install pointer your teammates' agents will see. Re-run it after a
-   skills update to converge the managed bits; skipping it entirely is
-   fine — the loop files bootstrap themselves on first use.
-2. **Capture** — run `codify` on an existing project so the agent's
-   first task already follows your conventions. Each convention is routed
-   to its fittest home — config, doc, rule (via `rule-writing`), or
-   nothing at all.
-3. **Work** — just work. Add or adjust a rule any time through
-   `rule-writing`.
-4. **Close the task** — run `retro`. It stages lessons from what went
-   wrong in `.ai/learnings/` and, with your consent, promotes them to the
-   fittest mechanism; recurring problems build a trail there until they
-   are cured.
-5. **Grow skills** — when a repeated procedure deserves to be a skill
-   (your idea, or a codify/retro handoff), author it with
-   `skill-writing`, prove it with `skill-testing`, and sweep the whole
-   set with `skill-auditing` when things may have gone stale.
+requires another. The typical pass: `codify` once to capture conventions
+→ work (rules via `rule-writing` any time) → `retro` when each task ends.
+`harness-sync` optionally lays out the whole surface on day 0 and
+re-syncs it after skills updates; grow your own skills with
+`skill-writing`, prove them with `skill-testing`, and sweep the set with
+`skill-auditing`. Each skill's timing is in the table above.
 
 ## The learning loop
 
