@@ -35,7 +35,7 @@ entry file:
 
 ```markdown
 <!-- harness:begin -->
-AI learning loop: lessons are staged in `.ai/learnings/`, ideas in `.ai/backlog/` (one file per entry; see the retro skill).
+AI learning loop: lessons are staged in `.ai/learnings/`, ideas in `.ai/backlog/` (one file per entry); run the retro skill when a task ends.
 Rules live in <rules location>; write them only via the rule-writing skill (budget: entry ≤60, resident ≤150 lines).
 Install the skills: `npx skills add <owner>/<repo>`
 <!-- harness:end -->

@@ -1,6 +1,6 @@
 ---
 name: retro
-description: Runs a post-task retrospective - detects user corrections, failures, and repeated mistakes, stages lessons as candidates, and proposes consent-gated improvements routed to their fittest destination (project rule, entry-file fact, memory, backlog, or skill update). Use when a task is complete or about to be marked done.
+description: Runs a post-task retrospective - detects user corrections, failures, and repeated mistakes, stages lessons as candidates, and proposes consent-gated improvements routed to their fittest destination (project rule, entry-file fact, memory, backlog, or skill update). Use when a task is complete or about to be marked done, before committing or closing out, or when the user says done, wrap up, or ship it.
 ---
 
 # Retro
