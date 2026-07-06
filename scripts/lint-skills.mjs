@@ -103,7 +103,7 @@ const readmePath = join(ROOT, "README.md");
 if (existsSync(readmePath)) {
   const readme = readFileSync(readmePath, "utf8");
   const listed = new Set(
-    [...readme.matchAll(/^\| \[?`([a-z][a-z0-9-]*)`/gm)].map((m) => m[1])
+    [...readme.matchAll(/^\| \[([a-z][a-z0-9-]*)\]\(skills\//gm)].map((m) => m[1])
   );
   const actual = new Set(skillDirs);
   for (const name of listed)
