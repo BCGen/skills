@@ -7,23 +7,11 @@ The root problem predates AI: conventions that live only in your team's
 heads trip every newcomer. An AI agent is simply the most demanding
 newcomer you will ever onboard — it starts from zero every single session.
 
-These skills close the loop: capture the conventions your project already
-follows so the agent starts from them, and stage every correction as a
-lesson that — only with your consent — lands where it fits best: a config,
-a doc, or a budgeted, team-shared rule your human teammates read too.
-Works with Claude Code, Cursor, and any agent that reads `AGENTS.md`.
-
-## Install
-
-```sh
-npx skills@latest add BCGen/skills
-```
-
-Without the skill-authoring toolchain:
-
-```sh
-npx skills@latest add BCGen/skills -s harness-sync codify retro rule-writing
-```
+These skills close the loop. Your conventions get captured up front, so
+the agent starts from them. Every correction becomes a lesson that — with
+your consent — lands where it fits: a config, a doc, or a budgeted rule
+your teammates read too. Works with Claude Code, Cursor, and any agent
+that reads `AGENTS.md`.
 
 ## Skills
 
@@ -36,6 +24,18 @@ npx skills@latest add BCGen/skills -s harness-sync codify retro rule-writing
 | [skill-writing](skills/skill-writing/SKILL.md) | Authors a new skill — for a collection, a project, or your own setup — to a tested standard. | When a procedure is worth capturing as a skill — your own idea, or a codify/retro handoff. |
 | [skill-testing](skills/skill-testing/SKILL.md) | Acceptance-tests any skill with mechanical checks. | After writing or changing a skill, to prove it does what its SKILL.md says. |
 | [skill-auditing](skills/skill-auditing/SKILL.md) | Audits a skills directory for stale format or facts. | Periodically, or when a skill seems outdated. |
+
+## Install
+
+```sh
+npx skills@latest add BCGen/skills
+```
+
+Without the skill-authoring toolchain:
+
+```sh
+npx skills@latest add BCGen/skills -s harness-sync codify retro rule-writing
+```
 
 ## Usage
 
@@ -51,8 +51,8 @@ The typical pass:
 
 `harness-sync` optionally lays out the whole surface on day 0 and
 re-syncs it after skills updates. The authoring trio — `skill-writing`,
-`skill-testing`, `skill-auditing` — grows, proves, and sweeps skills of
-your own. Timing per skill is in the table above.
+`skill-testing`, `skill-auditing` — writes, tests, and audits skills of
+your own.
 
 ## The learning loop
 
@@ -75,9 +75,8 @@ These skills route each lesson to the mechanism that fits — config, doc,
 or rule — only with your consent, and keep rules under a hard budget, so
 more lessons never mean worse adherence.
 
-Unlike one-shot file generators or hook-based capture bolted onto a
-methodology, these are standalone, consent-gated, and write each agent's
-native format.
+Unlike one-shot config generators, these are standalone, consent-gated,
+and write each agent's native format.
 
 ## Contributing
 
