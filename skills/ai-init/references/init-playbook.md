@@ -120,8 +120,11 @@ present as a no-op.
 Behavior: the hook fires at every turn end; the `stop_hook_active` guard
 lets the follow-up stop through, so it costs at most one short extra
 evaluation per turn, and retro's own idempotency guard makes any
-double-fire harmless. The command needs a POSIX shell. Verified against
-the hooks reference at code.claude.com/docs 2026-07-06.
+double-fire harmless. The command needs a POSIX shell. Verified
+2026-07-06 against code.claude.com/docs plus the running Claude Code
+(2.1.201): the nested structure matches a live working config, and the
+`stop_hook_active` flag exists in the binary even though the current
+docs page omits it.
 
 ## Out of scope — never touch
 
