@@ -35,15 +35,9 @@ entry file:
 
 ```markdown
 <!-- harness:begin -->
-Run the retro skill when a task ends; lessons are staged in `.ai/learnings/`, ideas in `.ai/backlog/` (one file per entry).
-Rules live in <rules location>; write them only via the rule-writing skill (budget: entry ≤60, resident ≤150 lines).
-Install the skills: `npx skills@latest add <owner>/<repo>`
+Run the retro skill when a task ends; lessons land in `.ai/learnings/`, ideas in `.ai/backlog/`.
 <!-- harness:end -->
 ```
-
-Resolve `<owner>/<repo>` from the git remote of the repo this skill was
-installed from when discoverable; otherwise keep the literal placeholder
-and tell the user to fill it in — never invent a slug.
 
 ## Loop directories
 

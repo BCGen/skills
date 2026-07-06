@@ -49,11 +49,13 @@ awk '/Plan as presented/,0' report.md | grep -c 'harness:begin'   # > 0
 ## Scenario: converge an outdated managed block
 
 Fixture `existing-claudemd`, but before the `fixture` commit preseed the
-entry file with a harness block whose first line is exactly this stale
-(v1) wording — lines 2–3 stay current:
+entry file with the stale multi-line block (v1 wording between the
+markers):
 
 ```markdown
 AI learning loop: lessons are staged in `.ai/learnings/`, ideas in `.ai/backlog/` (one file per entry; see the retro skill).
+Rules live in `.claude/rules/`; write them only via the rule-writing skill (budget: entry ≤60, resident ≤150 lines).
+Install the skills: `npx skills add BCGen/skills`
 ```
 
 Expect the block converged in place. The per-file additions-only check
@@ -62,6 +64,7 @@ marker-stripped compare give equivalent coverage:
 
 ```sh
 ! grep -q 'see the retro skill' CLAUDE.md          # stale wording gone
+! grep -q 'Install the skills:' CLAUDE.md          # dropped lines gone
 grep -c 'Run the retro skill when a task ends' CLAUDE.md   # == 1 (current template)
 git -C <sandbox> diff fixture..pass1 --numstat -- ':!CLAUDE.md' | awk '{s+=$2} END {exit s>0?1:0}'   # all other files additions-only
 git -C <sandbox> show fixture:CLAUDE.md | sed '/harness:begin/,/harness:end/d' > before.stripped
