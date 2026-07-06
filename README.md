@@ -69,10 +69,11 @@ blameless (no names; authorship lives in git history).
 
 ## Why
 
-Native agent memory is machine-local and never becomes team-shared rules,
-and rule files that only grow eventually make the agent follow them *less*.
-These skills promote lessons into shared rules only with your consent, and
-keep them under a budget — so more rules never mean worse adherence.
+Native agent memory is machine-local and never becomes team-shared, and
+rule files that only grow eventually make the agent follow them *less*.
+These skills route each lesson to the mechanism that fits — config, doc,
+or rule — only with your consent, and keep rules under a hard budget, so
+more lessons never mean worse adherence.
 
 Unlike one-shot file generators or hook-based capture bolted onto a
 methodology, these are standalone, consent-gated, and write each agent's
