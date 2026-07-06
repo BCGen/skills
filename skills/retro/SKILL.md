@@ -73,7 +73,8 @@ toward the 3.
 Present one proposal at a time: the finding, its evidence, the pre-drafted
 content, the destination, one line on why this destination beats the other
 routes, and one line on what declining means — phrased for the user's
-technical background. Then:
+technical background, asked as a structured choice where the platform
+offers option prompts. Then:
 
 - **Approved rule** → hand the draft to rule-writing when installed (the
   mandatory rule write path). Not installed → print the draft for the

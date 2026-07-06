@@ -40,8 +40,10 @@ harness block only.
 
 Print the full plan in the conversation — the complete content of every
 file to be created and a diff for every file to be modified — then ask
-for approval. Never ask the user to approve content they have not seen.
-The plan covers:
+for approval as one structured choice where the platform offers option
+prompts (e.g. approve as planned / adjust first), else a plain question.
+Never ask the user to approve content they have not seen. The plan
+covers:
 
 - Entry file (create, append the managed harness block to an existing
   one, or update a drifted block in place — never edit outside your
