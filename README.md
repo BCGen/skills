@@ -29,13 +29,13 @@ npx skills@latest add BCGen/skills -s harness-sync codify retro rule-writing
 
 | Skill | What it does | When to use it |
 | --- | --- | --- |
-| `harness-sync` | Sets up and re-syncs a project's AI instruction files. | Optional day 0 — lays out the whole surface at once; everything also bootstraps without it. Re-run after a skills update to re-sync the managed bits. |
-| `codify` | Captures a project's existing conventions so the agent follows them from the first run. | Once on an existing project, before the agent's first real task. |
-| `retro` | After a task, turns your corrections into durable improvements, with your consent. | At the end of every task — especially one where you corrected the agent. Saying done or wrap up triggers it too. |
-| `rule-writing` | The one place rules get written — filtered, budgeted, provenance-stamped. | Any time a rule should be added, changed, or removed — directly, or handed a draft by codify/retro. |
-| `skill-writing` | Authors a new skill — for a collection, a project, or your own setup — to a tested standard. | When a procedure is worth capturing as a skill — your own idea, or a codify/retro handoff. |
-| `skill-testing` | Acceptance-tests any skill with mechanical checks. | After writing or changing a skill, to prove it does what its SKILL.md says. |
-| `skill-auditing` | Audits a skills directory for stale format or facts. | Periodically, or when a skill seems outdated. |
+| [`harness-sync`](skills/harness-sync/) | Sets up and re-syncs a project's AI instruction files. | Optional day 0 — everything also bootstraps without it; re-run after a skills update to re-sync the managed bits. |
+| [`codify`](skills/codify/) | Captures a project's existing conventions so the agent follows them from the first run. | Once on an existing project, before the agent's first real task. |
+| [`retro`](skills/retro/) | After a task, turns your corrections into durable improvements, with your consent. | At the end of every task — especially one where you corrected the agent. Saying done or wrap up triggers it too. |
+| [`rule-writing`](skills/rule-writing/) | The one place rules get written — filtered, budgeted, provenance-stamped. | Any time a rule should be added, changed, or removed — directly, or handed a draft by codify/retro. |
+| [`skill-writing`](skills/skill-writing/) | Authors a new skill — for a collection, a project, or your own setup — to a tested standard. | When a procedure is worth capturing as a skill — your own idea, or a codify/retro handoff. |
+| [`skill-testing`](skills/skill-testing/) | Acceptance-tests any skill with mechanical checks. | After writing or changing a skill, to prove it does what its SKILL.md says. |
+| [`skill-auditing`](skills/skill-auditing/) | Audits a skills directory for stale format or facts. | Periodically, or when a skill seems outdated. |
 
 ## Usage
 
@@ -57,10 +57,9 @@ Lessons live in your repo, not in any agent's private memory:
   (fixed somewhere better) → `resolved` (cured — the file is deleted).
 - `.ai/backlog/` — one file per idea worth building later.
 
-Commit both: they are plain markdown, team-shared through git, so a
-lesson one person's agent learns reaches everyone's next session. Entries
-stay blameless — no person names; authorship already lives in git
-history.
+Commit both: plain markdown, team-shared through git — a lesson one
+person's agent learns reaches everyone's next session. Entries stay
+blameless (no names; authorship lives in git history).
 
 ## Why
 
