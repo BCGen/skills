@@ -27,7 +27,7 @@ npx skills add BCGen/skills -s ai-init codify retro rule-writing
 | --- | --- | --- |
 | `ai-init` | Sets up a project's AI instruction files. | Optional day 0 — lays out the whole surface at once; everything also bootstraps without it. |
 | `codify` | Captures a project's existing conventions so the agent follows them from the first run. | Once on an existing project, before the agent's first real task. |
-| `retro` | After a task, turns your corrections into durable improvements, with your consent. | At the end of every task — especially one where you corrected the agent. |
+| `retro` | After a task, turns your corrections into durable improvements, with your consent. | At the end of every task — especially one where you corrected the agent. Saying done or wrap up triggers it too. |
 | `rule-writing` | The one place rules get written — filtered, budgeted, provenance-stamped. | Any time a rule should be added, changed, or removed — directly, or handed a draft by codify/retro. |
 | `skill-writing` | Authors a new skill — for a collection, a project, or your own setup — to a tested standard. | When a procedure is worth capturing as a skill — your own idea, or a codify/retro handoff. |
 | `skill-testing` | Acceptance-tests any skill with mechanical checks. | After writing or changing a skill, to prove it does what its SKILL.md says. |
@@ -68,7 +68,9 @@ Lessons live in your repo, not in any agent's private memory:
 - `.ai/backlog/` — one file per idea worth building later.
 
 Commit both: they are plain markdown, team-shared through git, so a
-lesson one person's agent learns reaches everyone's next session.
+lesson one person's agent learns reaches everyone's next session. Entries
+stay blameless — no person names; authorship already lives in git
+history.
 
 ## Why
 

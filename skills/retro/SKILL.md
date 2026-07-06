@@ -16,7 +16,8 @@ Scan the current conversation (the whole task, not just the last steps) for:
 - **Failure**: a command failed, or an edit was reverted or redone.
 - **Repetition**: the same mistake surfaced twice or more within this task.
 
-**No signals → output at most 2 lines and stop. Write nothing.**
+**No signals — or a retrospective already ran for this task → output at
+most 2 lines and stop. Write nothing; never double-write provenance.**
 
 Evidence rules: only externally observable evidence counts — a hunch with
 no correction or failure behind it is NOT a lesson. Use only the current
