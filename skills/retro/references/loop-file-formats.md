@@ -24,29 +24,45 @@ promoted_on:
 - 2026-07-05 · task: order list page · evidence: same timezone correction
 ```
 
-- `status`: `candidate` (staged), `promoted` (acted on; keep for history),
-  or `dismissed` (user said never propose again — a plain decline does NOT
-  dismiss).
-- `promoted_to`: the destination that fit best — a rule path
-  (`.claude/rules/api-dates.md`), `memory`, or `skill:<name>` for a skill
-  update. Promotion is not limited to rules.
-- One provenance bullet per observation: date · task · evidence.
+The **H1 is the ROOT CAUSE**, not the change made this task — "Convert API
+date fields from UTC" (matches wherever the problem recurs), never "fixed
+the order page timezone" (won't match the next place).
 
-Matching: before creating a file, scan existing filenames AND H1 titles —
-a new lesson matches an existing file when both describe the same behavior
-change, regardless of wording. When in doubt, treat as a match and append
-a provenance bullet. If two files turn out to describe the same lesson,
-propose merging them.
+### Status lifecycle
+
+`candidate → promoted → resolved`, with `dismissed` separate:
+
+- `candidate` — staged, observing; not yet fixed.
+- `promoted` — fixed via some mechanism, but NOT terminal: the file is KEPT
+  so a re-promotion (mechanism upgrade, e.g. doc → rule → tool) can be
+  tracked. `promoted_to` records the current destination; `promoted_on` the
+  date. Promotion is not limited to rules.
+- `resolved` — the user confirmed the problem is CURED (perfectly solved, no
+  more adjustment). Reaching resolved **deletes the file** — provenance
+  already lives in the destination mechanism's stamp and in git history, so
+  `.ai/learnings/` stays a live worklist, not an archive.
+- `dismissed` — user said never propose again (a plain decline does NOT
+  dismiss).
+
+Promote ≠ cure: promoting fixes it (maybe re-promoted later); curing ends
+it (deleted). Only `resolved` deletes.
+
+### Matching
+
+Before creating a file, scan existing filenames AND H1 titles — a new lesson
+matches an existing file when both describe the same ROOT CAUSE, regardless
+of wording or which place was fixed. When in doubt, treat as a match and
+append a provenance bullet (this is how a problem's cross-task trail builds
+up). If two files turn out to describe the same root cause, propose merging.
 
 Directory README template (also keeps the directory git-tracked):
 
 ```markdown
-# Learnings (staged candidates)
+# Learnings
 
-One lesson per file, kebab-case slug filename, frontmatter status.
-A candidate is promoted to its fittest destination (rule, memory, skill
-update) only after it recurs or the user confirms.
-See the retro skill.
+One lesson per file, kebab-case slug filename, root-cause H1, frontmatter
+status (candidate → promoted → resolved; resolved is deleted). A live
+worklist, not an archive — see the retro skill.
 ```
 
 ## `.ai/backlog/` — pre-proposal ideas

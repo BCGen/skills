@@ -26,21 +26,29 @@ conversation; do not read platform transcript files.
 
 For each evidenced lesson (formats in [references/loop-file-formats.md](references/loop-file-formats.md)):
 
-1. Scan `.ai/learnings/` filenames and H1 titles for a match (create the
-   directory with its README first if missing). Wording differences do not
+1. Scan `.ai/learnings/` filenames and H1 titles for a **root-cause** match
+   (create the dir + README if missing). Title a candidate by its root cause
+   ("API dates need UTC conversion"), not this task's change, so continued
+   fixes to the same problem match across tasks. Wording differences do not
    defeat a match.
-2. **New lesson** → create `.ai/learnings/<slug>.md` (`status: candidate`,
-   provenance bullet). Staged, not proposed.
-3. **Matches an existing candidate file** → recurrence: append a provenance
-   bullet to that file and carry it into Step 3 as a promotion proposal.
-   Two files describing the same lesson → a merge proposal.
-4. The user explicitly asking to promote something also qualifies for Step 3.
+2. **Matches an existing file** → recurrence: append a provenance bullet,
+   carry it to Step 3.
+3. **New lesson** → recommend by evidence, user decides: one-off / no stated
+   rule → **stage** (`status: candidate`, observe); recurring or the user
+   says it's a rule → **fix now** (promote directly in Step 3, no observe
+   period). Either way create the file; fix-now keeps it too (promote ≠ cure).
 
 ## Step 3 — Build proposals (max 3, ranked by impact)
 
-For a project-shared lesson, decide its mechanism with the shared routing
-in [references/routing.md](references/routing.md) — the SAME logic codify
-uses, so a lesson routes to config / project doc / rule / tool-upgrade /
+**On recurrence, first ask about cure.** Show the full trail (all provenance
+across tasks) and offer three choices: (a) **cured** — the user confirms the
+problem is perfectly solved, no more adjustment → mark `status: resolved`
+and DELETE the file; (b) **harden** for next time → promote (keep the file);
+(c) **keep observing** → leave it. Never mark cured automatically.
+
+For a lesson being fixed/hardened, decide its mechanism with the shared
+routing in [references/routing.md](references/routing.md) — the SAME logic
+codify uses, so it routes to config / project doc / rule / tool-upgrade /
 pointer at full parity, not just "a rule." Reconciliation applies first: if
 the lesson already lives in a rule/doc/config, respect it (propose marking
 the candidate promoted to it, no duplicate).
@@ -77,18 +85,17 @@ technical background. Then:
 - **Promoted** → only after the destination write actually happened, update
   frontmatter: `status: promoted`, `promoted_to: <destination>` (rule path,
   entry file, `memory`, or `skill:<name>`), `promoted_on: <date>`. A
-  printed draft is not a write — the file stays `candidate`.
+  printed draft is not a write — the file stays `candidate`. Promoted files
+  are KEPT (a later re-promotion to a better mechanism updates them).
+- **Cured** → the user confirmed the problem is resolved: delete the
+  learning file (its provenance is already in the destination and git).
 
 ## Honesty rules
 
-Be brutally honest about your own violations. Rationalizations to reject:
-
-| Thought | Reality |
-| --- | --- |
-| "The task was too simple" | Simple tasks still produce corrections worth staging |
-| "The user seems rushed" | The clean-task check costs seconds and 2 lines |
-| "Nothing went wrong" | Then say exactly that in 2 lines and stop |
-| "I'll remember next time" | You won't. The next conversation starts from zero |
+Be brutally honest about your own violations. Reject the rationalizations:
+"too simple" (simple tasks still produce corrections), "user seems rushed"
+(the check costs seconds), "nothing went wrong" (then say so in 2 lines),
+"I'll remember next time" (you won't — the next conversation starts blank).
 
 Reports stay proportional: clean task → 2 lines; findings → short evidence
 bullets, never essays.
