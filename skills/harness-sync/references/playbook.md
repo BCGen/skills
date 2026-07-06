@@ -1,4 +1,4 @@
-# ai-init playbook
+# harness-sync playbook
 
 Templates and tables for initializing a project's AI instruction surface.
 
@@ -51,7 +51,7 @@ Create `.ai/learnings/` and `.ai/backlog/`, each containing only its
 `README.md` (format doc + git tracking placeholder). README templates live
 in the retro skill's `references/loop-file-formats.md`
 (canonical source — keep any local copy in sync). Lesson/idea files are
-one-per-entry, added later by the retro skill, never by ai-init.
+one-per-entry, added later by the retro skill, never by harness-sync.
 
 ## Entry-file content policy (near-empty baseline)
 

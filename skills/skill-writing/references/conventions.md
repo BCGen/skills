@@ -33,8 +33,7 @@ description: <capability sentence>. Use when <trigger conditions>.
 ## Naming philosophy
 
 - Short and apt. Two deliberate styles coexist: **gerund** (`skill-writing`,
-  `rule-writing`) for managed-unit tools; **short names** (`retro`,
-  `ai-init`) for standalone acts. Pick the family the skill belongs to.
+  `rule-writing`) for managed-unit tools; **short names** (`retro`) for standalone acts. Pick the family the skill belongs to.
 - Collision-check the proposed name on skills.sh before finalizing a
   collection addition: `npx skills find "<name>"` and look for an exact
   `@<name>` match. Report any exact collision with its install count and

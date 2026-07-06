@@ -47,7 +47,7 @@ strips block comments before injection):
 <!-- provenance: 2026-07-05 · task: order list page · evidence: user corrected timezone twice · via: retro -->
 ```
 
-`via:` is one of `retro`, `ai-init`, `manual`.
+`via:` is one of `retro`, `harness-sync`, `manual`.
 
 ## Dialect mapping
 

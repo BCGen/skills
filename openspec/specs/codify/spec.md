@@ -8,14 +8,14 @@ TBD - created by archiving change add-codify. Update Purpose after archive.
 
 ### Requirement: Explicit, one-time, non-init invocation
 
-codify SHALL run only when explicitly invoked, never on the ai-init path.
+codify SHALL run only when explicitly invoked, never on the harness-sync path.
 It reads the repository for analysis (which produces no resident context)
 and proposes changes for consent; it MUST NOT auto-generate unfiltered
 resident instructions.
 
-#### Scenario: Not triggered by ai-init
+#### Scenario: Not triggered by harness-sync
 
-- **WHEN** ai-init initializes a project
+- **WHEN** harness-sync initializes a project
 - **THEN** codify does not run and no conventions are auto-generated
 
 #### Scenario: Explicit invocation scans practice

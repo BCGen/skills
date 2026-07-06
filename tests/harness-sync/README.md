@@ -1,4 +1,4 @@
-# Acceptance tests: ai-init
+# Acceptance tests: harness-sync
 
 Each fixture in `tests/fixtures/` is copied to a sandbox and committed to a
 fresh git repo (commit `fixture`). A subagent then runs the skill twice;
@@ -7,7 +7,7 @@ git provides mechanical before/after and idempotency proof.
 Subagent prompt template (harness mechanics, no skill rules):
 
 > Project root: `<sandbox>` (a git repo). Follow the skill at
-> `<repo>/skills/ai-init/SKILL.md` to initialize this project. The user
+> `<repo>/skills/harness-sync/SKILL.md` to initialize this project. The user
 > pre-approves your proposed plan; if you would ask the user a question,
 > state it and assume your recommended answer. After finishing, run
 > `git add -A && git commit -m pass1`. Then run the skill again from

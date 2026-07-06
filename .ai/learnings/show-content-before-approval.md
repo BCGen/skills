@@ -1,6 +1,6 @@
 ---
 status: promoted
-promoted_to: skill:ai-init
+promoted_to: skill:harness-sync
 promoted_on: 2026-07-06
 ---
 

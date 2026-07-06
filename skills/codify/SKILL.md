@@ -7,7 +7,7 @@ description: Scans a project's current practice, classifies each convention by h
 
 Get the first agent execution on an existing project accurate by routing
 each observed convention to its fittest mechanism. Run explicitly, on any
-existing project — with or without ai-init. The full classification logic is in
+existing project — with or without harness-sync. The full classification logic is in
 [references/routing.md](references/routing.md) — read it first. Success is
 first-execution accuracy, NOT rule count; routing most practice to
 config/docs/nothing is the correct outcome.
