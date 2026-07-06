@@ -1,78 +1,51 @@
 # Skills
 
-Agent skills that set up and maintain a project's AI configuration:
-initialize the instruction files agents read, keep rules within a hard
-budget, and turn lessons from completed tasks into durable, team-shared
-improvements. Works with Claude Code, Cursor, and any agent that reads
-`AGENTS.md`.
+Your AI coding agent makes the same mistake twice, ignores conventions your
+project already follows, and forgets each task's lessons by the next.
+
+These skills fix that: capture a project's conventions up front so the first
+run follows them, and turn every correction into a durable, team-shared rule
+— without bloating the agent's context. Works with Claude Code, Cursor, and
+any agent that reads `AGENTS.md`.
+
+## Install
+
+```sh
+npx skills add BCGen/skills
+```
 
 ## Skills
 
 | Skill | What it does |
 | --- | --- |
-| `ai-init` | Initializes a project's AI instruction surface — entry file, per-rule directories, cross-agent interop glue, and the `.ai/` learning-loop files — with idempotent, diff-first, marker-managed writes. |
-| `rule-writing` | The single write path for rule files. Owns the cross-agent rule format spec, enforces a non-discoverability admission filter and the rule budget, stamps provenance. |
-| `codify` | Scans an existing project's practice and routes each convention to its fittest mechanism — config, project doc, rule, a project skill, or a paste-ready pointer — so the first agent execution follows the project's conventions. |
-| `retro` | Post-task retrospective: mines user corrections and failures, stages lesson candidates in `.ai/learnings/`, and routes approved proposals to their fittest destination (rule, entry-file fact, memory, backlog, skill update). |
-| `skill-writing` | Authors a new skill to this collection's standard: gather requirements, draft with enforced conventions, collision-check the name, scaffold an acceptance test plan. |
-| `skill-testing` | Acceptance-tests any skill via a minimal-prompt subagent, then verifies the output with mechanical checks only (grep/regex/count/diff) so tester bias is isolated. |
-| `skill-auditing` | Audits any skills directory on two layers — format against the authoring conventions, and content facts against live documentation — reporting per-layer findings with sources. |
+| `ai-init` | Sets up a project's AI instruction files. |
+| `codify` | Captures a project's existing conventions so the agent follows them from the first run. |
+| `rule-writing` | The one place rules get written — filtered, budgeted, provenance-stamped. |
+| `retro` | After a task, turns your corrections into durable improvements, with your consent. |
+| `skill-writing` | Authors a new skill to this collection's standard. |
+| `skill-testing` | Acceptance-tests any skill with mechanical checks. |
+| `skill-auditing` | Audits a skills directory for stale format or facts. |
 
-`ai-init`, `rule-writing`, `codify`, and `retro` form the **setup + learning
-loop** (initialize, codify existing practice, then keep learning per task);
-`skill-writing`/`skill-testing`/`skill-auditing` form the **skill toolchain**.
-Each skill installs and works independently; siblings cooperate when
-co-installed and degrade gracefully when not.
-
-## Install
-
-```sh
-npx skills add BCGen/skills                       # all skills
-npx skills add BCGen/skills --skill rule-writing  # just one
-```
+Each installs and works alone; together they form a loop.
 
 ## Usage
 
-Once installed, skills trigger automatically when your task matches them —
-you don't have to invoke them. You can also run one on demand: `/codify`,
-`/retro`, etc. in Claude Code, or just ask ("run a retrospective").
-
-A typical flow on a project:
-
-1. **`ai-init`** — set up the AI instruction files once.
-2. **`codify`** — capture the project's existing conventions so the first
-   run already follows them.
-3. Work as usual. Rules, docs, and config guide the agent.
-4. **`retro`** at the end of a task — turn corrections and failures into
-   durable improvements, with your consent on each.
-
-Authoring or maintaining skills themselves? `skill-writing` /
-`skill-testing` / `skill-auditing` do that.
+Skills trigger automatically when your task matches, or run one on demand
+(`/codify`, `/retro`, or just ask). Typical flow: `ai-init` once → `codify`
+to capture conventions → work as usual → `retro` at the end of a task.
 
 ## Why
 
-AI coding agents repeat the same mistakes across tasks because lessons
-evaporate: native memory features are machine-local and never become
-team-shared rules, and rule files that only ever grow measurably degrade
-agent performance (adherence collapses past ~150–200 instructions;
-LLM-generated boilerplate context is net-negative). These skills close the
-loop the vendors leave open and treat anti-bloat as a first-class feature:
-admission filters, two-stage promotion, line budgets, and deletion
-proposals.
+Native agent memory is machine-local and never becomes team-shared rules,
+and rule files that only grow eventually make the agent follow them *less*.
+These skills promote lessons into shared rules only with your consent, and
+keep them under a budget — so more rules never mean worse adherence.
 
-## How this differs from similar projects
-
-- **AI instruction-file generators** (GitHub's create-agentsmd, the
-  built-in `/init` commands): they scan and emit one file, once. These
-  skills write each agent's *native* per-rule format and keep rules alive
-  through the retrospective loop.
-- **Continuous-learning systems** (everything-claude-code's instinct
-  system, compound-engineering's compound step): they capture lessons via
-  hooks or as part of a full methodology you must adopt. Here, promotion is
-  consent-gated, evidence-based, staged across tasks, and budget-enforced —
-  in standalone skills that fit whatever workflow you already have.
+Unlike one-shot file generators or hook-based capture bolted onto a
+methodology, these are standalone, consent-gated, and write each agent's
+native format.
 
 ## Contributing
 
-Development setup, repo layout, and the spec workflow are in
+Development setup and the spec workflow are in
 [CONTRIBUTING.md](CONTRIBUTING.md).
