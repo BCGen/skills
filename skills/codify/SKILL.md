@@ -57,8 +57,8 @@ Apply the routing table in the reference. Key decisions:
 ## Step 4 — Present and execute with consent
 
 Present findings grouped by route, each with why-this-mechanism and the
-pre-drafted content/diff; ask each consent as one structured choice
-where the platform offers option prompts. On approval:
+pre-drafted content/diff; ask each consent with the platform's
+option-prompt tool when it has one (Claude Code: AskUserQuestion). On approval:
 
 - **Config / doc** → write diff-first, surgically (never clobber
   hand-written content); a second run produces no further change.

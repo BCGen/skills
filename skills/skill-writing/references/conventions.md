@@ -29,8 +29,8 @@ description: <capability sentence>. Use when <trigger conditions>.
 - Numbered steps for a procedure; a short principles/mistakes table where
   it earns its place. Match the voice of existing skills.
 - State constraints the steps can't show; don't narrate the obvious.
-- Consent moments ask as one structured choice where the platform offers
-  option prompts; plain question otherwise.
+- Consent moments ask with the platform's option-prompt tool when it has
+  one (Claude Code: AskUserQuestion); plain question otherwise.
 
 ## Naming philosophy
 

@@ -40,8 +40,9 @@ harness block only.
 
 Print the full plan in the conversation — the complete content of every
 file to be created and a diff for every file to be modified — then ask
-for approval as one structured choice where the platform offers option
-prompts (e.g. approve as planned / adjust first), else a plain question.
+for approval with the platform's option-prompt tool when it has one
+(Claude Code: AskUserQuestion) — choices like approve-as-planned /
+adjust-first; plain question only when no such tool exists.
 Never ask the user to approve content they have not seen. The plan
 covers:
 
