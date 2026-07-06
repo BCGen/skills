@@ -1,8 +1,10 @@
 # Collection conventions
 
-The single source of truth for how skills in this collection are written.
-skill-writing enforces these at authoring time; skill-auditing's format
-layer checks against this same file.
+The single source of truth for the authoring conventions skill-writing
+enforces and skill-auditing's format layer checks against — the same
+standard wherever a skill lives: a collection, a project, or the user's
+personal setup (the lint-enforcement notes below apply only within this
+repo's CI).
 
 ## Frontmatter
 
@@ -33,9 +35,11 @@ description: <capability sentence>. Use when <trigger conditions>.
 - Short and apt. Two deliberate styles coexist: **gerund** (`skill-writing`,
   `rule-writing`) for managed-unit tools; **short names** (`retro`,
   `ai-init`) for standalone acts. Pick the family the skill belongs to.
-- Collision-check the proposed name on skills.sh before finalizing:
-  `npx skills find "<name>"` and look for an exact `@<name>` match. Report
-  any exact collision with its install count and offer alternatives.
+- Collision-check the proposed name on skills.sh before finalizing a
+  collection addition: `npx skills find "<name>"` and look for an exact
+  `@<name>` match. Report any exact collision with its install count and
+  offer alternatives. A skill not being added to a collection skips the
+  registry and only avoids names already installed at its destination.
 
 ## Scripts
 
@@ -57,6 +61,8 @@ absent. Generic skills carry zero references to any toolchain.
 
 ## Acceptance
 
-Every skill ships with `tests/<name>/README.md`: scenarios plus mechanical
-checks (grep/regex/count/diff), designed alongside the skill. Verify with
+Every skill ships with a test plan of scenarios plus mechanical checks
+(grep/regex/count/diff), designed alongside the skill — at
+`tests/<name>/README.md` in this collection; elsewhere the plan lives
+where the destination keeps tests (same default). Verify with
 skill-testing.

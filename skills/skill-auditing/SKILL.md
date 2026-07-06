@@ -1,6 +1,6 @@
 ---
 name: skill-auditing
-description: Audits any skills directory on two layers - format against the collection's authoring conventions, and content facts (commands, APIs, versions) against live documentation - reporting per-layer findings with sources. Use when asked to audit, review, or check whether skills are outdated, stale, or still correct.
+description: Audits any skills directory on two layers - format against shared authoring conventions, and content facts (commands, APIs, versions) against live documentation - reporting per-layer findings with sources. Use when asked to audit, review, or check whether skills are outdated, stale, or still correct.
 ---
 
 # Skill Auditing
@@ -13,7 +13,7 @@ are facts.
 
 Default to the current project's installed skills (`.claude/skills/`,
 `.agents/skills/`, or the repo's `skills/`). Accept any directory path the
-user names, including this collection's own `skills/`.
+user names, including a collection repo's own `skills/`.
 
 ## Step 2 — Format layer (offline)
 
