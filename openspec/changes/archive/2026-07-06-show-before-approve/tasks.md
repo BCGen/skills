@@ -20,5 +20,5 @@
 - [x] 2.2 Adversarial review of the diff (4 findings, all fixed:
       playbook lag, template gap, unscoped grep, diff-only heading);
       `pnpm lint`; `openspec validate show-before-approve`
-- [ ] 2.3 Stage + promote the lesson (`show-content-before-approval`);
+- [x] 2.3 Stage + promote the lesson (`show-content-before-approval`);
       archive keeping the delta; sync develop and main
