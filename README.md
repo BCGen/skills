@@ -32,7 +32,7 @@ npx skills@latest add BCGen/skills -s harness-sync codify retro rule-writing
 | [harness-sync](skills/harness-sync/SKILL.md) | Sets up and re-syncs a project's AI instruction files. | Optional day 0 — everything also bootstraps without it; re-run after a skills update to re-sync the managed bits. |
 | [codify](skills/codify/SKILL.md) | Captures a project's existing conventions so the agent follows them from the first run. | Once on an existing project, before the agent's first real task. |
 | [retro](skills/retro/SKILL.md) | After a task, turns your corrections into durable improvements, with your consent. | At the end of every task — especially one where you corrected the agent. Saying done or wrap up triggers it too. |
-| [rule-writing](skills/rule-writing/SKILL.md) | The one place rules get written — filtered, budgeted, provenance-stamped. | Any time a rule should be added, changed, or removed — directly, or handed a draft by codify/retro. |
+| [rule-writing](skills/rule-writing/SKILL.md) | The one place rules get written — filtered, budgeted, provenance-stamped. | Mostly invoked by codify/retro handing it drafts; call it directly when you already know a landmine worth a rule. |
 | [skill-writing](skills/skill-writing/SKILL.md) | Authors a new skill — for a collection, a project, or your own setup — to a tested standard. | When a procedure is worth capturing as a skill — your own idea, or a codify/retro handoff. |
 | [skill-testing](skills/skill-testing/SKILL.md) | Acceptance-tests any skill with mechanical checks. | After writing or changing a skill, to prove it does what its SKILL.md says. |
 | [skill-auditing](skills/skill-auditing/SKILL.md) | Audits a skills directory for stale format or facts. | Periodically, or when a skill seems outdated. |
@@ -46,7 +46,7 @@ requires another.
 The typical pass:
 
 1. `codify` once, so the agent's first task follows your conventions.
-2. Work as usual — add or adjust rules through `rule-writing` any time.
+2. Work as usual — your corrections become `retro`'s evidence.
 3. `retro` when each task ends.
 
 `harness-sync` optionally lays out the whole surface on day 0 and
