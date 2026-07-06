@@ -37,7 +37,7 @@ entry file:
 <!-- harness:begin -->
 Run the retro skill when a task ends; lessons are staged in `.ai/learnings/`, ideas in `.ai/backlog/` (one file per entry).
 Rules live in <rules location>; write them only via the rule-writing skill (budget: entry ≤60, resident ≤150 lines).
-Install the skills: `npx skills add <owner>/<repo>`
+Install the skills: `npx skills@latest add <owner>/<repo>`
 <!-- harness:end -->
 ```
 

@@ -78,7 +78,7 @@ offers option prompts. Then:
 
 - **Approved rule** → hand the draft to rule-writing when installed (the
   mandatory rule write path). Not installed → print the draft for the
-  user's own tooling; mention `npx skills add <owner>/<repo>` at most once
+  user's own tooling; mention `npx skills@latest add <owner>/<repo>` at most once
   per retrospective, never repeatedly.
 - **Approved fact** → apply the entry-file edit exactly as the shown diff.
 - **Approved memory / backlog / skill update** → save or edit, showing diffs.

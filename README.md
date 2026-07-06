@@ -12,13 +12,13 @@ and any agent that reads `AGENTS.md`.
 ## Install
 
 ```sh
-npx skills add BCGen/skills
+npx skills@latest add BCGen/skills
 ```
 
 Without the skill-authoring toolchain:
 
 ```sh
-npx skills add BCGen/skills -s harness-sync codify retro rule-writing
+npx skills@latest add BCGen/skills -s harness-sync codify retro rule-writing
 ```
 
 ## Skills
