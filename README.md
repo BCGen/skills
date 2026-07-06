@@ -41,12 +41,18 @@ npx skills@latest add BCGen/skills -s harness-sync codify retro rule-writing
 
 Skills trigger automatically when your task matches, or run one on demand
 (`/codify`, `/retro`, or just ask). Every skill runs standalone — none
-requires another. The typical pass: `codify` once to capture conventions
-→ work (rules via `rule-writing` any time) → `retro` when each task ends.
+requires another.
+
+The typical pass:
+
+1. `codify` once, so the agent's first task follows your conventions.
+2. Work as usual — add or adjust rules through `rule-writing` any time.
+3. `retro` when each task ends.
+
 `harness-sync` optionally lays out the whole surface on day 0 and
-re-syncs it after skills updates; grow your own skills with
-`skill-writing`, prove them with `skill-testing`, and sweep the set with
-`skill-auditing`. Each skill's timing is in the table above.
+re-syncs it after skills updates. The authoring trio — `skill-writing`,
+`skill-testing`, `skill-auditing` — grows, proves, and sweeps skills of
+your own. Timing per skill is in the table above.
 
 ## The learning loop
 
