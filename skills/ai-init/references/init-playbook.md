@@ -76,8 +76,8 @@ discovery and then trim its output to the policy above.
 2. Plan only the missing pieces — never regenerate existing content.
 3. Content you own lives inside `harness:begin/end` markers; NEVER edit
    anything outside your markers in a pre-existing file.
-4. Show a diff of every file you will create or change; write only after
-   approval.
+4. Present the full content of every file you will create and a diff of
+   every file you will change; write only after approval.
 5. A second run right after the first must produce zero diff.
 
 ## Framework coexistence

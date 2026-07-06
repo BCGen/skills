@@ -33,10 +33,12 @@ prefer it for discovery, then trim to the content policy: **no generic
 rules, no personas, no best-practice boilerplate** — verified facts and the
 harness block only.
 
-## Step 4 — Plan and show diffs
+## Step 4 — Present the plan, then get approval
 
-Assemble the full plan and show a diff for every file to be created or
-modified, then wait for approval:
+Print the full plan in the conversation — the complete content of every
+file to be created and a diff for every file to be modified — then ask
+for approval. Never ask the user to approve content they have not seen.
+The plan covers:
 
 - Entry file (create, or append the managed harness block to an existing
   one — never edit outside your `harness:begin/end` markers).

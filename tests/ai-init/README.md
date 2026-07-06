@@ -12,7 +12,9 @@ Subagent prompt template (harness mechanics, no skill rules):
 > state it and assume your recommended answer. After finishing, run
 > `git add -A && git commit -m pass1`. Then run the skill again from
 > scratch on the same project (second pass). Report: detected target,
-> files created/modified per pass, and the question you assumed (if any).
+> files created/modified per pass, the question you assumed (if any),
+> and — under a heading "Plan as presented" — the plan exactly as you
+> showed it for approval before writing.
 
 ## Mechanical checks (all fixtures)
 
@@ -25,6 +27,14 @@ test ! -e .claude/settings.json      # never touches execution settings
 ```
 
 Entry file stays ≤ 60 lines.
+
+Presentation check: the report's "Plan as presented" section must carry
+the full content of each new file as shown before any write. Mechanical
+proxy, scoped to that section so an after-the-fact echo cannot pass:
+
+```sh
+awk '/Plan as presented/,0' report.md | grep -c 'harness:begin'   # > 0
+```
 
 ## Per-fixture expectations
 
