@@ -98,6 +98,22 @@ if (existsSync(sharedRouting)) {
   }
 }
 
+// README's skills table must list exactly the skills in skills/.
+const readmePath = join(ROOT, "README.md");
+if (existsSync(readmePath)) {
+  const readme = readFileSync(readmePath, "utf8");
+  const listed = new Set(
+    [...readme.matchAll(/^\| `([a-z][a-z0-9-]*)` \|/gm)].map((m) => m[1])
+  );
+  const actual = new Set(skillDirs);
+  for (const name of listed)
+    if (!actual.has(name))
+      fail(readmePath, `skills table lists "${name}" but skills/${name} does not exist`);
+  for (const name of actual)
+    if (!listed.has(name))
+      fail(readmePath, `skills/${name} exists but is not in the README skills table`);
+}
+
 if (violations.length) {
   console.error(`lint-skills: ${violations.length} violation(s)`);
   for (const v of violations) console.error(`  ✗ ${v}`);
