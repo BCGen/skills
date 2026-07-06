@@ -25,7 +25,7 @@ npx skills add BCGen/skills -s harness-sync codify retro rule-writing
 
 | Skill | What it does | When to use it |
 | --- | --- | --- |
-| `harness-sync` | Sets up a project's AI instruction files. | Optional day 0 — lays out the whole surface at once; everything also bootstraps without it. Re-run after a skills update to re-sync the managed bits. |
+| `harness-sync` | Sets up and re-syncs a project's AI instruction files. | Optional day 0 — lays out the whole surface at once; everything also bootstraps without it. Re-run after a skills update to re-sync the managed bits. |
 | `codify` | Captures a project's existing conventions so the agent follows them from the first run. | Once on an existing project, before the agent's first real task. |
 | `retro` | After a task, turns your corrections into durable improvements, with your consent. | At the end of every task — especially one where you corrected the agent. Saying done or wrap up triggers it too. |
 | `rule-writing` | The one place rules get written — filtered, budgeted, provenance-stamped. | Any time a rule should be added, changed, or removed — directly, or handed a draft by codify/retro. |
@@ -39,10 +39,11 @@ Skills trigger automatically when your task matches, or run one on demand
 (`/codify`, `/retro`, or just ask). Every skill runs standalone — none
 requires another. A full pass over a project's life:
 
-1. **Adopt** — optionally run `harness-sync` once: entry file, rules
+1. **Adopt** — optionally run `harness-sync`: entry file, rules
    directory, and the `.ai/` learning-loop files in one pass, plus an
-   install pointer your teammates' agents will see. Skipping it is fine —
-   the loop files bootstrap themselves on first use.
+   install pointer your teammates' agents will see. Re-run it after a
+   skills update to converge the managed bits; skipping it entirely is
+   fine — the loop files bootstrap themselves on first use.
 2. **Capture** — run `codify` on an existing project so the agent's
    first task already follows your conventions. Each convention is routed
    to its fittest home — config, doc, rule (via `rule-writing`), or

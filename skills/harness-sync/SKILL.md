@@ -1,11 +1,12 @@
 ---
 name: harness-sync
-description: Initializes a project's AI instruction surface — entry file, per-rule directories, cross-agent interop glue, and the learning-loop files — with idempotent, diff-first, marker-managed writes. Use when setting up AI collaboration or AI configuration for a new or existing project, or when re-syncing the managed surface after the skills were updated.
+description: Sets up and re-syncs a project's AI instruction surface — entry file, per-rule directories, cross-agent interop glue, and the learning-loop files — with idempotent, diff-first, marker-managed writes. Use when setting up AI collaboration or AI configuration for a new or existing project, or when re-syncing the managed surface after the skills were updated.
 ---
 
 # Harness Sync
 
-Set up the files agents read ("instruction surface") plus the harness loop.
+Set up — and keep synced — the files agents read ("instruction surface")
+plus the harness loop.
 Tables and templates live in
 [references/playbook.md](references/playbook.md) — read it first.
 Never touch execution settings (settings.json, hooks, MCP, CI).
