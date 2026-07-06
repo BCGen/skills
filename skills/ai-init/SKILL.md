@@ -1,6 +1,6 @@
 ---
 name: ai-init
-description: Initializes a project's AI instruction surface — entry file, per-rule directories, cross-agent interop glue, and the learning-loop files — with idempotent, diff-first, marker-managed writes. Use when setting up AI collaboration or AI configuration for a new or existing project.
+description: Initializes a project's AI instruction surface — entry file, per-rule directories, cross-agent interop glue, and the learning-loop files — with idempotent, diff-first, marker-managed writes. Use when setting up AI collaboration or AI configuration for a new or existing project, or when re-syncing the managed surface after the skills were updated.
 ---
 
 # AI Init
@@ -20,8 +20,10 @@ answer (AGENTS.md is the portable default). Never guess.
 ## Step 2 — Inventory
 
 List what already exists: entry file, rules directory, `.ai/learnings/`,
-`.ai/backlog/`, harness block, interop glue. The plan covers ONLY the
-missing pieces — re-running on an initialized project must be a no-op.
+`.ai/backlog/`, harness block, interop glue. The plan covers the missing
+pieces AND any managed piece that drifted from the current template (the
+harness block, the loop READMEs) — re-running on an up-to-date project
+must be a no-op.
 
 ## Step 3 — Discover (new entry file only)
 
@@ -40,13 +42,14 @@ file to be created and a diff for every file to be modified — then ask
 for approval. Never ask the user to approve content they have not seen.
 The plan covers:
 
-- Entry file (create, or append the managed harness block to an existing
-  one — never edit outside your `harness:begin/end` markers).
+- Entry file (create, append the managed harness block to an existing
+  one, or update a drifted block in place — never edit outside your
+  `harness:begin/end` markers).
 - Interop glue when applicable (e.g. `CLAUDE.md` starting with `@AGENTS.md`).
 - Rules directory for the target agent (empty — rules are written later,
   only via the rule-writing skill).
-- `.ai/learnings/` and `.ai/backlog/` directories, each with its README,
-  per the playbook.
+- `.ai/learnings/` and `.ai/backlog/` directories, each with its README
+  (created, or updated on drift), per the playbook.
 - Coexisting framework detected → one reference line instead of duplicate
   content, per the playbook.
 

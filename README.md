@@ -25,7 +25,7 @@ npx skills add BCGen/skills -s ai-init codify retro rule-writing
 
 | Skill | What it does | When to use it |
 | --- | --- | --- |
-| `ai-init` | Sets up a project's AI instruction files. | Optional day 0 — lays out the whole surface at once; everything also bootstraps without it. |
+| `ai-init` | Sets up a project's AI instruction files. | Optional day 0 — lays out the whole surface at once; everything also bootstraps without it. Re-run after a skills update to re-sync the managed bits. |
 | `codify` | Captures a project's existing conventions so the agent follows them from the first run. | Once on an existing project, before the agent's first real task. |
 | `retro` | After a task, turns your corrections into durable improvements, with your consent. | At the end of every task — especially one where you corrected the agent. Saying done or wrap up triggers it too. |
 | `rule-writing` | The one place rules get written — filtered, budgeted, provenance-stamped. | Any time a rule should be added, changed, or removed — directly, or handed a draft by codify/retro. |

@@ -73,12 +73,16 @@ discovery and then trim its output to the policy above.
 
 1. Inventory what already exists (entry file, rules dir, `.ai/` files,
    harness block, interop glue).
-2. Plan only the missing pieces — never regenerate existing content.
+2. Plan the missing pieces plus any managed piece that drifted from the
+   current template (harness block content, loop README content) —
+   regenerate ONLY the managed surface, and only on drift.
 3. Content you own lives inside `harness:begin/end` markers; NEVER edit
    anything outside your markers in a pre-existing file.
 4. Present the full content of every file you will create and a diff of
    every file you will change; write only after approval.
-5. A second run right after the first must produce zero diff.
+5. A second run right after the first must produce zero diff; a run
+   after the skill's templates changed converges the managed surface and
+   nothing else.
 
 ## Framework coexistence
 
