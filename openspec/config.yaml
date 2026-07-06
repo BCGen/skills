@@ -5,6 +5,11 @@ context: |
   distributed via the Vercel skills CLI (`npx skills add <owner>/<repo>`).
   Deliverables are markdown skill instructions, not application code.
 
+  North star lens: unclear conventions burn every newcomer; the AI agent
+  is only the most demanding one (it re-onboards every session). Prefer
+  artifacts humans and agents share (docs, configs) over agent-only
+  surfaces (rules) — the doc-first routing rule exists for this reason.
+
   Conventions (decided, non-negotiable):
   - All skill bodies and frontmatter are written in English.
   - Cross-platform first: skills must work on any agent that supports the

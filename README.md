@@ -3,11 +3,15 @@
 Your AI coding agent makes the same mistake twice, ignores conventions your
 project already follows, and forgets each task's lessons by the next.
 
+The root problem predates AI: conventions that live only in your team's
+heads trip every newcomer. An AI agent is simply the most demanding
+newcomer you will ever onboard — it starts from zero every single session.
+
 These skills close the loop: capture the conventions your project already
 follows so the agent starts from them, and stage every correction as a
 lesson that — only with your consent — lands where it fits best: a config,
-a doc, or a budgeted, team-shared rule. Works with Claude Code, Cursor,
-and any agent that reads `AGENTS.md`.
+a doc, or a budgeted, team-shared rule your human teammates read too.
+Works with Claude Code, Cursor, and any agent that reads `AGENTS.md`.
 
 ## Install
 
