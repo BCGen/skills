@@ -28,6 +28,10 @@ The **H1 is the ROOT CAUSE**, not the change made this task — "Convert API
 date fields from UTC" (matches wherever the problem recurs), never "fixed
 the order page timezone" (won't match the next place).
 
+Provenance bullets are **blameless**: never record person names — evidence
+describes what happened, breadth can be counted ("a second engineer hit the
+same"), and identity, when it matters, comes from git history.
+
 ### Status lifecycle
 
 `candidate → promoted → resolved`, with `dismissed` separate:
