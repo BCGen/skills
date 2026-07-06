@@ -28,8 +28,26 @@ co-installed and degrade gracefully when not.
 
 ```sh
 npx skills add BCGen/skills                       # all skills
-npx skills add BCGen/skills --skill rule-writing      # just one
+npx skills add BCGen/skills --skill rule-writing  # just one
 ```
+
+## Usage
+
+Once installed, skills trigger automatically when your task matches them —
+you don't have to invoke them. You can also run one on demand: `/codify`,
+`/retro`, etc. in Claude Code, or just ask ("run a retrospective").
+
+A typical flow on a project:
+
+1. **`ai-init`** — set up the AI instruction files once.
+2. **`codify`** — capture the project's existing conventions so the first
+   run already follows them.
+3. Work as usual. Rules, docs, and config guide the agent.
+4. **`retro`** at the end of a task — turn corrections and failures into
+   durable improvements, with your consent on each.
+
+Authoring or maintaining skills themselves? `skill-writing` /
+`skill-testing` / `skill-auditing` do that.
 
 ## Why
 
@@ -54,27 +72,7 @@ proposals.
   consent-gated, evidence-based, staged across tasks, and budget-enforced —
   in standalone skills that fit whatever workflow you already have.
 
-## Repo layout
+## Contributing
 
-- `skills/<name>/SKILL.md` — the skills (installable units)
-- `shared/` — canonical files synced byte-identical into skills (e.g.
-  `routing.md`, the mechanism-routing logic shared by codify and retro)
-- `openspec/` — product specs and change proposals (what to build and why)
-- `.ai/` — this repo's own learning-loop files (lessons staged while
-  building the toolkit)
-- `tests/` — acceptance scenarios and fixtures
-- `scripts/` — repo lint and tooling
-
-## Development
-
-```sh
-pnpm install        # also installs a pre-commit hook that runs lint
-pnpm lint           # skill lint (incl. shared-copy drift check) + markdownlint
-pnpm sync-routing   # after editing shared/routing.md, re-sync the skill copies
-```
-
-Lint is enforced by a versioned pre-commit hook (`.githooks/`, wired by
-`pnpm install`), so a lint failure blocks the commit.
-
-Specs and changes are managed with [OpenSpec](https://github.com/Fission-AI/OpenSpec)
-(`/opsx:propose`, `/opsx:apply`, `/opsx:archive`).
+Development setup, repo layout, and the spec workflow are in
+[CONTRIBUTING.md](CONTRIBUTING.md).
