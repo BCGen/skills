@@ -87,7 +87,44 @@ overlapping theirs. Add one reference line inside the harness block's first
 line (e.g. "project principles: see `.specify/`"), and still create the
 `.ai/` loop files if missing.
 
+## Opt-in retro Stop hook (Claude Code target only)
+
+The single exception to the execution-settings boundary. When the
+detected target is Claude Code, the plan includes ONE extra question —
+"Add the retro Stop hook so a finished task always gets its
+retrospective?" — recommended answer: **yes**. Non-interactive runs SKIP
+the hook; consent for it is never assumed. On consent, write to
+`.claude/settings.json` (the version-controlled, team-shared file)
+diff-first and surgically: merge in the `hooks.Stop` entry, keep every
+pre-existing key's value unchanged (only syntax the merge requires, e.g.
+a trailing comma, may move), and treat a re-run with the hook already
+present as a no-op.
+
+```json
+{
+  "hooks": {
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "grep -q '\"stop_hook_active\"[[:space:]]*:[[:space:]]*true' && exit 0; echo '{\"decision\":\"block\",\"reason\":\"A turn just ended. If a task was completed in this conversation and no retrospective has run for it, run the retro skill now; otherwise just stop.\"}'"
+          }
+        ]
+      }
+    ]
+  }
+}
+```
+
+Behavior: the hook fires at every turn end; the `stop_hook_active` guard
+lets the follow-up stop through, so it costs at most one short extra
+evaluation per turn, and retro's own idempotency guard makes any
+double-fire harmless. The command needs a POSIX shell. Verified against
+the hooks reference at code.claude.com/docs 2026-07-06.
+
 ## Out of scope — never touch
 
 `settings.json`, hooks, MCP configuration, CI files, or any execution
-setting. Instruction surface only.
+setting — except the single opt-in retro Stop hook above, written only
+on explicit consent. Everything else: instruction surface only.

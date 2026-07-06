@@ -72,6 +72,30 @@ lesson one person's agent learns reaches everyone's next session. Entries
 stay blameless — no person names; authorship already lives in git
 history.
 
+Want retro to fire deterministically at task end? `ai-init` offers to add
+this Stop hook (Claude Code, with your consent) — or paste it into
+`.claude/settings.json` yourself:
+
+```json
+{
+  "hooks": {
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "grep -q '\"stop_hook_active\"[[:space:]]*:[[:space:]]*true' && exit 0; echo '{\"decision\":\"block\",\"reason\":\"A turn just ended. If a task was completed in this conversation and no retrospective has run for it, run the retro skill now; otherwise just stop.\"}'"
+          }
+        ]
+      }
+    ]
+  }
+}
+```
+
+It costs one short check per turn end; retro's built-in guard makes a
+duplicate fire harmless.
+
 ## Why
 
 Native agent memory is machine-local and never becomes team-shared rules,
