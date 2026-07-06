@@ -33,4 +33,6 @@ byte-identical.
 Managed with [OpenSpec](https://github.com/Fission-AI/OpenSpec)
 (`/opsx:propose`, `/opsx:apply`, `/opsx:archive`). A change's `specs/` delta
 must match its intent: a name-only rename ships no delta; an ADDED/MODIFIED
-change keeps its delta through archive.
+change keeps its delta through archive. `openspec archive` rewrites living
+specs without markdown formatting — run `pnpm lint` and fix
+blanks-around-headings before committing the archive.

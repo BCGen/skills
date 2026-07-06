@@ -4,5 +4,9 @@ Before `openspec archive`, match the change's `specs/` delta to its intent.
 A name-only rename ships NO delta folder (a placeholder delta fails
 validation). An ADDED/MODIFIED/REMOVED change MUST keep its delta through
 archive — deleting it drops those capabilities from `openspec/specs/`.
+The delta must also be COMPLETE: when the implementation changes behavior
+a still-live requirement specifies, that requirement needs a MODIFIED
+entry — an ADDED-only delta archives into a self-contradicting spec.
 
 <!-- provenance: 2026-07-05 · task: add-skill-toolchain · evidence: over-generalized the name-only "no delta" rule and deleted an ADDED delta, losing three capabilities from living specs until git recovery; the name-only case had earlier failed archive twice with a placeholder delta · via: rule-writing -->
+<!-- provenance: 2026-07-06 · task: reposition-catalog · evidence: ADDED-only delta while the implementation contradicted two unmodified SHALLs; adversarial review caught the would-be self-contradicting spec pre-archive · via: retro -->
