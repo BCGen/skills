@@ -45,14 +45,17 @@ requires another.
 
 The typical pass:
 
-1. `codify` first, so the agent's first task follows your conventions.
-2. Work as usual — your corrections become `retro`'s evidence.
-3. `retro` when each task ends.
+```mermaid
+flowchart LR
+    A["harness-sync<br/>(day 0, optional)"] --> B["codify<br/>(capture conventions)"]
+    B --> C[work]
+    C --> D["retro<br/>(task end)"]
+    D -->|lessons land| C
+```
 
-`harness-sync` optionally lays out the whole surface on day 0 and
-re-syncs it after skills updates. The authoring trio — `skill-writing`,
-`skill-testing`, `skill-auditing` — writes, tests, and audits skills of
-your own.
+Re-run `harness-sync` after a skills update to converge the managed
+bits. The authoring trio — `skill-writing`, `skill-testing`,
+`skill-auditing` — writes, tests, and audits skills of your own.
 
 ## The learning loop
 
