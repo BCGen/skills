@@ -53,7 +53,8 @@ Apply the routing table in the reference. Key decisions:
    workflow → `CONTRIBUTING.md`; architecture decision → ADR), create only on
    consent, add an entry-file reference — prefer an `@import` for a
    short, load-bearing doc (guaranteed in context every session); use a
-   plain pointer for long ones.
+   plain pointer for long ones. Label the import inline so the line also
+   reads for humans (e.g. "Conventions: @docs/conventions.md").
 3. Short pure agent-behavior constraint → draft a rule via rule-writing.
 
 ## Step 4 — Present and execute with consent
