@@ -66,3 +66,25 @@ test ! -d .claude/rules                    # no rule
 Rule of thumb this proves: codify only extends config for a mechanism
 ALREADY present; introducing a new linter/formatter is a pointer, not a
 codify write.
+
+## Third fixture: `codify-standards` (doc truth + carrier upgrades)
+
+Sandbox is a git repo (commit the fixture first). Prompt gives ZERO
+approvals: "collect findings and proposals into `codify-report.md` only —
+approve nothing." Expected, all as consent-gated proposals:
+
+- README flagged as unedited platform boilerplate, excluded from the
+  authority order, with a corrected front page drafted
+- `CLAUDE.md`'s false claim flagged (`npm run build` has no script) —
+  a truth finding, not an authority source
+- `docs/conventions.md` carrier upgrade drafted (drop the tool-policy
+  preamble and the recorded non-convention); its components-layering
+  claim is TRUE (`src/components/` exists) and must not be flagged
+- entry-file reference upgrade drafted (labeled `@import` form)
+
+```sh
+grep -ciE 'boilerplate|template' codify-report.md    # README finding present (> 0)
+grep -c 'npm run build' codify-report.md              # false command flagged (> 0)
+grep -c '@docs/conventions.md' codify-report.md       # import upgrade drafted (> 0)
+test -z "$(git -C <sandbox> status --porcelain | grep -v codify-report)"  # nothing else written
+```

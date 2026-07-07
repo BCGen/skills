@@ -18,7 +18,11 @@ Read, in this order (project layer only — never personal auto memory or the
 global `~/.claude/CLAUDE.md`): explicit config files (commitlint, eslint,
 tsconfig, editorconfig, and commit history for commit conventions) > project
 docs (CONTRIBUTING, README, entry file, `docs/`) > code and git-history
-majority. Never carry assumptions from another project.
+majority. Never carry assumptions from another project. A doc that is
+unedited template boilerplate or makes false verifiable claims (commands
+or paths that do not exist) loses its authority standing — flag it and
+propose the correction. Convention disagreements between truthful
+sources still follow the authority order.
 
 ## Step 2 — Classify and route each convention
 
@@ -26,6 +30,9 @@ Apply the routing table in the reference. Key decisions:
 
 - **Already placed** → if a convention already lives in a rule/doc/config
   (e.g. a rule retro promoted), respect it: no migration, no duplicate.
+  Still check the carrier against current standards (doc-writing
+  guidance; labeled `@import` form) — shortfall → consent-gated upgrade
+  proposal.
 - **Discoverable fact** (layout, versions, existing pattern) → nothing.
 - **Mechanically enforceable** → decide "already enforced?" by probing the
   effective config when it extends a preset (`eslint --print-config`), not

@@ -1,0 +1,7 @@
+{
+  "name": "codify-standards",
+  "private": true,
+  "scripts": {
+    "test": "node --test"
+  }
+}
