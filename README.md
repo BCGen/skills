@@ -53,6 +53,13 @@ flowchart LR
     D -->|lessons land| C
 ```
 
+1. `harness-sync` — optional day 0: lay out the instruction surface in
+   one pass.
+2. `codify` — capture existing conventions, so the agent's first real
+   task follows them.
+3. Work as usual — your corrections become `retro`'s evidence.
+4. `retro` when each task ends — lessons land, and the loop closes.
+
 Re-run `harness-sync` after a skills update to converge the managed
 bits. The authoring trio — `skill-writing`, `skill-testing`,
 `skill-auditing` — writes, tests, and audits skills of your own.
