@@ -79,12 +79,17 @@ proposals route by type: project-shared convention → rule-writing; personal
 preference → the agent's native memory; corrected project fact (e.g.
 build command, layout) → an entry-file edit shown as a diff before
 writing; missing capability → a new file under `.ai/backlog/`; recurring
-mistake in an existing skill → update that skill's mistakes section. On
-promotion the candidate file's frontmatter SHALL be updated
-(`status: promoted`, `promoted_to`, `promoted_on`) — the destination
-recorded is whatever the proposal targeted, not necessarily a rule. A
-declined proposal leaves the file at `status: candidate`;
-`status: dismissed` is set only on explicit user request.
+mistake in an existing skill → update that skill's mistakes section. An
+entry-file edit SHALL carry ONLY the lesson's own content (the corrected
+fact); retro MUST NOT add, sync, or reconcile the harness block or any other
+harness-sync-managed content, and an entry file with no harness block SHALL
+be left without one. If no entry file exists, retro MAY create one
+containing only the fact — never the harness block. On promotion the
+candidate file's frontmatter SHALL be updated (`status: promoted`,
+`promoted_to`, `promoted_on`) — the destination recorded is whatever the
+proposal targeted, not necessarily a rule. A declined proposal leaves the
+file at `status: candidate`; `status: dismissed` is set only on explicit
+user request.
 
 #### Scenario: User declines
 
@@ -100,6 +105,11 @@ declined proposal leaves the file at `status: candidate`;
 
 - **WHEN** the evidenced lesson is a wrong project fact the user corrected (e.g. the build command)
 - **THEN** the proposal targets the entry file, shows the exact diff, and writes only after approval
+
+#### Scenario: Entry file has no harness block
+
+- **WHEN** retro writes an approved corrected fact to an entry file (existing or newly created) that has no harness block
+- **THEN** it writes only the fact and adds no harness block or other harness-sync-managed content
 
 #### Scenario: Proposal carries reasoning
 

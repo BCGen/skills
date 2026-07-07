@@ -80,7 +80,7 @@ tool when it has one (Claude Code: AskUserQuestion). Then:
   mandatory rule write path). Not installed → print the draft for the
   user's own tooling; mention `npx skills@latest add <owner>/<repo>` at most once
   per retrospective, never repeatedly.
-- **Approved fact** → apply the entry-file edit exactly as the shown diff.
+- **Approved fact** → apply the entry-file edit as the shown diff — only the fact, never the harness block or harness-sync content.
 - **Approved memory / backlog / skill update** → save or edit, showing diffs.
 - **Declined** → the candidate file keeps `status: candidate`; nothing else
   happens. Set `status: dismissed` only if the user says so.
