@@ -39,10 +39,6 @@ npx skills@latest add BCGen/skills -s harness-sync codify retro rule-writing
 
 ## Usage
 
-Skills trigger automatically when your task matches, or run one on demand
-(`/codify`, `/retro`, or just ask). Every skill runs standalone — none
-requires another.
-
 The typical pass:
 
 ```mermaid
@@ -56,7 +52,8 @@ flowchart LR
 1. `harness-sync` — optional day 0 setup.
 2. `codify` — capture conventions.
 3. Work as usual.
-4. `retro` at each task's end — the loop closes.
+4. `retro` at each task's end — fires on its own when you wrap up; the
+   loop closes.
 
 ## The learning loop
 
