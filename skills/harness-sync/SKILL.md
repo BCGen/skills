@@ -1,6 +1,6 @@
 ---
 name: harness-sync
-description: Sets up and re-syncs a project's entry-file harness block — the wiring that brings retro in — plus cross-agent interop glue, with idempotent, diff-first, marker-managed writes; retro owns the learning loop. Use when setting up AI collaboration for a new or existing project, or when re-syncing the managed block after the skills were updated. Optional day-0 setup — projects bootstrap without it.
+description: Sets up and re-syncs a project's entry-file harness block — the wiring that brings retro in — plus cross-agent interop glue, with idempotent, diff-first, marker-managed writes; retro owns the learning loop. Use when setting up AI collaboration for a new or existing project, or when re-syncing the managed block after the skills were updated. Optional — projects bootstrap without it.
 ---
 
 # Harness Sync

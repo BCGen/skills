@@ -17,7 +17,7 @@ that reads `AGENTS.md`.
 
 | Skill | What it does | When to use it |
 | --- | --- | --- |
-| [harness-sync](skills/harness-sync/SKILL.md) | Sets up and re-syncs the entry-file harness block that wires retro in, plus cross-agent interop glue. | Optional day 0 — everything also bootstraps without it; re-run after a skills update to re-sync the managed block. retro owns the loop. |
+| [harness-sync](skills/harness-sync/SKILL.md) | Sets up and re-syncs the entry-file harness block that wires retro in, plus cross-agent interop glue. | Run at setup to make retro fire reliably and unify agents on one source; re-run after a skills update to re-sync the managed block. Optional — everything also bootstraps without it; retro owns the loop. |
 | [codify](skills/codify/SKILL.md) | Captures a project's existing conventions so the agent follows them from the first run. | First on an existing project, before the agent's first real task. Re-run as things evolve — it reconciles, never duplicates, and proposes upgrades when placed artifacts fall short of current standards. |
 | [retro](skills/retro/SKILL.md) | After a task, turns your corrections into durable improvements, with your consent. | At the end of every task — especially one where you corrected the agent. Saying done or wrap up triggers it too. |
 | [rule-writing](skills/rule-writing/SKILL.md) | The one place rules get written — filtered, budgeted, provenance-stamped. | Mostly invoked by codify/retro handing it drafts; call it directly when you already know a landmine worth a rule. |
@@ -50,13 +50,13 @@ The typical pass:
 
 ```mermaid
 flowchart LR
-    A["harness-sync<br/>(day 0, optional)"] --> B["codify<br/>(capture conventions)"]
+    A["harness-sync<br/>(optional, wires retro in)"] --> B["codify<br/>(capture conventions)"]
     B --> C[work]
     C --> D["retro<br/>(task end)"]
     D -->|lessons land| C
 ```
 
-1. `harness-sync` — optional day 0 setup.
+1. `harness-sync` — optional; wires retro in and unifies agents, re-synced on updates.
 2. `codify` — capture conventions.
 3. Work as usual.
 4. `retro` at each task's end — fires on its own when you wrap up; the
