@@ -56,6 +56,17 @@ minimal prompt, mechanical verification only).
 - the lesson file's `promoted_to` records the entry file
 - no rule files created
 
+### 7. README reconciliation on drift (`scenarios/correction.md`, preseed `.ai/learnings/README.md` with a STALE first line)
+
+- the lesson file is created (reconciliation rides on the lesson write)
+- `.ai/learnings/README.md` now matches the current template — the stale
+  line is gone (`! grep -q '<stale phrase>' .ai/learnings/README.md`)
+
+### 8. Clean task leaves a stale README untouched (`scenarios/clean.md`, preseed `.ai/learnings/README.md` with a STALE first line)
+
+- `.ai/learnings/README.md` is byte-identical to the preseed — a no-op task
+  writes nothing to `.ai/`, so no reconciliation happens
+
 ## Verification snippets
 
 ```sh

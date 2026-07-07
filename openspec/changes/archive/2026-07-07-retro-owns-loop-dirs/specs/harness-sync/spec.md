@@ -1,10 +1,6 @@
-# harness-sync Specification
+# harness-sync (delta)
 
-## Purpose
-
-TBD - created by archiving change add-ai-harness-skills. Update Purpose after archive.
-
-## Requirements
+## MODIFIED Requirements
 
 ### Requirement: Instruction-surface scope
 
@@ -25,15 +21,6 @@ settings (settings.json, hooks, MCP configuration).
 - **THEN** after the run the entry file exists, no loop directories were
   created (retro creates them on first write), no rules directory was
   pre-created, and no settings/hooks/MCP files were created
-
-### Requirement: Wrap native discovery, near-empty baseline
-
-For codebase-convention discovery harness-sync SHALL use the agent's native `/init` capability where available rather than re-implementing scanning. The installed baseline SHALL contain only structure, interop glue, and harness conventions — no generic opinionated coding rules.
-
-#### Scenario: Baseline content
-
-- **WHEN** harness-sync completes on a fresh project without user-specific input
-- **THEN** no rule restating generic best practices (e.g. "write clean code") exists in the output
 
 ### Requirement: Idempotent, marker-managed, diff-first writes
 
@@ -82,12 +69,3 @@ When spec-kit (`.specify/`), Agent OS (`agent-os/`), or Kiro (`.kiro/steering/`)
 
 - **WHEN** `.specify/` exists in the project
 - **THEN** harness-sync references the constitution instead of generating principle rules, and installs the harness block without creating `.ai/` loop directories
-
-### Requirement: Onboarding block installation
-
-harness-sync SHALL write the team onboarding block defined in harness-conventions into the entry file.
-
-#### Scenario: Block present after init
-
-- **WHEN** harness-sync completes
-- **THEN** the entry file contains the ≤ 3-line managed harness block with the install command

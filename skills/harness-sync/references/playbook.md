@@ -39,13 +39,13 @@ Run the retro skill when a task ends; lessons land in `.ai/learnings/`, ideas in
 <!-- harness:end -->
 ```
 
-## Loop directories
+## Loop directories — not harness-sync's to create
 
-Create `.ai/learnings/` and `.ai/backlog/`, each containing only its
-`README.md` (format doc + git tracking placeholder). README templates live
-in the retro skill's `references/loop-file-formats.md`
-(canonical source — keep any local copy in sync). Lesson/idea files are
-one-per-entry, added later by the retro skill, never by harness-sync.
+harness-sync does NOT create `.ai/learnings/` or `.ai/backlog/`. retro owns
+them: it creates each directory and its `README.md` from the canonical
+templates in its `references/loop-file-formats.md` on its first write, and
+reconciles a drifted README while writing. harness-sync only names the two
+directories in the harness block (a forward reference).
 
 ## Entry-file content policy (near-empty baseline)
 
@@ -65,12 +65,12 @@ discovery and then trim its output to the policy above.
 
 ## Idempotency algorithm
 
-1. Inventory what already exists (entry file, `.ai/` files,
-   harness block, interop glue). Never pre-create a rules directory —
-   rule-writing creates it with the first rule.
-2. Plan the missing pieces plus any managed piece that drifted from the
-   current template (harness block content, loop README content) —
-   regenerate ONLY the managed surface, and only on drift.
+1. Inventory what already exists (entry file, harness block, interop glue).
+   Never pre-create a rules directory — rule-writing creates it with the
+   first rule. The `.ai/` loop directories are retro's, not part of
+   harness-sync's managed surface.
+2. Plan the missing pieces plus the harness block if it drifted from the
+   current template — regenerate ONLY the managed surface, and only on drift.
 3. Content you own lives inside `harness:begin/end` markers; NEVER edit
    anything outside your markers in a pre-existing file.
 4. Present the full content of every file you will create and a diff of
@@ -83,8 +83,8 @@ discovery and then trim its output to the policy above.
 
 When spec-kit / Agent OS / Kiro artifacts exist: do not generate content
 overlapping theirs. Add one reference line inside the harness block's first
-line (e.g. "project principles: see `.specify/`"), and still create the
-`.ai/` loop files if missing.
+line (e.g. "project principles: see `.specify/`"). Do not create `.ai/` loop
+files — retro creates them on its first write.
 
 ## Out of scope — never touch
 

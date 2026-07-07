@@ -1,6 +1,6 @@
 ---
 name: harness-sync
-description: Sets up and re-syncs a project's AI instruction surface — entry file, per-rule directories, cross-agent interop glue, and the learning-loop files — with idempotent, diff-first, marker-managed writes. Use when setting up AI collaboration or AI configuration for a new or existing project, or when re-syncing the managed surface after the skills were updated.
+description: Sets up and re-syncs a project's entry-file harness block — the wiring that brings retro in — plus cross-agent interop glue, with idempotent, diff-first, marker-managed writes; retro owns the learning loop. Use when setting up AI collaboration for a new or existing project, or when re-syncing the managed block after the skills were updated. Optional day-0 setup — projects bootstrap without it.
 ---
 
 # Harness Sync
@@ -20,11 +20,11 @@ answer (AGENTS.md is the portable default). Never guess.
 
 ## Step 2 — Inventory
 
-List what already exists: entry file, `.ai/learnings/`,
-`.ai/backlog/`, harness block, interop glue. The plan covers the missing
-pieces AND any managed piece that drifted from the current template (the
-harness block, the loop READMEs) — re-running on an up-to-date project
-must be a no-op.
+List what already exists: entry file, harness block, interop glue. The plan
+covers the missing pieces AND the harness block if it drifted from the
+current template — re-running on an up-to-date project must be a no-op. The
+`.ai/` loop directories are retro's to create; harness-sync neither creates
+nor reconciles them.
 
 ## Step 3 — Discover (new entry file only)
 
@@ -52,8 +52,9 @@ covers:
 - Interop glue when applicable (e.g. `CLAUDE.md` starting with `@AGENTS.md`).
 - No rules directory — git cannot track an empty directory; rule-writing
   creates it with the first rule.
-- `.ai/learnings/` and `.ai/backlog/` directories, each with its README
-  (created, or updated on drift), per the playbook.
+- No `.ai/` loop directories — retro creates and maintains
+  `.ai/learnings/` and `.ai/backlog/` on its first write; harness-sync only
+  names them in the harness block.
 - Coexisting framework detected → one reference line instead of duplicate
   content, per the playbook.
 
@@ -71,10 +72,11 @@ Short summary: what was created/modified, the detected target, and the
 budget status (entry file lines / 60). Then point at the next move, in
 order:
 
-1. Commit the new files — the loop is team-shared through git.
+1. Commit the new files — the harness is team-shared through git.
 2. Existing project → run the codify skill next, so the agent's first
    real task already follows the project's conventions.
-3. Then just work; retro picks up each task's lessons when it ends.
+3. Then just work; retro picks up each task's lessons when it ends,
+   creating `.ai/learnings/` and `.ai/backlog/` on its first write.
 
 ## Mistakes to refuse
 

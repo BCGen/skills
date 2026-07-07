@@ -22,7 +22,7 @@ Subagent prompt template (harness mechanics, no skill rules):
 git -C <sandbox> diff --stat          # pass-2 delta: MUST be empty (idempotent)
 git -C <sandbox> diff fixture..pass1 --numstat   # deletions column MUST be 0 (additions only)
 grep -c 'harness:begin' <entry file>  # == 1 (markers present)
-test -f .ai/learnings/README.md && test -f .ai/backlog/README.md
+test ! -e .ai/learnings && test ! -e .ai/backlog   # harness-sync no longer creates the loop — retro does
 test ! -e .claude/settings.json      # never touches execution settings
 ```
 

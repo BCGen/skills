@@ -6,6 +6,16 @@ lesson or idea — new entries create new files, so concurrent work never
 merge-conflicts; editing the *same* lesson collides on the same file,
 which is the one conflict worth a human look.
 
+## Ownership: retro creates and reconciles these
+
+retro owns both directories. It creates a directory and its README (from the
+templates below) the first time it needs to write there. Only on a run where
+it is ALREADY writing to that directory, it also reconciles a drifted README
+by rewriting it VERBATIM from the template here — propose the diff first. A
+clean, signal-free task writes nothing here and touches no README.
+harness-sync does not create or reconcile these, and no script is used —
+writes go through the agent's native file tools, so it works on any agent.
+
 ## `.ai/learnings/` — staged lesson candidates
 
 One file per lesson, named as a kebab-case slug of the lesson content
