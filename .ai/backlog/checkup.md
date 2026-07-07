@@ -10,5 +10,11 @@ status: open
   redundant so budget can be reclaimed
 - 2026-07-06 · task: codify interview · why: this is the skill that answers
   "does anything check for duplicate settings?" — a rule the user asked
+- 2026-07-07 · task: codify field fixes · why: artifacts codify previously
+  wrote (a tool-dialect conventions doc, a plain pointer that should be a
+  labeled `@import`) had to be upgraded BY HAND — reconciliation rightly
+  stops codify re-runs from touching placed content, so checkup is the
+  designed path to PROPOSE style/mechanism upgrades of existing
+  placements when the skills' own standards improve
   about (a rule superseded by a tool/hook should be retired). Until it
   exists, retro does this opportunistically when it escalates to enforcement
