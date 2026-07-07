@@ -62,7 +62,7 @@ minimal prompt, mechanical verification only).
 ls .ai/learnings/ | grep -v README | wc -l
 grep -c 'status: candidate' .ai/learnings/<slug>.md
 grep -c '^- ' .ai/learnings/<slug>.md   # provenance bullets
-grep -c 'npx skills add' report.md
+grep -c 'npx skills' report.md   # skill prints `npx skills@latest add`
 test ! -e .ai && echo absent
 ```
 

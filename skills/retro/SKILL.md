@@ -27,11 +27,11 @@ conversation; do not read platform transcript files.
 
 For each evidenced lesson (formats in [references/loop-file-formats.md](references/loop-file-formats.md)):
 
-1. Scan `.ai/learnings/` filenames and H1 titles for a **root-cause** match
-   (create the dir + README if missing). Title a candidate by its root cause
-   ("API dates need UTC conversion"), not this task's change, so continued
-   fixes to the same problem match across tasks. Wording differences do not
-   defeat a match.
+1. Scan `.ai/learnings/` as an **index only** — filenames, H1 titles, and
+   `status`, never bodies. Match by **root cause**; read a file's full body
+   only to settle a borderline match (create the dir + README if missing).
+   Title by root cause, not this task's change, so continued fixes match
+   across tasks. Wording differences do not defeat a match.
 2. **Matches an existing file** → recurrence: append a provenance bullet,
    carry it to Step 3.
 3. **New lesson** → recommend by evidence, user decides: one-off / no stated
@@ -41,8 +41,8 @@ For each evidenced lesson (formats in [references/loop-file-formats.md](referenc
 
 ## Step 3 — Build proposals (max 3, ranked by impact)
 
-**On recurrence, first ask about cure.** Show the full trail (all provenance
-across tasks) and offer three choices: (a) **cured** — the user confirms the
+**On recurrence, first ask about cure.** Read the matched file in full, then
+show the full trail (all provenance across tasks) and offer three choices: (a) **cured** — the user confirms the
 problem is perfectly solved, no more adjustment → mark `status: resolved`
 and DELETE the file; (b) **harden** for next time → promote (keep the file);
 (c) **keep observing** → leave it. Never mark cured automatically.
