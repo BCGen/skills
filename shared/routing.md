@@ -56,6 +56,10 @@ edited surgically (never clobber hand-written content):
    executable, dependency-adding change → POINTER, not a write.
 2. **project convention docs** — the shared human+agent source of truth
    (edit an existing CONTRIBUTING/docs, or a consent-created doc).
+   Written for the human teammate: each convention is a plain sentence
+   saying what to do, with one concrete example when it disambiguates.
+   No tool-policy preambles, no routing vocabulary, and never record
+   the absence of a convention.
 
 POINT at (never wire) settings that govern AGENT BEHAVIOR — git hooks,
 `settings.json` permissions, CI, file generators — with a paste-ready
