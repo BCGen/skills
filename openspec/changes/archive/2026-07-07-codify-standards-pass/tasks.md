@@ -22,4 +22,4 @@
 - [x] 2.2 Adversarial review (delta completeness vs living spec; no
       contradiction with "README.md is not a default conventions
       target"); `pnpm lint`; `openspec validate codify-standards-pass`
-- [ ] 2.3 Archive keeping the delta; publish on the user's go-ahead
+- [x] 2.3 Archive keeping the delta; publish on the user's go-ahead
