@@ -37,6 +37,13 @@ Without the skill-authoring toolchain:
 npx skills@latest add BCGen/skills -s harness-sync codify retro rule-writing
 ```
 
+Update installed skills later (then re-run `harness-sync` to converge
+the managed bits):
+
+```sh
+npx skills@latest update
+```
+
 ## Usage
 
 The typical pass:
