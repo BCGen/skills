@@ -1,4 +1,4 @@
-# Skills
+# AI Harness Skills
 
 Your AI coding agent makes the same mistake twice, ignores conventions your
 project already follows, and forgets each task's lessons by the next.
