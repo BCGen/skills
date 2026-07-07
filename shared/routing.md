@@ -58,8 +58,9 @@ edited surgically (never clobber hand-written content):
    (edit an existing CONTRIBUTING/docs, or a consent-created doc).
    Written for the human teammate: each convention is a plain sentence
    saying what to do, with one concrete example when it disambiguates.
-   No tool-policy preambles, no routing vocabulary, and never record
-   the absence of a convention.
+   One action per sentence or bullet — never chain clauses with
+   semicolons. No tool-policy preambles, no routing vocabulary, and
+   never record the absence of a convention.
 
 POINT at (never wire) settings that govern AGENT BEHAVIOR — git hooks,
 `settings.json` permissions, CI, file generators — with a paste-ready
