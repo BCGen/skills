@@ -67,6 +67,12 @@ minimal prompt, mechanical verification only).
 - `.ai/learnings/README.md` is byte-identical to the preseed — a no-op task
   writes nothing to `.ai/`, so no reconciliation happens
 
+### 9. Corrected fact that lives in README is fixed at its source (`scenarios/entry-fact.md`, preseed a `README.md` stating the wrong `npm test` command and a `CLAUDE.md`)
+
+- README's command is corrected to the right one (`make check`)
+- the entry file is NOT given a duplicated command line — it points to
+  README instead (`grep -c 'make check' <entry file>` == 0 when README owns it)
+
 ## Verification snippets
 
 ```sh

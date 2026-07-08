@@ -58,10 +58,11 @@ Apply the routing table in the reference. Key decisions:
 2. No fitting doc but worth persisting → propose creating a conventions doc,
    discuss where (recommend by nature: code conventions → `docs/conventions.md`;
    workflow → `CONTRIBUTING.md`; architecture decision → ADR), create only on
-   consent, add an entry-file reference — prefer an `@import` for a
-   short, load-bearing doc (guaranteed in context every session); use a
-   plain pointer for long ones. Label the import inline so the line also
-   reads for humans (e.g. "Conventions: @docs/conventions.md").
+   consent, add an entry-file reference — a plain pointer by default, an
+   `@import` only when the doc's bulk is load-bearing every session (imports
+   are eager). Label it inline so it also reads for humans (e.g.
+   "Conventions: @docs/conventions.md"). Give each fact one home by routing's
+   Placement by loading (must-see never left behind a pointer to a non-loading doc).
 3. Short pure agent-behavior constraint → draft a rule via rule-writing.
 
 ## Step 4 — Present and execute with consent

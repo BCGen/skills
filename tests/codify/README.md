@@ -88,3 +88,16 @@ grep -c 'npm run build' codify-report.md              # false command flagged (>
 grep -c '@docs/conventions.md' codify-report.md       # import upgrade drafted (> 0)
 test -z "$(git -C <sandbox> status --porcelain | grep -v codify-report)"  # nothing else written
 ```
+
+## Scenario: README fact is single-sourced, not duplicated
+
+Preseed a project whose `README.md` states a load-bearing, non-inferable
+convention (e.g. "All stored timestamps are UTC.") and an entry file with no
+such line. Run codify. It SHALL reference README from the entry file (a
+pointer or `@import`), never copy the convention into the entry file as a
+second, drift-prone copy:
+
+```sh
+grep -ci 'timestamps are utc' <entry file>   # 0 — the value is not duplicated
+grep -ciE 'README|@README' <entry file>       # > 0 — referenced instead
+```

@@ -16,6 +16,12 @@ Templates and tables for initializing a project's AI instruction surface.
 Zero or multiple agents detected → ask ONE question with a recommendation
 (AGENTS.md is the portable default; native dirs are the enhancement).
 
+`AGENTS.md` is the vendor-neutral cross-agent standard (read natively by
+Cursor and most agents); Claude Code does not read it natively. Detection
+logic: Claude Code with no `AGENTS.md` → target `CLAUDE.md` and do NOT create
+`AGENTS.md`; `AGENTS.md` present → thin `@AGENTS.md` shim (below); greenfield
+or ambiguous → recommend `AGENTS.md`.
+
 ## Targets per agent
 
 | Target | Entry file | Rules dir |
@@ -26,7 +32,10 @@ Zero or multiple agents detected → ask ONE question with a recommendation
 
 Interop glue: when Claude Code is the target and `AGENTS.md` also exists
 (or another agent is also in use), `CLAUDE.md` must begin with `@AGENTS.md`
-so both tools read one source; Claude-specific lines go below the import.
+— the Anthropic-documented shim — so both tools read one source;
+Claude-specific lines go below the import. The `@import` is eager (loads
+every session). Shared content, including the harness block, lives in
+`AGENTS.md`, never duplicated into the `CLAUDE.md` shim.
 
 ## Managed harness block (entry file)
 
@@ -57,8 +66,11 @@ A NEW entry file contains only:
 2. The managed harness block.
 
 It contains NO generic rules ("write clean code", "follow best practices",
-persona preambles) — evidence shows generated boilerplate context reduces
-task success. Discovered *conventions* the user wants enforced become rules
+persona preambles). Apply the per-line removal test — "would removing this
+line make the agent err?" — and drop anything inferable from code,
+frequently-changing, or boilerplate; vendors report longer entry files reduce
+instruction adherence (Anthropic targets <200 lines; our budget is stricter
+at ≤60). Discovered *conventions* the user wants enforced become rules
 via the rule-writing skill, not entry-file prose. Where the agent offers a
 native bootstrap (e.g. Claude Code `/init`), prefer suggesting it for
 discovery and then trim its output to the policy above.

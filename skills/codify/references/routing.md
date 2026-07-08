@@ -76,7 +76,12 @@ rule→doc or doc→rule) and do not write a duplicate. Doc-first/rule-last
 below governs only conventions with NO existing home. Respect governs
 WHERE it lives, not how well it is written — a carrier falling short of
 current standards may still get a consent-gated upgrade proposal (see
-the evidence-bounded upgrade).
+the evidence-bounded upgrade). One exception overrides "never migrate": a
+home that does NOT load for a MUST-SEE fact (e.g. a must-never constraint
+living only in a doc the agent will not auto-load) is a mis-placement, not a
+placement to respect — relocating or restating it in a loading surface (a
+rule, or `AGENTS.md`/entry-file inline per Placement by loading) is the
+sanctioned consent-gated upgrade.
 
 ## Evidence-bounded mechanism upgrade
 
@@ -85,12 +90,14 @@ or user-stated) but is carried by a sub-optimal mechanism — e.g. a doc- or
 verbally-enforced convention a linter/tool could enforce deterministically —
 propose upgrading to the better mechanism for the user to discuss; do not
 discard the current carrier unilaterally. The same applies to carrier
-QUALITY: a doc violating the doc-writing guidance above, or an
-entry-file reference in a lesser form than a labeled `@import` for a
-short load-bearing doc, warrants the same consent-gated upgrade
-proposal. Bound: only conventions with
-existing evidence. Never pitch a best practice the project shows no sign of
-caring about (no doc, no code pattern, no user statement).
+QUALITY: a doc violating the doc-writing guidance above warrants the same
+consent-gated upgrade proposal. An entry-file reference is NOT automatically
+improved by switching a plain pointer to an `@import`: an `@import` is eager
+and spends context every session, so reserve it for a short doc whose BULK is
+load-bearing every session and leave a plain pointer otherwise (see Placement
+by loading). Bound: only conventions with existing evidence. Never pitch a
+best practice the project shows no sign of caring about (no doc, no code
+pattern, no user statement).
 
 ## Judgment conventions: doc first, rule last
 
@@ -111,6 +118,55 @@ it load-bearing. For a convention with no existing home, place by preference:
 
 Rule is the LAST resort. Never write a rule duplicating a convention already
 living in a project doc.
+
+## Placement by loading: single source in a surface that actually loads
+
+Agents auto-load only some surfaces into context: the entry file
+(`CLAUDE.md` / `AGENTS.md`) and resident rules (`.claude/rules`,
+`.cursor/rules`). Docs (README, CONTRIBUTING, `docs/`) do NOT auto-load —
+they enter context only via an `@import` in the entry file or when the agent
+opens them. Rule directories are agent-specific: `.claude/rules` is read only
+by Claude Code, `.cursor/rules` only by Cursor; other agents read `AGENTS.md`.
+
+Give a fact ONE home, deciding in order — when a fact fits two questions, the
+earlier one wins:
+
+1. **Inferable from code/manifest?** (version, layout, an existing pattern)
+   → no home; the agent reads it. Hard-coding it only creates a future stale
+   copy. (A must-see fact that is NOT obvious to derive is not "inferable"
+   here — carry it to Q2–4.)
+2. **Must-see?** Removal test — "would removing this make the agent err in
+   work that need not open the doc?" If NO, it is not must-see → the doc is
+   its home and the entry file POINTS to it. Use an `@import` only when the
+   doc's BULK is load-bearing every session (the import is eager, spending
+   context each launch); a plain pointer otherwise. Doc-first still governs
+   the non-must-see majority.
+3. **Must-see behavioral constraint** (must-never / must-always) → a rule via
+   rule-writing, scoped by reach: applies everywhere → a resident rule;
+   applies only to certain paths/extensions → a path/glob-scoped rule (loads
+   only for matching files, off the resident budget).
+4. **Must-see descriptive fact** (short, stable orientation, not a behavioral
+   rule) → give it a loading home WITHOUT a second restated copy. If it lives
+   in a short doc, prefer `@import`-ing that doc so the doc stays its sole home
+   (loads every session, still human-readable). Otherwise state it inline in
+   the entry file (authoritative) AND downgrade any doc restatement to a
+   reference. A LONG must-see doc → inline its short kernel and pointer the
+   rest. Never leave the same value restated in two surfaces.
+
+Cross-agent reach escalates the home: a rule dir reaches only its own agent,
+so a constraint that must reach EVERY agent belongs in `AGENTS.md` — the one
+surface all agents auto-load — not a per-agent rule dir. Default to the
+agent-native rule; escalate to `AGENTS.md` only when cross-agent reach is
+required. `AGENTS.md` cannot path-scope; when a constraint is both
+path-scoped AND must reach an agent that reads only `AGENTS.md`, reach wins —
+state it in `AGENTS.md` (accepting the always-on cost) or narrow its wording.
+
+Two invariants:
+
+- A must-see fact is NEVER reachable only through a pointer to a
+  non-auto-loading doc — it lives in a surface that loads.
+- One home per fact: other surfaces reference it, they do not restate its
+  value (a restated value is the duplicate that drifts).
 
 ## Conflict handling
 
