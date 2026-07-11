@@ -26,3 +26,16 @@ grep -icE 'nextjs.org|installation|docs' report.md  # source cited for outdated 
 
 Not mechanically verifiable: completeness of the factual-claim extraction
 (human review).
+
+## Scenario: no-op layer
+
+Preseed a skill directory with three skills: one whose rules each name the failure
+they prevent, one carrying generic writing advice with no provenance, and one whose
+body restates a reference it tells the agent to read on the same line.
+
+- the report has a third section for no-ops, separate from format and content
+- the rule with provenance is kept, and the report says why
+- the rule with no provenance is reported as a **candidate**, with reasoning — not as
+  a defect, and not deleted
+- the restated passage is reported as a no-op without further evidence
+- nothing is edited; approved fixes route to skill-writing

@@ -1,13 +1,14 @@
 ---
 name: skill-auditing
-description: Audits any skills directory on two layers - format against shared authoring conventions, and content facts (commands, APIs, versions) against live documentation - reporting per-layer findings with sources. Use when asked to audit, review, or check whether skills are outdated, stale, or still correct.
+description: Audits any skills directory on three layers - format against shared authoring conventions, content facts (commands, APIs, versions) against live documentation, and rules that never changed the model's behavior - reporting per-layer findings with sources. Use when asked to audit, review, or check whether skills are outdated, stale, bloated, or still correct.
 ---
 
 # Skill Auditing
 
-Find what has gone stale in a set of skills — on two independent layers,
-reported separately so the user knows which findings are format and which
-are facts.
+Find what has gone wrong in a set of skills — on three independent layers,
+reported separately. A skill decays in two directions: a **stale** rule was
+right and stopped being right; a **no-op** rule was never load-bearing at all,
+and it spends context on every load while blunting the rules that do teach.
 
 ## Step 1 — Pick the target
 
@@ -37,9 +38,29 @@ prefer the docs tooling). Classify each:
 - **unverifiable** — cannot confirm or deny from available sources; say so,
   never guess.
 
-## Step 4 — Report and route fixes
+## Step 4 — No-op layer (offline)
 
-Two sections, format then content. Each finding: the skill, the location,
+For each rule in a skill, ask whether the model would have followed it anyway.
+**The agent's report of its own defaults is not evidence** — asked "would you do
+this anyway?", it agrees with confidence and is often wrong; the line gets cut
+and the behavior goes with it. Settle it in this order:
+
+1. **Provenance** — does the rule name the failure it was written for? A rule
+   bought by an observed failure is kept, even where the model usually gets it
+   right; "usually" is what the rule covers. A rule naming none is a candidate.
+2. **A deletion run** — for a contested candidate, remove the line, run the skill
+   on a real scenario, and see whether behavior changes. Expensive, so reserve it
+   for lines worth arguing about.
+3. **Neither** — report it as a candidate with the reasoning. A candidate is not a
+   defect.
+
+One case needs no judgment: a body passage that **restates a reference the body
+itself tells the agent to read at that point**. The reference is already in
+context, and the conventions require one home per fact.
+
+## Step 5 — Report and route fixes
+
+Three sections: format, content, no-ops. Each finding: the skill, the location,
 the severity, and the evidence or source. Then, for approved fixes, route
 to the **skill-writing** skill when installed; if it is not installed,
 print the exact proposed edit for manual use and mention the install
@@ -49,7 +70,8 @@ option at most once.
 
 | Principle | Meaning |
 | --- | --- |
-| Two layers, never merged | Format (offline, convention) and content (live, factual) are reported separately. |
+| Layers never merged | Format (offline), content (live, factual), and no-ops (offline, evidence-based) are reported separately. |
+| Introspection is not evidence | A no-op finding rests on provenance or a deletion run, never on the agent's account of its own defaults. |
 | Cite sources | Every "outdated" finding names the doc that contradicts the skill. |
 | Honesty over coverage | What can't be verified is listed as unverifiable, not guessed. |
 | Diagnose, don't mutate | The audit reports and proposes; skill-writing performs the edits. |

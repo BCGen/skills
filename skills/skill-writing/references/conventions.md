@@ -104,8 +104,12 @@ that writes in another language is the tool overriding the project.
   rots in place.
 - **Write only what changes behavior** _(platform)_. A line the model would follow
   anyway spends context and teaches nothing; it also blunts the lines that do teach.
-  Delete a sentence and ask whether the agent would act differently — if not, it was
-  sediment.
+- **A rule records the failure that bought it**, in a clause where the rule lives. A
+  rule that can name none was never paid for — do not write it. This is what makes a
+  later audit survivable: a rule can be cut safely only by someone who knows why it is
+  there, and the memory does not persist while the record does. Without it the outcome
+  is not over-cutting but paralysis, and the skill swells until the cap pushes it into
+  a reference where it swells unseen.
 
 ## Naming
 
