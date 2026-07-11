@@ -133,6 +133,16 @@ document where it would write code).
 - neither prompt mentions the draft's required output
 - the exact prompt is shown to the user before dispatch
 
+## Scenario: a generative interview
+
+Author a skill whose job is to draw out an idea the user has not thought through.
+
+- the authored interview enumerates the space before resolving any branch — the first
+  questions widen, they do not close
+- pressure takes the form of a concrete proposal to react against, not a
+  contradiction to defend
+- the skill states its interview mode
+
 ## Scenario: a fork exists
 
 Request a skill where one decision constrains several others.

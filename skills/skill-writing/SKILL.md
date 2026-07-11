@@ -45,10 +45,11 @@ this needs the job, not the name.
 
 ## Step 4 — Interrogate the procedure
 
-Read [references/eliciting.md](references/eliciting.md) — it governs how you ask,
-and it goes into any skill you author that interviews a user. The user describes
-what they do; what they omit is what breaks. Establish, only where an answer would
-change the output:
+Read [references/eliciting.md](references/eliciting.md) — it governs how you ask, and
+it goes into any skill you author that interviews a user, whose interview mode
+(pressing a claim vs drawing out something half-formed) it must settle first. The
+user describes what they do; what they omit is what breaks. Establish, only where an
+answer would change the output:
 
 - A checkable completion criterion for each step.
 - What to do when a precondition is absent (file missing, command fails).
@@ -85,13 +86,9 @@ lookup says a name is free; it does not say it is right.
 
 Read [references/dry-run.md](references/dry-run.md) now — the method for each skill
 shape, how to choose the control, how to keep the test honest, and what to do when a
-gap will not close. **The scenario is a real use of the skill, never the request
-that asked for it**, and the draft runs against a **control**: the strongest
-alternative the user already has.
-
-**What the control gets wrong is what the skill has to teach**; the rest is padding.
-**Where the run improvised, a sentence is missing.** Show the real output and these
-two — never a verdict.
+gap will not close. **The scenario is a real use of the skill, never the request that
+asked for it.** The draft runs against a **control** — the strongest alternative the
+user already has — and what that control gets wrong is what the skill has to teach.
 
 ## Step 9 — Done, and hand back
 

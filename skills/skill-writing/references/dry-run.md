@@ -13,10 +13,9 @@ How to run Step 8, and how to read what comes back.
 
 ## Why a run, and not an interview
 
-An interview only surfaces the gaps the user knows about. The gaps that matter are
-the ones they cannot describe — what happens when the file is missing, whether the
-agent will invent a threshold nobody gave it. Those appear on a run and nowhere
-else.
+An interview surfaces only the gaps the user knows about. The ones that matter — what
+happens when the file is missing, whether the agent invents a threshold nobody gave
+it — appear on a run and nowhere else.
 
 A scenario qualifies only if the user says it has actually happened or is about to.
 An imagined edge case is not worth plugging, and plugging it lengthens and blunts

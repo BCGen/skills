@@ -63,11 +63,8 @@ default.
 - ≤ 100 lines AND within the platform's 5,000-token instruction budget
   _(platform)_ — whichever binds first. A body of few enormous lines still costs
   context; the line cap alone does not bound it.
-- Numbered steps for a procedure; a short principles/mistakes table where it earns
-  its place. Match the voice of the surrounding skills.
 - Each step ends on a completion criterion that can be checked. A step nobody can
   tell is finished is a step nobody thought through.
-- State constraints the steps cannot show; do not narrate the obvious.
 - Consent moments ask with the platform's option-prompt tool when it has one
   (Claude Code: AskUserQuestion); a plain question otherwise.
 
@@ -105,8 +102,10 @@ that writes in another language is the tool overriding the project.
 - **One term per concept** _(platform)_. Synonyms read as new concepts.
 - **Nothing time-sensitive** _(platform)_ — "before August 2025, use the old API"
   rots in place.
-- **Assume the model is capable** _(platform)_. Every paragraph justifies its
-  token cost; re-explaining what the model already knows blunts what it does not.
+- **Write only what changes behavior** _(platform)_. A line the model would follow
+  anyway spends context and teaches nothing; it also blunts the lines that do teach.
+  Delete a sentence and ask whether the agent would act differently — if not, it was
+  sediment.
 
 ## Naming
 
