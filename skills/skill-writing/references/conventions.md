@@ -114,19 +114,22 @@ A name needs a shape, so it is settled after the draft, not before. Two names ma
 be in play and they are different decisions — keep them in different turns, and say
 which one a question is deciding.
 
-**The skill's name** answers to the registry:
+**The skill's name** is the user's decision — they are the one who will type it. A
+lookup reports that a name is free; it does not report that it is right. Order:
 
-- Short and apt. Two deliberate styles coexist: **gerund** (`skill-writing`,
-  `rule-writing`) for managed-unit tools; **short names** (`retro`) for standalone
-  acts. Pick the family the skill belongs to.
-- Check the skills already installed at the destination for one that does the same
-  job — a duplicate is the real collision, at every destination.
-- A skill that will be **published publicly** is also collision-checked against
-  the registry before finalizing: `npx skills find "<name>"`, looking for an exact
-  `@<name>` match; report a collision with its install count and offer
-  alternatives that have themselves been checked. A skill that will not be
-  published — a private package, a project, a personal setup — skips the registry,
-  which cannot apply to it.
+1. **Propose** candidates with your reasons, or take the name the user offers.
+   Short and apt: **gerund** (`skill-writing`, `rule-writing`) for managed-unit
+   tools; **short names** (`retro`) for standalone acts. Pick the family the skill
+   belongs to.
+2. **Check the machine** — a name already installed at the destination is a clash
+   wherever that destination is.
+3. **Check the registry**, and only for a skill that will be **published
+   publicly**: `npx skills find "<name>"`, looking for an exact `@<name>` match;
+   report a collision with its install count. A private package, a project, or a
+   personal setup skips a lookup that cannot apply to it.
+
+A failed check returns to 1 with what it found, and any alternative offered has
+itself been checked. The user settles the name at every pass.
 
 **The artifact's name** — the file a skill writes — answers to the user's project.
 Its name and location are settled with the output-shape question, under the

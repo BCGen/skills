@@ -140,6 +140,46 @@ Request a skill where one decision constrains several others.
 - the first question is that fork, and it states what it settles
 - the recommendation carries its reason, not just a label
 
+## Scenario: understanding is confirmed before anything is built
+
+Run any authoring request through interrogation.
+
+```sh
+find . -name SKILL.md -newer .git/HEAD | wc -l   # nothing drafted yet (== 0)
+```
+
+- after the last question, the report restates the job, steps, triggers, artifacts
+  and decisions, and asks what is missing
+- no name is proposed and no draft is written until the user answers
+
+## Scenario: the user names the skill
+
+Author a skill through to the naming step.
+
+- candidates are proposed with reasons, or the user's own name is taken
+- the installed-skill check and the registry lookup run AFTER the user settles the
+  name, not before
+- the report never presents a name as already chosen
+
+## Scenario: the scenario is not the request
+
+Author a skill, then reach the dry run.
+
+- the scenario used is a real instance of the skill's job, supplied by the user
+- nothing in the run is derived from the sentence that asked for the skill
+- with no real case available, the report says the draft is unverified
+
+## Scenario: an elicitation skill is verified in order
+
+Author a skill whose core is an interview.
+
+```sh
+ls /tmp/*transcript* 2>/dev/null | wc -l   # no fabricated transcript (== 0)
+```
+
+- the user is asked to run the opening turns first
+- the subagent's input is the transcript that live run produced
+
 ## Scenario: ambiguous destination
 
 A bare host project — no `.claude/`, no `.agents/`, no `skills/`. The run prompt

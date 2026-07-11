@@ -1,6 +1,6 @@
 # Running the draft before trusting it
 
-How to run Step 6, and how to read what comes back.
+How to run Step 8, and how to read what comes back.
 
 ## Contents
 
@@ -22,6 +22,13 @@ A scenario qualifies only if the user says it has actually happened or is about 
 An imagined edge case is not worth plugging, and plugging it lengthens and blunts
 the skill. Ask for one in plain words — never recite this rule at the user.
 
+**A scenario is a use of the skill, never the request that asked for it.** "Write me
+a skill that turns an inspiration into a PRD" is the specification; the scenario is
+an inspiration the user has actually had. Nothing is derived from the request
+either: material built from the specification tests the draft against the drafter's
+own understanding, and that test cannot fail. When the user has no real case to
+offer, say the draft is unverified — do not invent one.
+
 ## Match the method to the skill's shape
 
 **A skill that transforms an input into an output**, with no human in the loop:
@@ -32,13 +39,19 @@ lies an eval harness, which this skill deliberately does not build.
 
 **A skill whose job is to elicit from a human**: a subagent cannot test it. It has
 nobody to ask, so it plays both sides, and an interview with an invented user tests
-nothing about the questions. Split the test instead:
+nothing about the questions. Split the test, in this order:
 
 1. **The user runs the opening turns themselves.** They are present — this is the
    cheapest test available and the only valid one for the questions. The control
    runs the same opening.
-2. **The subagent tests the tail that needs no human.** Given a fixed transcript,
-   it produces the artifact. That part is objectively checkable.
+2. **The subagent tests the tail that needs no human**, working from **the
+   transcript the live run just produced**. It produces the artifact, which is
+   objectively checkable.
+
+The order is not a preference. A transcript you wrote yourself is a fiction, and a
+subagent run on it is not a smaller version of the test — it is a different test, of
+nothing. Run the tail first and the flow can declare itself verified while the half
+only the user can perform never happened.
 
 ## Choosing the control
 

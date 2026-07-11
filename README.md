@@ -46,6 +46,20 @@ writing and testing skills.
 | [skill-testing](skills/skill-testing/SKILL.md) | Acceptance-tests any skill with mechanical checks. | After writing or changing a skill, to prove it does what its SKILL.md says. |
 | [skill-auditing](skills/skill-auditing/SKILL.md) | Audits a skills directory for stale format or facts. | Periodically, or when a skill seems outdated. |
 
+## Ideas & product definition
+
+Skills for the stage before anything is built — when someone has a hunch and
+no document.
+
+**In scope:** drawing an idea out of the person who has it, and writing it
+down in terms anyone can read.
+**Out of scope:** architecture, estimates, or anything that presumes the idea
+was already accepted.
+
+| Skill | What it does | When to use it |
+| --- | --- | --- |
+| [idea-shaping](skills/idea-shaping/SKILL.md) | Interviews you about a raw idea, pressure-tests it, and writes a non-technical PRD plus an interactive mindmap. | When a spark is worth capturing — a new product, or a new capability on one you already have — and you want it shaped before anyone argues about how to build it. |
+
 ## Contributing
 
 Development setup and the spec workflow are in
