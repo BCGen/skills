@@ -77,8 +77,10 @@ recommend it, and let the user settle it.
 
 **For a skill the user tests live, the control is theirs to run too** — an interview
 cannot be conducted by a subagent either. Offer it once, with the candidate and the
-reason ("you have `grilling` installed; give it the same opening and compare"), then
-drop it. Whether a second session is worth their time is their call, not yours.
+reason ("you have `<skill>` installed, and it already does this step; give it the same
+opening and compare"), then drop it. Whether a second session is worth their time is
+their call, not yours. The candidate is whatever the scan of installed skills found —
+never a name written into this file.
 
 When nothing overlaps, say how far you looked ("I read the descriptions of the 12
 skills installed here; none touches these steps"), note that the user may name a

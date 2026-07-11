@@ -19,6 +19,7 @@ repo's CI.
 - [High stakes](#high-stakes)
 - [Scripts](#scripts)
 - [Originality](#originality)
+- [No third-party names in runtime text](#no-third-party-names-in-runtime-text)
 - [Toolchain awareness](#toolchain-awareness-this-packages-skills-only)
 - [Sources](#sources)
 
@@ -166,6 +167,16 @@ Absorb ideas and design patterns from other projects, but author all content her
 Never copy another skill's text verbatim and never vendor a third-party skill into
 `skills/` as ours (see the repo's no-vendoring rule). Adopting a platform rule and
 citing it is not vendoring; restate it in our own words.
+
+## No third-party names in runtime text
+
+A skill's body and references name no skill this package does not maintain. Examples
+use a placeholder; a concrete name comes only from reading what is actually installed.
+The failure that bought this rule: an example here once named a real third-party
+skill, which biased the control choice toward it even where a fitter one was
+installed, would have rotted silently if that skill were renamed, and read as noise to
+every user who did not have it. A name the agent discovers is evidence; a name we ship
+is a standing recommendation for software we do not maintain.
 
 ## Toolchain awareness (this package's skills only)
 
