@@ -37,21 +37,28 @@ scenarios — the main path (always), a missing precondition, and one where the 
 should not fire (the last two for a high-stakes skill). Three is the cap; beyond it
 lies an eval harness, which this skill deliberately does not build.
 
-**A skill whose job is to elicit from a human**: a subagent cannot test it. It has
-nobody to ask, so it plays both sides, and an interview with an invented user tests
-nothing about the questions. Split the test, in this order:
+**A skill whose job is to elicit from a human**: the user tests it, **in a fresh
+session**, and no subagent is used. A subagent has nobody to ask, so it plays both
+sides, and an interview with an invented user tests nothing.
 
-1. **The user runs the opening turns themselves.** They are present — this is the
-   cheapest test available and the only valid one for the questions. The control
-   runs the same opening.
-2. **The subagent tests the tail that needs no human**, working from **the
-   transcript the live run just produced**. It produces the artifact, which is
-   objectively checkable.
+The fresh session is the whole point. This session knows the answers — it wrote the
+draft and heard every answer the user gave — so a run here is completed from memory,
+and the sentences SKILL.md forgot to write get supplied by a context the real user
+will never have. A skill is only tested where nothing is remembered.
 
-The order is not a preference. A transcript you wrote yourself is a fiction, and a
-subagent run on it is not a smaller version of the test — it is a different test, of
-nothing. Run the tail first and the flow can declare itself verified while the half
-only the user can perform never happened.
+So hand it over:
+
+1. **Write the draft to its destination** so it can be invoked by name.
+2. **Ask the user to run it in a new session, on a real case**, and to bring back
+   what went wrong — a question that was blunt, an artifact that smuggled in a
+   technical solution, a diagram that would not render. A live run exercises the
+   whole skill: the artifact is written at the end of the same conversation, so they
+   see the questions and the output.
+3. **Amend from what they bring back, and hand it over again.**
+
+Mechanical checks run against the artifact that session produced — a diagram that
+does not parse, a document carrying vocabulary the skill forbids. No subagent is
+needed to see that.
 
 ## Choosing the control
 
@@ -68,6 +75,11 @@ doing nothing else the draft does.
 **Propose, do not decide.** The agent weighing an installed skill against the draft
 is the agent that just wrote the draft: name the candidate, say why it overlaps,
 recommend it, and let the user settle it.
+
+**For a skill the user tests live, the control is theirs to run too** — an interview
+cannot be conducted by a subagent either. Offer it once, with the candidate and the
+reason ("you have `grilling` installed; give it the same opening and compare"), then
+drop it. Whether a second session is worth their time is their call, not yours.
 
 When nothing overlaps, say how far you looked ("I read the descriptions of the 12
 skills installed here; none touches these steps"), note that the user may name a

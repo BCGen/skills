@@ -475,26 +475,39 @@ present wherever the authored skill later runs.
 
 ### Requirement: The dry run matches the skill's shape
 
-skill-writing SHALL choose the dry-run method by the shape of the skill. A skill
-whose value is the conversation itself cannot be dry-run by a subagent — the
-subagent has no user to ask, so it plays both sides, and a conversation with an
-invented user tests nothing about the questions.
+skill-writing SHALL choose the dry-run method by the shape of the skill.
 
 - **A skill that transforms an input into an output**, with no human in the loop,
-  is run as written: a fresh-context subagent, against a control.
-- **A skill whose job is to elicit from a human** is run in two parts, in this
-  order. First the user runs the opening turns themselves — they are present, which
-  makes this the cheapest and the only valid test of the questions — while the
-  control is the strongest existing alternative given the same opening. The
-  transcript that live run produces is then handed to a subagent, which tests the
-  part that needs no human: from that transcript, it produces the artifact, which is
-  objectively checkable.
+  SHALL be run as written: the draft given to a fresh-context subagent, against a
+  control, on up to three real scenarios.
+- **A skill whose job is to elicit from a human** SHALL be verified by that human,
+  in a fresh session, and SHALL NOT be handed to a subagent. A subagent has nobody
+  to ask, so it plays both sides, and an interview with an invented user tests
+  nothing.
 
-#### Scenario: An elicitation skill is dry-run
+The fresh session is the point. The authoring session knows the answers — it just
+wrote the draft and heard every answer the user gave — so a run there is completed
+from memory, and the sentences SKILL.md failed to write are supplied by a context
+the real user will never have. A skill is only tested where nothing is remembered.
+
+skill-writing SHALL therefore write the draft to its destination so it can be
+invoked, hand the test to the user with what to bring back — a real case to run it
+on, and what went wrong: a blunt question, an artifact that smuggled in a technical
+solution, a diagram that did not render — and amend from that feedback. Mechanical
+checks SHALL run against the artifact that session produced.
+
+#### Scenario: An elicitation skill is verified
 
 - **WHEN** the drafted skill's core is an interview with the user
-- **THEN** the user runs the opening turns live first, and the subagent then works
-  from the transcript that run produced
+- **THEN** skill-writing installs the draft at its destination, asks the user to run
+  it in a fresh session on a real case, dispatches no subagent, and amends from what
+  they bring back
+
+#### Scenario: A transform skill is verified
+
+- **WHEN** the drafted skill takes an input and produces an output with no human in
+  the loop
+- **THEN** a fresh-context subagent runs it against a control, on real scenarios
 
 ### Requirement: The user is never told the rules, only asked the question
 
@@ -516,25 +529,32 @@ skill-writing SHALL propose the control with its reasoning and let the user sett
 it, rather than concluding alone. The agent judging whether an installed skill
 beats the draft is the agent that just wrote the draft.
 
+For a skill verified live by a human, the control SHALL be run by that human, at
+their discretion, in the same fresh-session manner: an interview cannot be conducted
+by a subagent, and whether a second session is worth their time is theirs to judge.
+skill-writing SHALL offer it once — naming the candidate and the reason — and SHALL
+NOT block, repeat, or dispatch a subagent to simulate it.
+
 When no installed skill overlaps, skill-writing SHALL say how far it looked (how
 many installed skills it read), SHALL tell the user they may name a control
-themselves, and SHALL proceed with the naked agent without waiting — a blocking
-question here would tax every authoring run. A user-named control need not be a
-skill; it may be whatever they do today instead. A named skill that is not
-installed is reported as such, and skill-writing SHALL NOT recommend installing a
-third-party skill on its own initiative.
+themselves, and SHALL proceed without waiting — a blocking question here would tax
+every authoring run. A user-named control need not be a skill; it may be whatever
+they do today instead. A named skill that is not installed is reported as such, and
+skill-writing SHALL NOT recommend installing a third-party skill on its own
+initiative.
 
 #### Scenario: No overlap found
 
 - **WHEN** no installed skill performs any of the drafted steps
 - **THEN** skill-writing states the scan's scope, notes that the user may name a
-  control, and proceeds with the naked agent
+  control, and proceeds
 
-#### Scenario: A candidate exists
+#### Scenario: A candidate exists for a live-run skill
 
-- **WHEN** an installed skill appears to perform one of the drafted steps better
-- **THEN** skill-writing names it, says why, recommends it as the control, and the
-  user settles the choice
+- **WHEN** an installed skill would make a fitting control for a skill the user is
+  verifying in a fresh session
+- **THEN** skill-writing names it once and leaves the run to the user, dispatching
+  no subagent
 
 ### Requirement: Descriptions are read, bodies are not
 
@@ -628,25 +648,3 @@ scenario hides that instead of reporting it.
 - **WHEN** the user cannot name a real case to run
 - **THEN** skill-writing reports that the draft is unverified rather than inventing
   a case
-
-### Requirement: The live run produces the fixture
-
-For a skill whose job is to elicit from a human, skill-writing SHALL run the live
-half first — the user answering its opening questions — and SHALL use the
-transcript that run produces as the input the subagent then works from. No
-transcript SHALL be fabricated.
-
-A subagent run on an invented transcript is not a smaller version of the test; it
-is a different test, of nothing. Running it before the live half also lets the flow
-declare itself verified while the half only the user can perform never happened.
-
-#### Scenario: An elicitation skill is verified
-
-- **WHEN** the drafted skill's core is an interview
-- **THEN** the user runs the opening turns first, and the subagent's input is the
-  transcript that run produced
-
-#### Scenario: A fabricated transcript
-
-- **WHEN** no live run has happened
-- **THEN** no transcript is written for the subagent to consume

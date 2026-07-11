@@ -169,16 +169,19 @@ Author a skill, then reach the dry run.
 - nothing in the run is derived from the sentence that asked for the skill
 - with no real case available, the report says the draft is unverified
 
-## Scenario: an elicitation skill is verified in order
+## Scenario: an elicitation skill is handed to the user
 
 Author a skill whose core is an interview.
 
 ```sh
-ls /tmp/*transcript* 2>/dev/null | wc -l   # no fabricated transcript (== 0)
+ls /tmp/*transcript* 2>/dev/null | wc -l   # no transcript fixture (== 0)
 ```
 
-- the user is asked to run the opening turns first
-- the subagent's input is the transcript that live run produced
+- no subagent is dispatched for the interview or for the artifact
+- the draft is written to its destination so it can be invoked by name
+- the user is asked to run it in a **fresh session** on a real case and bring back
+  what went wrong
+- if a control is offered, it is named once and left for the user to run
 
 ## Scenario: ambiguous destination
 
