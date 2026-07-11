@@ -1,19 +1,40 @@
-# AI Harness Skills
+# Skills
 
-Your AI coding agent makes the same mistake twice, ignores conventions your
-project already follows, and forgets each task's lessons by the next.
+Agent skills I actually use, grouped by purpose. Each group is
+independent — install a whole group, or just the skills you want.
 
-The root problem predates AI: conventions that live only in your team's
-heads trip every newcomer. An AI agent is simply the most demanding
-newcomer you will ever onboard — it starts from zero every single session.
+Skills that only make sense inside my own workflow live in a separate
+private repo; everything here works for anyone.
 
-These skills close the loop. Your conventions get captured up front, so
-the agent starts from them. Every correction becomes a lesson that — with
-your consent — lands where it fits: a config, a doc, or a budgeted rule
-your teammates read too. Works with Claude Code, Cursor, and any agent
-that reads `AGENTS.md`.
+## Install
 
-## Skills
+Everything:
+
+```sh
+npx skills@latest add BCGen/skills
+```
+
+One group, or a few skills by name:
+
+```sh
+npx skills@latest add BCGen/skills -s retro codify
+```
+
+Update later:
+
+```sh
+npx skills@latest update
+```
+
+## Agent harness & skill authoring
+
+Skills that make an agent learn from a project and from its own mistakes,
+plus the toolchain for authoring skills themselves. A coherent set —
+[read the full story](docs/ai-harness-skills.md).
+
+**In scope:** capturing conventions, routing lessons into durable rules,
+writing and testing skills.
+**Out of scope:** anything tied to one language, framework, or product.
 
 | Skill | What it does | When to use it |
 | --- | --- | --- |
@@ -21,70 +42,9 @@ that reads `AGENTS.md`.
 | [codify](skills/codify/SKILL.md) | Captures a project's existing conventions so the agent follows them from the first run. | First on an existing project, before the agent's first real task. Re-run as things evolve — it reconciles, never duplicates, and proposes upgrades when placed artifacts fall short of current standards. |
 | [retro](skills/retro/SKILL.md) | After a task, turns your corrections into durable improvements, with your consent. | At the end of every task — especially one where you corrected the agent. Saying done or wrap up triggers it too. |
 | [rule-writing](skills/rule-writing/SKILL.md) | The one place rules get written — filtered, budgeted, provenance-stamped. | Mostly invoked by codify/retro handing it drafts; call it directly when you already know a landmine worth a rule. |
-| [skill-writing](skills/skill-writing/SKILL.md) | Authors a new skill — for a collection, a project, or your own setup — to a tested standard. | When a procedure is worth capturing as a skill — your own idea, or a codify/retro handoff. |
+| [skill-writing](skills/skill-writing/SKILL.md) | Authors or edits a skill — checking a skill is the right carrier, that one does not already exist, interrogating the procedure for the gaps you did not mention, and running the draft in a subagent before you trust it. | When a procedure is worth capturing as a skill — your own idea, or a codify/retro handoff. |
 | [skill-testing](skills/skill-testing/SKILL.md) | Acceptance-tests any skill with mechanical checks. | After writing or changing a skill, to prove it does what its SKILL.md says. |
 | [skill-auditing](skills/skill-auditing/SKILL.md) | Audits a skills directory for stale format or facts. | Periodically, or when a skill seems outdated. |
-
-## Install
-
-```sh
-npx skills@latest add BCGen/skills
-```
-
-Without the skill-authoring toolchain:
-
-```sh
-npx skills@latest add BCGen/skills -s harness-sync codify retro rule-writing
-```
-
-Update installed skills later (then re-run `harness-sync` to converge
-the managed bits):
-
-```sh
-npx skills@latest update
-```
-
-## Usage
-
-The typical pass:
-
-```mermaid
-flowchart LR
-    A["harness-sync<br/>(optional, wires retro in)"] --> B["codify<br/>(capture conventions)"]
-    B --> C[work]
-    C --> D["retro<br/>(task end)"]
-    D -->|lessons land| C
-```
-
-1. `harness-sync` — optional; wires retro in and unifies agents, re-synced on updates.
-2. `codify` — capture conventions.
-3. Work as usual.
-4. `retro` at each task's end — fires on its own when you wrap up; the
-   loop closes.
-
-## The learning loop
-
-Lessons live in your repo, not in any agent's private memory:
-
-- `.ai/learnings/` — one file per lesson `retro` stages, named by root
-  cause, with a status lifecycle: `candidate` (observing) → `promoted`
-  (fixed somewhere better) → `resolved` (cured — the file is deleted).
-- `.ai/backlog/` — one file per idea worth building later.
-
-Commit both: plain markdown, team-shared through git — a lesson one
-person's agent learns reaches everyone's next session. Entries stay
-blameless (no names; authorship lives in git history).
-
-## Why
-
-Native agent memory is machine-local and never becomes team-shared, and
-rule files that only grow eventually make the agent follow them *less*.
-These skills route each lesson to the mechanism that fits — config, doc,
-or rule — only with your consent, and keep rules under a hard budget, so
-more lessons never mean worse adherence.
-
-Unlike one-shot config generators, these are standalone, consent-gated,
-and write each agent's native format.
 
 ## Contributing
 
