@@ -133,6 +133,25 @@ document where it would write code).
 - neither prompt mentions the draft's required output
 - the exact prompt is shown to the user before dispatch
 
+## Scenario: the request's nouns are pressed
+
+Open with a request that names an artifact and a format ("collect my ideas and produce
+a PRD and a mindmap").
+
+- before the procedure is interrogated, each named noun is offered one concrete
+  alternative with a reason
+- whether the skill opens a space, closes one, or does both as ordered phases is settled
+  in the same pass
+- a premise the user keeps is not raised again
+
+## Scenario: a premise is overturned
+
+Mid-flow, reject a premise the draft was built on.
+
+- the flow returns to the understanding checkpoint
+- the report names which decisions are void and which survive
+- the draft is not silently reshaped to fit the new premise
+
 ## Scenario: a generative interview
 
 Author a skill whose job is to draw out an idea the user has not thought through.

@@ -7,6 +7,8 @@ whatever skill-writing models, the skills it writes reproduce.
 ## Contents
 
 - [Mechanics: true in both modes](#mechanics-true-in-both-modes)
+- [What to establish about a procedure](#what-to-establish-about-a-procedure)
+- [Press the request itself, not only the answers](#press-the-request-itself-not-only-the-answers)
 - [Which mode are you in](#which-mode-are-you-in)
 - [Adversarial: pressing a claim](#adversarial-pressing-a-claim)
 - [Generative: drawing out something half-formed](#generative-drawing-out-something-half-formed)
@@ -45,6 +47,38 @@ precisely, not whether it can be *answered*. Sensing an unresolved area you cann
 yet put into words is normal: park it in a holding list and revisit it when a later
 answer sharpens it. Asking it early returns a vague answer, and a vague answer gets
 treated as settled.
+
+## What to establish about a procedure
+
+The user describes what they do; what they omit is what breaks. Establish, only where
+an answer would change the output:
+
+- A checkable completion criterion for each step.
+- What to do when a precondition is absent (file missing, command fails).
+- Whether a failed step blocks or warns.
+- When the skill should NOT fire.
+- The output artifact's shape — and the name and location of any file it writes.
+- Which tools or data it depends on, and what it does when they are absent.
+- The tacit step: "last time you did this by hand, what did you skip or add from
+  experience?" — the one the agent will get wrong.
+
+## Press the request itself, not only the answers
+
+The rules above will be obeyed against every answer the user gives and still never
+reach the sentence they opened with. A user names the container they know — "a PRD", "a
+mindmap" — and the whole skill gets built around furniture rather than around the job.
+**A question asked inside a premise cannot reach the premise:** "what does the PRD feed"
+presupposes a PRD.
+
+So the nouns of the opening request are pressed first, each with one concrete
+alternative to react against — the same manufactured concreteness, aimed one level up.
+Once. A user who keeps their premise keeps it; the point is that they chose it rather
+than inheriting it from their own first sentence.
+
+The failure that bought this rule: a skill for shaping ideas was interrogated for eight
+questions without one of them touching the PRD, the mindmap, or the output language the
+request had named. The user knocked all three down himself, and the last one exposed a
+contradiction that had been sitting in the opening sentence the whole time.
 
 ## Which mode are you in
 
