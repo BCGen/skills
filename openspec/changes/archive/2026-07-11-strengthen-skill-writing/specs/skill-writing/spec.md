@@ -1,115 +1,6 @@
-# skill-writing Specification
+# skill-writing (delta)
 
-## Purpose
-
-Authoring and editing skills that survive contact with reality — for a
-skills package, a project, or the user's personal setup.
-
-## Requirements
-
-### Requirement: Convention-complete authoring
-
-A skill authored through skill-writing SHALL satisfy the authoring
-standard: frontmatter name equals the directory name; frontmatter carries only
-keys the Agent Skills specification allows; the name is within 64 characters of
-lowercase letters, digits and single interior hyphens, and avoids the platform's
-reserved words; description is a capability sentence plus a "Use when ..."
-sentence within 1024 characters, written in the third person and covering the
-words a user actually says, because an agent under-triggers a narrow
-description; body within 100 lines AND within the platform's 5,000-token instruction budget,
-whichever binds first, so that a body of few but enormous lines cannot evade the
-cap; detail split into references/ that sit one level below SKILL.md, that the
-body says when to read, and that carry a table of contents once a reference file
-passes 100 lines; written in the destination's language;
-original content (no vendoring); scripts only for deterministic operations, and
-a script resolves its own foreseeable errors rather than handing them back;
-instructions state what to do, reserving a prohibition for a guardrail that
-cannot be phrased positively and pairing it with the positive alternative; no
-time-sensitive content; one default approach with an escape hatch rather than a
-menu of options; one term per concept throughout. The conventions SHALL live in
-one references file that other skills (e.g. skill-auditing) can read as the same
-source of truth, and each rule adopted from the platform's published guidance
-SHALL record its source.
-
-#### Scenario: Convention enforcement
-
-- **WHEN** a draft violates any convention (e.g. body over 100 lines)
-- **THEN** skill-writing fixes or flags it before presenting the draft
-
-#### Scenario: Illegal frontmatter key
-
-- **WHEN** a draft carries a frontmatter key outside the allowed set
-- **THEN** skill-writing removes or relocates it before presenting the draft
-
-### Requirement: Naming discipline
-
-Proposed names SHALL follow the conventions' naming philosophy (short,
-apt, gerund for managed-unit tools). A skill that will be published publicly —
-in a package others install — SHALL be collision-checked against the skills.sh
-registry before finalizing, with exact collisions surfaced with install counts
-and alternatives. A skill that will not be published publicly — a private
-package, a project, or a personal setup — SHALL skip the registry entirely
-rather than run a lookup that cannot apply to it, and SHALL rely on the
-duplicate check against skills installed at its destination.
-
-#### Scenario: Collision found
-
-- **WHEN** the proposed name of a skill bound for public publication has an
-  exact match on skills.sh
-- **THEN** the collision is reported with install counts and alternative names offered
-
-#### Scenario: Unpublished skill
-
-- **WHEN** authoring a skill that will not be published publicly
-- **THEN** no registry lookup runs; only clashes with skills already installed at
-  the destination are avoided
-
-### Requirement: Gather, draft, review flow
-
-The skill SHALL gather requirements (task domain, use cases, triggers,
-needed resources) before drafting, and present the draft for user review
-before finalizing. The description's trigger sentence is written from the
-gathered use cases, not invented afterward. Gathering SHALL ask what failure the
-user actually observed without the skill, and the trigger conditions SHALL come
-from that observed failure; when no failure has been seen, skill-writing SHALL
-say the triggers are unverified rather than inventing them.
-
-#### Scenario: Requirements before draft
-
-- **WHEN** the user asks for a new skill with an unstated trigger context
-- **THEN** skill-writing asks for the use cases before producing a draft
-
-#### Scenario: No observed failure
-
-- **WHEN** the user cannot name a failure the agent made without the skill
-- **THEN** skill-writing flags the triggers as unverified and offers to draft
-  from stated use cases instead of inventing them
-
-### Requirement: Destination-aware authoring (delegation target)
-
-skill-writing SHALL establish where a skill lives as part of requirements
-gathering — a package's `skills/`, the host project's skill directory,
-or the user's global skills directory — recommending from context and
-asking one question with a recommended answer when the destination is
-ambiguous. It is the delegation target that codify and retro hand
-multi-step procedures to per the shared routing; a delegated project
-procedure is recommended into that project. The dry-run discipline SHALL hold
-at every destination. The frontmatter description SHALL surface the
-non-package triggers so delegated handoffs reach the skill.
-
-#### Scenario: Delegated handoff lands in the project
-
-- **WHEN** codify or retro hands over a drafted multi-step procedure while
-  working in a host project
-- **THEN** skill-writing authors it in that project's skill directory per
-  the context recommendation, not as an addition to a package
-
-#### Scenario: Ambiguous destination
-
-- **WHEN** the gathered context does not settle where the skill lives
-  (e.g. zero or multiple plausible skill directories)
-- **THEN** skill-writing asks one question with a recommended answer
-  before writing
+## ADDED Requirements
 
 ### Requirement: Carrier gate before drafting
 
@@ -366,3 +257,127 @@ should be committed for the rest of the team.
 - **WHEN** a skill is authored into a host project's skill directory
 - **THEN** the user is told its path, its invocation mode, and that committing it
   shares it with the team
+
+## MODIFIED Requirements
+
+### Requirement: Convention-complete authoring
+
+A skill authored through skill-writing SHALL satisfy the authoring
+standard: frontmatter name equals the directory name; frontmatter carries only
+keys the Agent Skills specification allows; the name is within 64 characters of
+lowercase letters, digits and single interior hyphens, and avoids the platform's
+reserved words; description is a capability sentence plus a "Use when ..."
+sentence within 1024 characters, written in the third person and covering the
+words a user actually says, because an agent under-triggers a narrow
+description; body within 100 lines AND within the platform's 5,000-token instruction budget,
+whichever binds first, so that a body of few but enormous lines cannot evade the
+cap; detail split into references/ that sit one level below SKILL.md, that the
+body says when to read, and that carry a table of contents once a reference file
+passes 100 lines; written in the destination's language;
+original content (no vendoring); scripts only for deterministic operations, and
+a script resolves its own foreseeable errors rather than handing them back;
+instructions state what to do, reserving a prohibition for a guardrail that
+cannot be phrased positively and pairing it with the positive alternative; no
+time-sensitive content; one default approach with an escape hatch rather than a
+menu of options; one term per concept throughout. The conventions SHALL live in
+one references file that other skills (e.g. skill-auditing) can read as the same
+source of truth, and each rule adopted from the platform's published guidance
+SHALL record its source.
+
+#### Scenario: Convention enforcement
+
+- **WHEN** a draft violates any convention (e.g. body over 100 lines)
+- **THEN** skill-writing fixes or flags it before presenting the draft
+
+#### Scenario: Illegal frontmatter key
+
+- **WHEN** a draft carries a frontmatter key outside the allowed set
+- **THEN** skill-writing removes or relocates it before presenting the draft
+
+### Requirement: Gather, draft, review flow
+
+The skill SHALL gather requirements (task domain, use cases, triggers,
+needed resources) before drafting, and present the draft for user review
+before finalizing. The description's trigger sentence is written from the
+gathered use cases, not invented afterward. Gathering SHALL ask what failure the
+user actually observed without the skill, and the trigger conditions SHALL come
+from that observed failure; when no failure has been seen, skill-writing SHALL
+say the triggers are unverified rather than inventing them.
+
+#### Scenario: Requirements before draft
+
+- **WHEN** the user asks for a new skill with an unstated trigger context
+- **THEN** skill-writing asks for the use cases before producing a draft
+
+#### Scenario: No observed failure
+
+- **WHEN** the user cannot name a failure the agent made without the skill
+- **THEN** skill-writing flags the triggers as unverified and offers to draft
+  from stated use cases instead of inventing them
+
+### Requirement: Naming discipline
+
+Proposed names SHALL follow the conventions' naming philosophy (short,
+apt, gerund for managed-unit tools). A skill that will be published publicly —
+in a package others install — SHALL be collision-checked against the skills.sh
+registry before finalizing, with exact collisions surfaced with install counts
+and alternatives. A skill that will not be published publicly — a private
+package, a project, or a personal setup — SHALL skip the registry entirely
+rather than run a lookup that cannot apply to it, and SHALL rely on the
+duplicate check against skills installed at its destination.
+
+#### Scenario: Collision found
+
+- **WHEN** the proposed name of a skill bound for public publication has an
+  exact match on skills.sh
+- **THEN** the collision is reported with install counts and alternative names offered
+
+#### Scenario: Unpublished skill
+
+- **WHEN** authoring a skill that will not be published publicly
+- **THEN** no registry lookup runs; only clashes with skills already installed at
+  the destination are avoided
+
+### Requirement: Destination-aware authoring (delegation target)
+
+skill-writing SHALL establish where a skill lives as part of requirements
+gathering — a package's `skills/`, the host project's skill directory,
+or the user's global skills directory — recommending from context and
+asking one question with a recommended answer when the destination is
+ambiguous. It is the delegation target that codify and retro hand
+multi-step procedures to per the shared routing; a delegated project
+procedure is recommended into that project. The dry-run discipline SHALL hold
+at every destination. The frontmatter description SHALL surface the
+non-package triggers so delegated handoffs reach the skill.
+
+#### Scenario: Delegated handoff lands in the project
+
+- **WHEN** codify or retro hands over a drafted multi-step procedure while
+  working in a host project
+- **THEN** skill-writing authors it in that project's skill directory per
+  the context recommendation, not as an addition to a package
+
+#### Scenario: Ambiguous destination
+
+- **WHEN** the gathered context does not settle where the skill lives
+  (e.g. zero or multiple plausible skill directories)
+- **THEN** skill-writing asks one question with a recommended answer
+  before writing
+
+## REMOVED Requirements
+
+### Requirement: Acceptance scaffold and handoff
+
+**Reason**: The dry run replaces it as skill-writing's correctness check, and
+replaces it with something stronger: a real run that exposes where the agent had
+to improvise, instead of a set of grep checks imagined before anything ran.
+Authoring a test plan that the author will not run — the common case at a project
+or personal destination — produced a file that rotted, and it made the most
+decisive step in the flow depend on a sibling skill being installed. skill-writing
+is now self-contained: it runs its own draft and needs no sibling.
+
+**Migration**: skill-testing remains a standalone skill and keeps sole ownership
+of repeatable acceptance and regression checks for any skill, authored here or
+not. Invoke it directly when a skill needs a durable test plan; this repo's
+own `tests/<name>/README.md` plans are authored and run through it. skill-writing
+mentions it once at close-out and does not call it.

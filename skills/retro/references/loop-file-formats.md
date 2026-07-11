@@ -6,6 +6,12 @@ lesson or idea — new entries create new files, so concurrent work never
 merge-conflicts; editing the *same* lesson collides on the same file,
 which is the one conflict worth a human look.
 
+## Contents
+
+- [Ownership: retro creates and reconciles these](#ownership-retro-creates-and-reconciles-these)
+- [`.ai/learnings/` — staged lesson candidates](#ailearnings--staged-lesson-candidates)
+- [`.ai/backlog/` — pre-proposal ideas](#aibacklog--pre-proposal-ideas)
+
 ## Ownership: retro creates and reconciles these
 
 retro owns both directories. It creates a directory and its README (from the

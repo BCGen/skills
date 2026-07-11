@@ -2,6 +2,17 @@
 
 Templates and tables for initializing a project's AI instruction surface.
 
+## Contents
+
+- [Detection](#detection)
+- [Targets per agent](#targets-per-agent)
+- [Managed harness block (entry file)](#managed-harness-block-entry-file)
+- [Loop directories — not harness-sync's to create](#loop-directories--not-harness-syncs-to-create)
+- [Entry-file content policy (near-empty baseline)](#entry-file-content-policy-near-empty-baseline)
+- [Idempotency algorithm](#idempotency-algorithm)
+- [Framework coexistence](#framework-coexistence)
+- [Out of scope — never touch](#out-of-scope--never-touch)
+
 ## Detection
 
 | Artifact found | Meaning |

@@ -8,6 +8,19 @@ checkup) so the decision is identical whoever reaches it.
 Success is the RIGHT mechanism, not "N rules created" — routing most things
 to config/docs/nothing is correct.
 
+## Contents
+
+- [Authority order](#authority-order)
+- [Probe preset-extended configs before deciding "already enforced"](#probe-preset-extended-configs-before-deciding-already-enforced)
+- [Routing table](#routing-table)
+- [Output boundary (produce vs point at)](#output-boundary-produce-vs-point-at)
+- [Reconciliation: respect an existing placement first](#reconciliation-respect-an-existing-placement-first)
+- [Evidence-bounded mechanism upgrade](#evidence-bounded-mechanism-upgrade)
+- [Judgment conventions: doc first, rule last](#judgment-conventions-doc-first-rule-last)
+- [Placement by loading: single source in a surface that actually loads](#placement-by-loading-single-source-in-a-surface-that-actually-loads)
+- [Conflict handling](#conflict-handling)
+- [Delegation](#delegation)
+
 ## Authority order
 
 When sources disagree: explicit config files (commitlint, eslint, tsconfig,

@@ -28,7 +28,7 @@ severity and the evidence or source for each.
 ### Requirement: Generic target
 
 The skill SHALL default to auditing the current project's installed
-skills and accept any directory path, including this collection's own
+skills and accept any directory path, including this repo's own
 `skills/`.
 
 #### Scenario: Explicit path

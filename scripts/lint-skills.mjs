@@ -1,7 +1,8 @@
 #!/usr/bin/env node
 // Zero-dependency lint for skills/*/SKILL.md per openspec repo-quality-checks.
-// Checks: frontmatter parses; name == directory; description shape and length;
-// body line cap; no CJK characters in any skills/**/*.md.
+// Checks: frontmatter keys and name rules per the Agent Skills spec; name ==
+// directory; description shape, length and angle brackets; body line and token
+// caps; reference depth and table of contents; no CJK in any skills/**/*.md.
 
 import { readdirSync, readFileSync, existsSync, statSync } from "node:fs";
 import { join, relative } from "node:path";
@@ -9,7 +10,20 @@ import { join, relative } from "node:path";
 const ROOT = new URL("..", import.meta.url).pathname;
 const SKILLS_DIR = join(ROOT, "skills");
 const BODY_LINE_CAP = 100;
+const BODY_TOKEN_CAP = 5000; // platform instruction budget; ~4 chars per token
 const DESCRIPTION_MAX = 1024;
+const NAME_MAX = 64;
+const REFERENCE_TOC_LINES = 100;
+// Agent Skills spec: any other key is a validation error.
+const ALLOWED_KEYS = new Set([
+  "name",
+  "description",
+  "license",
+  "allowed-tools",
+  "metadata",
+  "compatibility",
+  "disable-model-invocation", // Claude Code
+]);
 const CJK_RE = /[぀-ヿ㐀-䶿一-鿿가-힯豈-﫿]/u;
 
 const violations = [];
@@ -60,8 +74,21 @@ for (const dir of skillDirs) {
   }
   const { fields, body } = parsed;
 
+  for (const key of Object.keys(fields))
+    if (!ALLOWED_KEYS.has(key))
+      fail(skillFile, `frontmatter key "${key}" is not in the allowed set`);
+
   if (fields.name !== dir)
     fail(skillFile, `frontmatter name "${fields.name}" != directory "${dir}"`);
+  else if (
+    fields.name.length > NAME_MAX ||
+    !/^[a-z0-9]+(-[a-z0-9]+)*$/.test(fields.name) ||
+    /anthropic|claude/.test(fields.name)
+  )
+    fail(
+      skillFile,
+      `name "${fields.name}" breaks the spec (<=${NAME_MAX} chars, lowercase, single interior hyphens, no reserved words)`
+    );
 
   const desc = fields.description;
   if (!desc) fail(skillFile, "description missing");
@@ -70,11 +97,33 @@ for (const dir of skillDirs) {
       fail(skillFile, `description ${desc.length} chars (max ${DESCRIPTION_MAX})`);
     if (!/\bUse when\b/.test(desc))
       fail(skillFile, 'description lacks "Use when ..." trigger sentence');
+    if (/[<>]/.test(desc))
+      fail(skillFile, "description contains angle brackets");
   }
 
   const bodyLines = body.split("\n").length;
   if (bodyLines > BODY_LINE_CAP)
     fail(skillFile, `body ${bodyLines} lines (cap ${BODY_LINE_CAP})`);
+
+  // A line cap alone does not bound context while line width is unlimited.
+  const bodyTokens = Math.ceil(body.length / 4);
+  if (bodyTokens > BODY_TOKEN_CAP)
+    fail(skillFile, `body ~${bodyTokens} tokens (cap ${BODY_TOKEN_CAP})`);
+
+  const refsDir = join(SKILLS_DIR, dir, "references");
+  if (existsSync(refsDir)) {
+    for (const entry of readdirSync(refsDir)) {
+      const refPath = join(refsDir, entry);
+      if (statSync(refPath).isDirectory()) {
+        fail(refPath, "references sit one level below SKILL.md — no subdirectories");
+        continue;
+      }
+      if (!entry.endsWith(".md")) continue;
+      const lines = readFileSync(refPath, "utf8").split("\n").length;
+      if (lines > REFERENCE_TOC_LINES && !/^##+ Contents$/m.test(readFileSync(refPath, "utf8")))
+        fail(refPath, `${lines} lines without a "## Contents" table of contents`);
+    }
+  }
 }
 
 for (const file of walkMarkdown(SKILLS_DIR)) {

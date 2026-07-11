@@ -94,7 +94,7 @@ When detection (presence of `.claude/`, `.cursor/`, `AGENTS.md`) finds zero or m
 The entry file SHALL contain a marker-managed block of at most 3 lines
 declaring the harness loop: the run-retro-at-task-end directive and the
 `.ai/learnings/` / `.ai/backlog/` locations. The install command is not
-part of the block — the collection README carries install discovery. When a
+part of the block — the package README carries install discovery. When a
 thin `@AGENTS.md` shim is used, the block lives in `AGENTS.md` and the
 `CLAUDE.md` requirement to "contain" it is satisfied by the `@AGENTS.md`
 import — the block is never duplicated into the shim.

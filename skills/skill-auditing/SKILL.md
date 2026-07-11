@@ -13,7 +13,7 @@ are facts.
 
 Default to the current project's installed skills (`.claude/skills/`,
 `.agents/skills/`, or the repo's `skills/`). Accept any directory path the
-user names, including a collection repo's own `skills/`.
+user names, including a skills package's own `skills/`.
 
 ## Step 2 — Format layer (offline)
 
