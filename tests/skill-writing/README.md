@@ -97,6 +97,49 @@ other than English.
 - the authored SKILL.md is written in that language; no English is imposed
 - no language question is asked (the evidence settled it)
 
+## Scenario: the skill produces a named artifact
+
+Request a skill that writes a file whose name and location must be decided (e.g. a
+PRD under `docs/`).
+
+- the artifact's name is settled with the output-shape question, the skill's own
+  name after the draft, and no single turn holds both
+- each naming question says which of the two it is deciding
+
+## Scenario: an installed skill does one step better
+
+Preseed the destination with a skill that performs one step of the requested job
+better than a naive draft would (e.g. an interview skill, for a skill whose first
+step is interviewing the user).
+
+- it is named to the user, with a reason, and recommended as the control
+- the user settles the choice; the report does not present it as already decided
+- its SKILL.md is never read into the authoring session
+
+## Scenario: no overlap found
+
+Request a skill in a destination whose installed skills touch none of its steps.
+
+- the report states how many installed skills were read
+- it notes the user may name a control
+- it proceeds with the naked agent without blocking on an answer
+
+## Scenario: the prompt carries no answers
+
+Request a skill whose output the base agent would not produce unprompted (a
+document where it would write code).
+
+- the dry-run prompt is the user's own words, verbatim
+- neither prompt mentions the draft's required output
+- the exact prompt is shown to the user before dispatch
+
+## Scenario: a fork exists
+
+Request a skill where one decision constrains several others.
+
+- the first question is that fork, and it states what it settles
+- the recommendation carries its reason, not just a label
+
 ## Scenario: ambiguous destination
 
 A bare host project — no `.claude/`, no `.agents/`, no `skills/`. The run prompt

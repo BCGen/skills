@@ -16,6 +16,7 @@ repo's CI.
 - [Language](#language)
 - [Writing](#writing)
 - [Naming](#naming)
+- [High stakes](#high-stakes)
 - [Scripts](#scripts)
 - [Originality](#originality)
 - [Toolchain awareness](#toolchain-awareness-this-packages-skills-only)
@@ -109,6 +110,12 @@ that writes in another language is the tool overriding the project.
 
 ## Naming
 
+A name needs a shape, so it is settled after the draft, not before. Two names may
+be in play and they are different decisions — keep them in different turns, and say
+which one a question is deciding.
+
+**The skill's name** answers to the registry:
+
 - Short and apt. Two deliberate styles coexist: **gerund** (`skill-writing`,
   `rule-writing`) for managed-unit tools; **short names** (`retro`) for standalone
   acts. Pick the family the skill belongs to.
@@ -117,8 +124,20 @@ that writes in another language is the tool overriding the project.
 - A skill that will be **published publicly** is also collision-checked against
   the registry before finalizing: `npx skills find "<name>"`, looking for an exact
   `@<name>` match; report a collision with its install count and offer
-  alternatives. A skill that will not be published — a private package, a project,
-  a personal setup — skips the registry, which cannot apply to it.
+  alternatives that have themselves been checked. A skill that will not be
+  published — a private package, a project, a personal setup — skips the registry,
+  which cannot apply to it.
+
+**The artifact's name** — the file a skill writes — answers to the user's project.
+Its name and location are settled with the output-shape question, under the
+project's conventions, and never in the same turn as the skill's own name.
+
+## High stakes
+
+A skill whose wrong answer carries legal, financial, or destructive consequence
+states its sources, is permitted to report that it does not know, and returns the
+judgment to a human rather than asserting. A confident wrong answer is the failure
+mode, and confidence is the default.
 
 ## Scripts
 
