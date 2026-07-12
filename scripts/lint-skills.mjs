@@ -30,18 +30,39 @@ const violations = [];
 const fail = (file, msg) => violations.push(`${relative(ROOT, file)}: ${msg}`);
 
 // Minimal frontmatter parser: leading --- block of simple `key: value` pairs.
+// Indented lines are collected into `nested` under their parent key, so a skill can
+// declare its always-read references and instruction budget under `metadata`.
 // Returns null when the block is missing or malformed.
 function parseFrontmatter(text) {
   const m = text.match(/^---\n([\s\S]*?)\n---\n?/);
   if (!m) return null;
   const fields = {};
+  const nested = {};
+  let parent = null;
   for (const line of m[1].split("\n")) {
-    if (line.trim() === "" || /^\s/.test(line)) continue; // nested keys ignored
+    if (line.trim() === "") continue;
+    if (/^\s/.test(line)) {
+      const kv = line.trim().match(/^([A-Za-z][\w-]*):\s*(.*)$/);
+      if (kv && parent) (nested[parent] ??= {})[kv[1]] = kv[2].replace(/^["']|["']$/g, "");
+      continue;
+    }
     const kv = line.match(/^([A-Za-z][\w-]*):\s*(.*)$/);
     if (!kv) return null;
     fields[kv[1]] = kv[2].replace(/^["']|["']$/g, "");
+    parent = kv[1];
   }
-  return { fields, body: text.slice(m[0].length) };
+  return { fields, nested, body: text.slice(m[0].length) };
+}
+
+// A CJK character is roughly one token; Latin text is roughly four characters per token.
+// Estimating everything at chars/4 under-counts a Chinese skill four- to six-fold, which
+// would make an instruction budget unenforceable at exactly the destinations that have no
+// linter of their own.
+const CJK_GLOBAL_RE = /[぀-ヿ㐀-䶿一-鿿가-힯豈-﫿]/gu;
+function estimateTokens(text) {
+  const cjk = (text.match(CJK_GLOBAL_RE) || []).length;
+  const rest = text.length - cjk;
+  return Math.ceil(cjk + rest / 4);
 }
 
 function* walkMarkdown(dir) {
@@ -72,7 +93,7 @@ for (const dir of skillDirs) {
     fail(skillFile, "frontmatter missing or unparseable");
     continue;
   }
-  const { fields, body } = parsed;
+  const { fields, nested, body } = parsed;
 
   for (const key of Object.keys(fields))
     if (!ALLOWED_KEYS.has(key))
@@ -106,9 +127,37 @@ for (const dir of skillDirs) {
     fail(skillFile, `body ${bodyLines} lines (cap ${BODY_LINE_CAP})`);
 
   // A line cap alone does not bound context while line width is unlimited.
-  const bodyTokens = Math.ceil(body.length / 4);
+  const bodyTokens = estimateTokens(body);
   if (bodyTokens > BODY_TOKEN_CAP)
     fail(skillFile, `body ~${bodyTokens} tokens (cap ${BODY_TOKEN_CAP})`);
+
+  // Total instruction budget. The body cap alone rewards moving text into a reference
+  // rather than removing it: a reference the flow always reads is part of the instruction
+  // surface whether or not it sits in SKILL.md. A skill declares what it always reads, and
+  // its budget, under frontmatter `metadata`. A reference read only on a branch is free.
+  const meta = nested.metadata ?? {};
+  const budget = Number(meta["instruction-budget"]);
+  if (budget > 0) {
+    const always = (meta["always-read"] ?? "")
+      .split(",")
+      .map((s) => s.trim())
+      .filter(Boolean);
+    let total = bodyTokens;
+    for (const rel of always) {
+      const refPath = join(SKILLS_DIR, dir, rel);
+      if (!existsSync(refPath)) {
+        fail(skillFile, `metadata.always-read names "${rel}", which does not exist`);
+        continue;
+      }
+      total += estimateTokens(readFileSync(refPath, "utf8"));
+    }
+    if (total > budget)
+      fail(
+        skillFile,
+        `instruction surface ~${total} tokens over its declared budget of ${budget} ` +
+          `(body + ${always.length} always-read reference(s)) — moving text into a reference does not shrink it`
+      );
+  }
 
   const refsDir = join(SKILLS_DIR, dir, "references");
   if (existsSync(refsDir)) {

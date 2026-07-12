@@ -1,142 +1,109 @@
-# Running the draft before trusting it
+# Running the draft before you trust it
 
-How to run Step 8, and how to read what comes back.
+An interview surfaces only the gaps the user knows about. Whether the agent invents a
+threshold nobody gave it appears on a run and nowhere else.
 
 ## Contents
 
-- [Why a run, and not an interview](#why-a-run-and-not-an-interview)
-- [Match the method to the skill's shape](#match-the-method-to-the-skills-shape)
+- [The control depends on the path](#the-control-depends-on-the-path)
 - [Choosing the control](#choosing-the-control)
-- [Keeping the test honest](#keeping-the-test-honest)
+- [Method by shape](#method-by-shape)
+- [Keeping it honest](#keeping-it-honest)
 - [Reading the result](#reading-the-result)
 - [When a gap will not close](#when-a-gap-will-not-close)
 
-## Why a run, and not an interview
+## The control depends on the path
 
-An interview surfaces only the gaps the user knows about. The ones that matter — what
-happens when the file is missing, whether the agent invents a threshold nobody gave
-it — appear on a run and nowhere else.
+**A new skill** runs against the strongest alternative the user already has. *Better than
+nothing* is a bar it clears by existing; *better than what I already have* is the bar that
+decides whether it should exist.
 
-A scenario qualifies only if the user says it has actually happened or is about to.
-An imagined edge case is not worth plugging, and plugging it lengthens and blunts
-the skill. Ask for one in plain words — never recite this rule at the user.
+**An edit runs against the skill as it stood before the edit**, on the scenario the edit was
+written to fix.
 
-**A scenario is a use of the skill, never the request that asked for it.** "Write me
-a skill that turns an inspiration into a PRD" is the specification; the scenario is
-an inspiration the user has actually had. Nothing is derived from the request
-either: material built from the specification tests the draft against the drafter's
-own understanding, and that test cannot fail. When the user has no real case to
-offer, say the draft is unverified — do not invent one.
+This is the whole point. Comparing an edited skill to a naked agent re-asks a question settled
+at birth — and the skill already won it — so **every edit passes a test it cannot fail**. That
+is how an instruction surface doubles while every step stays legal.
 
-## Match the method to the skill's shape
+> **Behavior unchanged on its own scenario ⇒ the edit taught nothing ⇒ it does not land.**
 
-**A skill that transforms an input into an output**, with no human in the loop:
-give the draft to a fresh-context subagent, and run a control. Up to three
-scenarios — the main path (always), a missing precondition, and one where the skill
-should not fire (the last two for a high-stakes skill). Three is the cap; beyond it
-lies an eval harness, which this skill deliberately does not build.
-
-**A skill whose job is to elicit from a human**: the user tests it, **in a fresh
-session**, and no subagent is used. A subagent has nobody to ask, so it plays both
-sides, and an interview with an invented user tests nothing.
-
-The fresh session is the whole point. This session knows the answers — it wrote the
-draft and heard every answer the user gave — so a run here is completed from memory,
-and the sentences SKILL.md forgot to write get supplied by a context the real user
-will never have. A skill is only tested where nothing is remembered.
-
-So hand it over:
-
-1. **Write the draft to its destination** so it can be invoked by name.
-2. **Ask the user to run it in a new session, on a real case**, and to bring back
-   what went wrong — a question that was blunt, an artifact that smuggled in a
-   technical solution, a diagram that would not render. A live run exercises the
-   whole skill: the artifact is written at the end of the same conversation, so they
-   see the questions and the output.
-3. **Amend from what they bring back, and hand it over again.**
-
-Mechanical checks run against the artifact that session produced — a diagram that
-does not parse, a document carrying vocabulary the skill forbids. No subagent is
-needed to see that.
+The scenario is chosen by the edit's purpose, so it necessarily exercises the edit.
 
 ## Choosing the control
 
-The control is the strongest alternative the user actually has — not nothing.
-"Better than nothing" is a bar the skill clears by existing; "better than what I
-already have" is the bar that decides whether it should exist.
+Read the **descriptions** of what is installed — never a body — and look for one that performs
+a step of the draft. A body read into this session poisons three things: the draft starts
+echoing its wording, which is vendoring; the control stops being a control, having already been
+absorbed; and the context grows for nothing. The control runs as a subagent that loads the
+skill itself; only its output returns.
 
-Read the **descriptions** of the skills installed at the destination and look for
-one that performs a step of the draft. Overlap at the level of the whole job is
-what the duplicate check catches; overlap at the level of a single step is not, and
-it is the common case — a skill can do one of the drafted steps far better while
-doing nothing else the draft does.
+**The duplicate candidate and the control may be the same skill.** Say so — if it wins, the
+draft is the duplicate the check suspected.
 
-**Propose, do not decide.** The agent weighing an installed skill against the draft
-is the agent that just wrote the draft: name the candidate, say why it overlaps,
-recommend it, and let the user settle it.
+**Propose, do not decide.** The agent weighing an installed skill against the draft just wrote
+the draft. Name the candidate, say why it overlaps, recommend it, let the user settle it. When
+nothing overlaps, say how far you looked, note they may name a control themselves (it need not
+be a skill), and proceed with the naked agent rather than blocking.
 
-**For a skill the user tests live, the control is theirs to run too** — an interview
-cannot be conducted by a subagent either. Offer it once, with the candidate and the
-reason ("you have `<skill>` installed, and it already does this step; give it the same
-opening and compare"), then drop it. Whether a second session is worth their time is
-their call, not yours. The candidate is whatever the scan of installed skills found —
-never a name written into this file.
+The draft is held to the control's standard; it does not call out to it. An installed skill
+cannot be assumed present wherever the authored skill later runs.
 
-When nothing overlaps, say how far you looked ("I read the descriptions of the 12
-skills installed here; none touches these steps"), note that the user may name a
-control themselves, and proceed with the naked agent — do not block on the answer.
-A user-named control need not be a skill; it may be whatever they do today. If they
-name a skill that is not installed, say so; do not recommend installing it.
+## Method by shape
 
-The draft is held to the control's standard. It does not call out to it — an
-installed skill cannot be assumed present wherever the authored skill later runs.
+**Input → output, no human in the loop**: a fresh-context subagent, plus the control. Up to
+three scenarios — main path always; a missing precondition and a should-not-fire only when the
+stakes are high.
 
-## Keeping the test honest
+**A skill whose job is to elicit from a human**: **the user tests it, in a fresh session**. No
+subagent — it has nobody to ask, so it plays both sides, and an interview with an invented user
+tests nothing. Write the draft to its destination, ask them to run it on a real case and bring
+back what broke, amend, hand it back. Their control is theirs to run too: offer it once, then
+drop it.
 
-**Read descriptions, never bodies.** A control skill's SKILL.md is never read into
-the authoring session. It poisons three things at once: the draft starts echoing
-its wording, which is vendoring; the control stops being a control, because the
-draft has already absorbed what it was meant to be measured against; and the
-context grows for nothing. The control runs as a subagent that loads the skill
-itself — only its output comes back. Learning from what a skill does is not
-vendoring; copying what it says is.
+The fresh context is the point. This session heard every answer, so a run here is completed
+from memory, and the sentences SKILL.md forgot get supplied by a context the real user will
+never have.
 
-**The prompt carries no answers.** Use the user's own words for the scenario,
-verbatim. Give the control a prompt identical to the skilled run's — the draft's
-presence is the only difference. Keep the draft's requirements and success criteria
-out of both: they exist to judge the output, and putting them in the prompt hands
-them to the control, which then passes a test it should have failed. Show the user
-the exact prompt before sending it.
+**The scenario is a use of the skill, never the request that asked for it.** "Write me a skill
+that turns an inspiration into a PRD" is the specification; the scenario is an inspiration they
+actually had. Material derived from the specification tests the draft against the drafter's own
+understanding — a test that cannot fail. No real case → say the draft is unverified. Do not
+invent one.
+
+## Keeping it honest
+
+**The prompt carries no answers.** The user's own words, verbatim. The control's prompt is
+identical — the draft's presence is the only difference. Keep the draft's requirements and
+success criteria out of both: they exist to judge the output, and in the prompt they hand the
+control a test it should have failed. Show the user the exact prompt first.
+
+**Run the same input twice.** A difference in the output is an underspecification in the draft,
+not an error by the model.
 
 ## Reading the result
 
-Show the user what the agent actually produced — the raw output, not a pass/fail
-verdict. This is not a presentation preference: the agent grading these runs wrote
-the draft, and that bias has no cheap fix short of the eval harness we are not
-building. Putting the raw output in front of the user is the safeguard.
+Show the **raw output**, not a verdict. The agent grading these runs wrote the draft, and that
+bias has no cheap fix.
 
-- **Where the skilled run improvised** — invented an assumption, hesitated, asked a
-  question the skill should have answered — each point marks a sentence SKILL.md
-  failed to say. Improvisation on something immaterial (a variable name) is
+- **Where the skilled run improvised** — an invented assumption, a question the skill should
+  have answered — each marks a sentence SKILL.md failed to write. Immaterial improvisation is
   reported and does not block.
-- **What the control got wrong** is exactly what the skill has to teach. Anything in
-  the draft the control already did right is padding — cut it.
-- **A control that does as well** means the skill may not need to exist. Say so
-  before finalizing; a skill nobody needed still spends context every turn.
+- **What the control got wrong** is what the skill has to teach.
+- **What the control got right, the draft need not say.** Every step it performed correctly
+  without being told is padding — cut it. This signal is free; no extra run buys it.
+- **A control that does as well means the skill may not need to exist.** Say so before
+  finalizing.
 
 ## When a gap will not close
 
-Amend and re-run. After two amendments on the same gap, stop — that gap is not one
-more sentence away, and adding sentences makes a skill longer and blunter without
-fixing it. Put three exits to the user:
+Amend and re-run, capped at two further runs on the same gap. Past that it is not one sentence
+away, and more sentences make a skill longer and blunter without fixing it. Put three exits:
 
-1. **Narrow the skill.** Drop the branch the agent keeps improvising on, or split
-   it into its own skill. The result is a smaller skill, so the amendment count
-   starts over.
-2. **Turn the gap into an explicit handoff.** The skill states that on reaching
-   this situation the agent stops and asks. The hole becomes handled: the agent no
-   longer guesses.
-3. **Abandon the skill.** The evidence now says what the carrier gate suspected.
+1. **Narrow it** — drop the branch it keeps improvising on, or split it out. Smaller skill, so
+   the count starts over.
+2. **Make the gap an explicit handoff** — the skill says that here, the agent stops and asks.
+   The hole becomes handled.
+3. **Abandon it** — the evidence now says what the decomposition suspected.
 
-A limitation the user accepts is written into the skill itself. Left in the
-conversation, it is forgotten by the next session and the agent guesses anyway.
+A limitation the user accepts is written into the skill. Left in the conversation it is
+forgotten, and the next agent guesses anyway.

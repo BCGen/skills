@@ -1,29 +1,16 @@
 # Authoring conventions
 
-The single source of truth for the conventions skill-writing enforces and
-skill-auditing's format layer checks against — the same standard wherever a skill
-lives: a package, a project, or the user's personal setup. Rules marked
-_(platform)_ are the Agent Skills platform's own published rules, adopted here
-rather than invented; see Sources. The lint-enforcement notes apply within this
-repo's CI.
+The source of truth skill-writing enforces and skill-auditing's format layer checks
+against — the same standard in a package, a project, or a personal setup. Rules marked
+_(platform)_ are the Agent Skills platform's own; see Sources.
 
-## Contents
+## The absolute rules
 
-- [Frontmatter](#frontmatter)
-- [Invocation mode](#invocation-mode)
-- [Body](#body)
-- [References](#references)
-- [Language](#language)
-- [Writing](#writing)
-- [Naming](#naming)
-- [High stakes](#high-stakes)
-- [Scripts](#scripts)
-- [Originality](#originality)
-- [No third-party names in runtime text](#no-third-party-names-in-runtime-text)
-- [Toolchain awareness](#toolchain-awareness-this-packages-skills-only)
-- [Sources](#sources)
+No reason is written for these: you never weigh whether to comply, so a reason would spend
+context and teach nothing.
 
-## Frontmatter
+Where a validator exists, RUN it rather than check by eye (`pnpm lint` here; `skills-ref
+validate <dir>` where Python is available). Neither is guaranteed, so these still stand alone.
 
 ```yaml
 ---
@@ -32,168 +19,68 @@ description: <capability sentence>. Use when <trigger conditions>.
 ---
 ```
 
-- Only these keys are valid _(platform)_: `name`, `description`, `license`,
-  `allowed-tools`, `metadata`, `compatibility`. Any other key is a validation
-  error. `disable-model-invocation` is a Claude Code key — write it only when the
-  destination is a Claude Code skill directory.
-- `name` MUST equal the skill's directory name (lint enforces), stay within 64
-  characters of lowercase letters, digits and single interior hyphens, and avoid
-  the reserved words `anthropic` and `claude` _(platform)_.
-- `description` ≤ 1024 characters, no angle brackets, written in the third person
-  _(platform)_ — it is injected into the system prompt, and a first-person
-  description confuses the invocation decision. Two parts: a capability sentence
-  (what it does), then a sentence starting "Use when ..." naming the triggers.
-- Write the triggers WIDE _(platform)_. An agent under-triggers a skill, so cover
-  the words a user actually says — in the language they say them — rather than a
-  tidy phrasing nobody types. This string is the entire storefront and the only
-  thing the agent sees when deciding to invoke.
+- Frontmatter keys, and no others _(platform)_: `name`, `description`, `license`,
+  `allowed-tools`, `metadata`, `compatibility`. `disable-model-invocation` is Claude Code's
+  — write it only at a Claude Code destination.
+- `name` = directory name; ≤ 64 chars; lowercase, digits, single interior hyphens; never
+  `anthropic` or `claude` _(platform)_.
+- `description` ≤ 1024 chars, third person, no angle brackets, a capability sentence plus a
+  "Use when ..." sentence _(platform)_.
+- Body ≤ 100 lines, and within the total instruction budget.
+- References one level below SKILL.md _(platform)_; past 100 lines a reference carries a
+  table of contents _(platform)_.
+- Every step ends on a criterion that can be checked.
+- Forward slashes _(platform)_. Nothing time-sensitive _(platform)_. One term per concept
+  _(platform)_. One default and one escape hatch, not a menu _(platform)_. Say what to do;
+  a prohibition is a last resort, paired with the positive alternative.
+- Say whether a file is RUN or READ _(platform)_.
+- Consent uses the platform's option prompt where it has one (Claude Code:
+  AskUserQuestion).
 
-## Invocation mode
+## The judgments
 
-A model-invoked skill's description sits in the agent's context every turn, drawn
-from a budget shared by every installed skill. Choose the mode; do not inherit the
-default.
+A reason is only worth its tokens where you are deciding something.
 
-- The agent, or a sibling skill, must reach it unaided → keep it model-invoked and
-  let the description carry the triggers.
-- It only ever fires by hand → `disable-model-invocation: true`. It pays no
-  standing cost, and its description becomes a human-facing one-liner.
+**Triggers go WIDE** _(platform)_ — the description is the whole storefront and the only
+thing seen when deciding to invoke. Cover the words a user actually says, in the language
+they say them.
 
-## Body
+**Choose the invocation mode.** A model-invoked description sits in context every turn, from
+a budget shared by every installed skill. Reachable by the agent or a sibling → model-invoked.
+Only ever by hand → `disable-model-invocation: true`, and it costs nothing.
 
-- ≤ 100 lines AND within the platform's 5,000-token instruction budget
-  _(platform)_ — whichever binds first. A body of few enormous lines still costs
-  context; the line cap alone does not bound it.
-- Each step ends on a completion criterion that can be checked. A step nobody can
-  tell is finished is a step nobody thought through.
-- Consent moments ask with the platform's option-prompt tool when it has one
-  (Claude Code: AskUserQuestion); a plain question otherwise.
+**Write in the destination's language.** Infer it from the destination's docs, rules, and
+comments; ask once when the evidence is absent or contradictory. English is a default only
+when nothing indicates otherwise — imposing it on a team that writes otherwise is the tool
+overriding the project. (This package is English-only; that is a rule of this destination,
+not of authoring.)
 
-## References
+**A skill whose wrong answer is legal, financial, or destructive** states its sources, may
+report that it does not know, and returns the judgment to a human. A confident wrong answer
+is the failure mode, and confidence is the default.
 
-- Push detail into `references/*.md` and link to it. Keep every reference ONE
-  level below SKILL.md _(platform)_ — a chain of references makes the agent
-  preview a file and act on half of it.
-- SKILL.md says WHEN to read each reference. A reference nobody is told to open
-  never enters context.
-- A reference past 100 lines carries a table of contents _(platform)_.
+**Scripts encode determinism, never judgment** — parsing, counting, mechanical transforms. A
+script solves the errors it can foresee rather than handing them back _(platform)_, and
+carries no unexplained constants _(platform)_: if you cannot say why the timeout is 47,
+neither can the model.
 
-## Language
+**Write only what changes behavior** _(platform)_. A line the model would follow anyway
+spends context, teaches nothing, and blunts the lines that do. The only reliable test is to
+remove it and re-run — see [dry-run.md](dry-run.md).
 
-A skill is written in the language its destination already uses.
+**Absorb ideas; author all text.** Never copy another skill's wording; never vendor one in as
+ours. Citing a platform rule is not vendoring.
 
-- A project: infer from what the project writes — documentation, existing skills
-  and rules, code comments. Ask once, with a recommended answer, when the evidence
-  is absent or contradictory.
-- A public package: English, because that is what its destination speaks. In this
-  repo that is a CI rule — lint rejects CJK anywhere under `skills/**`.
-- A personal setup or a private package: the user's call.
-
-English is a default only when nothing indicates otherwise. Imposing it on a team
-that writes in another language is the tool overriding the project.
-
-## Writing
-
-- **Say what to do.** A prohibition names the thing it forbids and invites it;
-  measured head-to-head, prohibition wording produced more of the unwanted
-  behavior than no guidance at all. Keep a prohibition only as a guardrail that
-  cannot be phrased positively, and pair it with the positive alternative.
-- **One default, one escape hatch** _(platform)_ — not a menu of five libraries to
-  choose between.
-- **One term per concept** _(platform)_. Synonyms read as new concepts.
-- **Nothing time-sensitive** _(platform)_ — "before August 2025, use the old API"
-  rots in place.
-- **Write only what changes behavior** _(platform)_. A line the model would follow
-  anyway spends context and teaches nothing; it also blunts the lines that do teach.
-- **A rule records the failure that bought it**, in a clause where the rule lives. A
-  rule that can name none was never paid for — do not write it. This is what makes a
-  later audit survivable: a rule can be cut safely only by someone who knows why it is
-  there, and the memory does not persist while the record does. Without it the outcome
-  is not over-cutting but paralysis, and the skill swells until the cap pushes it into
-  a reference where it swells unseen.
-
-## Naming
-
-A name needs a shape, so it is settled after the draft, not before. Two names may
-be in play and they are different decisions — keep them in different turns, and say
-which one a question is deciding.
-
-**The skill's name** is the user's decision — they are the one who will type it. A
-lookup reports that a name is free; it does not report that it is right. Order:
-
-1. **Propose** candidates with your reasons, or take the name the user offers.
-   Short and apt: **gerund** (`skill-writing`, `rule-writing`) for managed-unit
-   tools; **short names** (`retro`) for standalone acts. Pick the family the skill
-   belongs to.
-2. **Check the machine** — a name already installed at the destination is a clash
-   wherever that destination is.
-3. **Check the registry**, and only for a skill that will be **published
-   publicly**: `npx skills find "<name>"`, looking for an exact `@<name>` match;
-   report a collision with its install count. A private package, a project, or a
-   personal setup skips a lookup that cannot apply to it.
-
-A failed check returns to 1 with what it found, and any alternative offered has
-itself been checked. The user settles the name at every pass.
-
-**The artifact's name** — the file a skill writes — answers to the user's project.
-Its name and location are settled with the output-shape question, under the
-project's conventions, and never in the same turn as the skill's own name.
-
-## High stakes
-
-A skill whose wrong answer carries legal, financial, or destructive consequence
-states its sources, is permitted to report that it does not know, and returns the
-judgment to a human rather than asserting. A confident wrong answer is the failure
-mode, and confidence is the default.
-
-## Scripts
-
-Add a script only for deterministic operations (parsing, counting, mechanical
-transforms) — never to encode judgment the model should make.
-
-- **Solve, don't punt** _(platform)_: the script handles the errors it can foresee
-  (a missing file, a permission denial) instead of failing and leaving the model
-  to improvise.
-- No unexplained constants _(platform)_. If you cannot say why the timeout is 47,
-  the model cannot either.
-- Forward slashes in every path _(platform)_, on every platform.
-- Say whether a file is to be RUN or READ _(platform)_ — "run `analyze.py` to
-  extract the fields" and "see `analyze.py` for the algorithm" are different
-  instructions.
-
-## Originality
-
-Absorb ideas and design patterns from other projects, but author all content here.
-Never copy another skill's text verbatim and never vendor a third-party skill into
-`skills/` as ours (see the repo's no-vendoring rule). Adopting a platform rule and
-citing it is not vendoring; restate it in our own words.
-
-## No third-party names in runtime text
-
-A skill's body and references name no skill this package does not maintain. Examples
-use a placeholder; a concrete name comes only from reading what is actually installed.
-The failure that bought this rule: an example here once named a real third-party
-skill, which biased the control choice toward it even where a fitter one was
-installed, would have rotted silently if that skill were renamed, and read as noise to
-every user who did not have it. A name the agent discovers is evidence; a name we ship
-is a standing recommendation for software we do not maintain.
-
-## Toolchain awareness (this package's skills only)
-
-Skills that belong to a toolchain (the setup/loop trio; the skill trio) may
-reference their siblings with a graceful fallback when a sibling is absent.
-Generic skills carry zero references to any toolchain.
+**Name no skill this package does not maintain** in a body or reference. A shipped name biases
+a choice that should follow evidence and rots when that skill is renamed. Use a placeholder; a
+concrete name comes only from reading what is installed. Siblings here (skill-writing,
+skill-auditing) may be named with a graceful fallback; a generic skill names none.
 
 ## Sources
 
-Rules marked _(platform)_ come from the Agent Skills documentation:
+- <https://platform.claude.com/docs/en/agents-and-tools/agent-skills/best-practices>
+- <https://platform.claude.com/docs/en/agents-and-tools/agent-skills/overview>
+- <https://code.claude.com/docs/en/skills>
 
-- Skill authoring best practices —
-  <https://docs.claude.com/en/docs/agents-and-tools/agent-skills/best-practices>
-- Agent Skills overview (progressive disclosure, token budgets) —
-  <https://docs.claude.com/en/docs/agents-and-tools/agent-skills/overview>
-- Claude Code skills (frontmatter keys, invocation) —
-  <https://code.claude.com/docs/en/skills>
-
-When the platform's guidance moves, these rules move with it — check the source
-before assuming a rule here is our preference.
+None of them says which natural language a skill is written in. When the platform's guidance
+moves, these rules move with it.

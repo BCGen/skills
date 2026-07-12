@@ -1,10 +1,6 @@
-# repo-quality-checks Specification
+# repo-quality-checks (delta)
 
-## Purpose
-
-TBD - created by archiving change add-ai-harness-skills. Update Purpose after archive.
-
-## Requirements
+## MODIFIED Requirements
 
 ### Requirement: Skill lint
 
@@ -70,24 +66,3 @@ budget that never fails, which is the defect this requirement exists to close.
 - **WHEN** a skill carries a reference that its flow reads only on a branch, and it is not
   declared as always-read
 - **THEN** its tokens are not charged against the total instruction budget
-
-### Requirement: CI and local execution
-
-The lint SHALL run in GitHub Actions on every push and be runnable locally with a single command.
-
-#### Scenario: Push with violation
-
-- **WHEN** a commit with a lint violation is pushed
-- **THEN** the workflow fails and reports each violation
-
-### Requirement: Shared routing copies must be byte-identical
-
-The repo lint SHALL verify that every skill shipping a copy of the shared
-routing logic (`skills/*/references/routing.md` among the consuming skills)
-is byte-identical to the others. Any difference SHALL fail the lint, so the
-canonical routing cannot drift across skills.
-
-#### Scenario: Drift fails the lint
-
-- **WHEN** one skill's `references/routing.md` differs from another's
-- **THEN** the lint fails and names the diverging files

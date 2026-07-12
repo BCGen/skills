@@ -9,117 +9,96 @@ skills package, a project, or the user's personal setup.
 
 ### Requirement: Convention-complete authoring
 
-A skill authored through skill-writing SHALL satisfy the authoring
-standard: frontmatter name equals the directory name; frontmatter carries only
-keys the Agent Skills specification allows; the name is within 64 characters of
-lowercase letters, digits and single interior hyphens, and avoids the platform's
-reserved words; description is a capability sentence plus a "Use when ..."
-sentence within 1024 characters, written in the third person and covering the
-words a user actually says, because an agent under-triggers a narrow
-description; body within 100 lines AND within the platform's 5,000-token instruction budget,
-whichever binds first, so that a body of few but enormous lines cannot evade the
-cap; detail split into references/ that sit one level below SKILL.md, that the
-body says when to read, and that carry a table of contents once a reference file
-passes 100 lines; written in the destination's language;
-original content (no vendoring); scripts only for deterministic operations, and
-a script resolves its own foreseeable errors rather than handing them back;
-instructions state what to do, reserving a prohibition for a guardrail that
-cannot be phrased positively and pairing it with the positive alternative; no
-time-sensitive content; one default approach with an escape hatch rather than a
-menu of options; one term per concept throughout. The conventions SHALL live in
-one references file that other skills (e.g. skill-auditing) can read as the same
-source of truth, and each rule adopted from the platform's published guidance
-SHALL record its source.
+A skill authored through skill-writing SHALL satisfy the authoring standard, which splits by
+what settles it:
 
-#### Scenario: Convention enforcement
+- **Absolute rules, stated as bare assertions with no reason attached** — frontmatter carries
+  only keys the Agent Skills specification allows; `name` equals the directory name, within 64
+  characters of lowercase letters, digits and single interior hyphens, avoiding the platform's
+  reserved words; `description` is ≤ 1024 characters, third person, free of angle brackets,
+  and shaped as a capability sentence plus a "Use when ..." sentence; the body is within its
+  line and token caps; references sit one level below SKILL.md and carry a table of contents
+  past 100 lines. **A reason SHALL NOT be written for any of these**: there is no situation in
+  which the agent weighs whether to comply, so a reason spends context and teaches nothing.
+- **Judgment, which keeps its reason** — the invocation-mode trade-off; the destination's
+  language; the high-stakes degradations; the boundary between a script and a judgment;
+  originality (no vendoring); no third-party skill named in runtime text. These SHALL live in
+  one references file that other skills (e.g. skill-auditing) read as the same source of
+  truth, and each rule adopted from the platform's published guidance SHALL record its source.
 
-- **WHEN** a draft violates any convention (e.g. body over 100 lines)
-- **THEN** skill-writing fixes or flags it before presenting the draft
+The description's triggers SHALL cover the words a user actually says, because an agent
+under-triggers a narrow description.
+
+#### Scenario: An absolute rule is written
+
+- **WHEN** a convention admits no judgment (e.g. `description` must be third person)
+- **THEN** it is stated as an assertion and carries no justification
 
 #### Scenario: Illegal frontmatter key
 
 - **WHEN** a draft carries a frontmatter key outside the allowed set
-- **THEN** skill-writing removes or relocates it before presenting the draft
+- **THEN** it is removed or relocated before the draft is presented
 
 ### Requirement: Naming discipline
 
-The name is the user's decision. skill-writing SHALL propose candidates with their
-reasons, or take a name the user offers, and the lookups SHALL inform that decision
-rather than make it: a registry that reports a name is free has not decided that it
-is the right name, and the user is the one who will type it.
+The name is the user's decision — they are the one who will type it. skill-writing SHALL
+propose candidates with their reasons, or take a name the user offers. A lookup reports that a
+name is free; it does not report that it is right.
 
-Naming SHALL follow the draft, not precede it: a name is decidable only once the
-skill has a shape, and a name proposed earlier lands in the middle of the
-interrogation — beside the question about the output artifact — with two naming
-threads open at once.
+Naming follows the draft, because a name needs a shape. It is settled in a clause, not a step:
+a wrong name is cheap to fix and does not earn its own stopping point. **Where the name already
+exists as a fact** — the skill is already referenced by a backlog entry, a routing table, or a
+sibling — that is reported, and the question becomes whether to rename, not what to name.
 
-A skill that produces a named artifact has two distinct naming decisions, and they
-SHALL NOT share a turn. The artifact's name and location are the user's, governed
-by the project's conventions, and are settled with the output-shape question. The
-skill's own name is settled after the draft. Each question SHALL say which of the
-two it is deciding.
+The checks are: the skills installed at the destination, and — **only for a skill that will be
+published publicly** — the registry, where an exact collision is reported with its install
+count.
 
-The order for the skill's own name SHALL be:
-
-1. Propose candidates with reasons, or take the user's own, following the
-   conventions' naming philosophy (short, apt, gerund for managed-unit tools).
-2. Check the name against the skills installed at the destination — a name already
-   installed there is a clash wherever the destination is.
-3. Check the registry, and only for a skill that will be published publicly. A
-   private package, a project, or a personal setup SHALL skip a lookup that cannot
-   apply to it.
-
-A failed check returns to step 1 with what it found; exact registry collisions are
-surfaced with install counts, and any alternative offered SHALL itself have been
-checked. The user settles the name at every pass.
+The artifact a skill writes has its own name, which is the user's and follows their project's
+conventions. It is settled with the output-shape question, never in the same turn as the
+skill's own name.
 
 #### Scenario: The name is chosen
 
 - **WHEN** the draft has a shape and needs a name
-- **THEN** skill-writing proposes candidates with reasons, the user settles it, and
-  only then do the installed-skill and registry checks run
+- **THEN** skill-writing proposes candidates with reasons, the user settles it, and only then do
+  the installed-skill and registry checks run
 
-#### Scenario: Collision found
+#### Scenario: The name already exists as a fact
 
-- **WHEN** the name the user settled on, for a skill bound for public publication,
-  has an exact match on skills.sh
-- **THEN** the collision is reported with install counts, and the alternatives
-  offered have themselves been checked — the user chooses again
+- **WHEN** the skill's name is already referenced elsewhere in the project
+- **THEN** that is reported, and the decision put to the user is whether to rename it
 
 #### Scenario: Unpublished skill
 
 - **WHEN** authoring a skill that will not be published publicly
-- **THEN** no registry lookup runs; only clashes with skills already installed at
-  the destination are avoided
-
-#### Scenario: The skill produces a named artifact
-
-- **WHEN** the skill being authored writes a file whose name and location must be
-  decided
-- **THEN** the artifact's name is settled with the output-shape question and the
-  skill's name after the draft, each question saying which one it decides, and
-  never both in one turn
+- **THEN** no registry lookup runs; only clashes with skills already installed at the
+  destination are avoided
 
 ### Requirement: Gather, draft, review flow
 
-The skill SHALL gather requirements (task domain, use cases, triggers,
-needed resources) before drafting, and present the draft for user review
-before finalizing. The description's trigger sentence is written from the
-gathered use cases, not invented afterward. Gathering SHALL ask what failure the
-user actually observed without the skill, and the trigger conditions SHALL come
-from that observed failure; when no failure has been seen, skill-writing SHALL
-say the triggers are unverified rather than inventing them.
+skill-writing SHALL establish, before drafting: **the failure an agent made without the
+skill**, and **the words the user would actually say** when they want it. Trigger conditions
+SHALL come from the observed failure; when no failure has been seen, skill-writing SHALL
+record the skill as unverified by evidence and proceed rather than inventing triggers — the
+control run then decides whether it should exist.
+
+These two are the only inputs the model cannot obtain for itself: a behavior delta needs a
+run, a trigger frequency needs the user's own vocabulary, and a direction needs an observed
+failure or the user's acceptance. Everything the model can establish by reading, it reads.
+
+The draft SHALL be presented for review before it is run.
 
 #### Scenario: Requirements before draft
 
 - **WHEN** the user asks for a new skill with an unstated trigger context
-- **THEN** skill-writing asks for the use cases before producing a draft
+- **THEN** skill-writing establishes the failure and the triggering words before drafting
 
 #### Scenario: No observed failure
 
 - **WHEN** the user cannot name a failure the agent made without the skill
-- **THEN** skill-writing flags the triggers as unverified and offers to draft
-  from stated use cases instead of inventing them
+- **THEN** skill-writing records the skill as unverified by evidence, proceeds, and the control
+  run becomes the decisive check
 
 ### Requirement: Destination-aware authoring (delegation target)
 
@@ -147,28 +126,6 @@ non-package triggers so delegated handoffs reach the skill.
 - **THEN** skill-writing asks one question with a recommended answer
   before writing
 
-### Requirement: Carrier gate before drafting
-
-A skill-writing invocation that did not arrive from a routing handoff SHALL
-first check whether a config, a lint rule, or a single project rule carries the
-need better than a skill, and SHALL report that mismatch instead of drafting.
-An invocation delegated by codify or retro SHALL skip the gate, because the
-shared routing table already made the carrier decision.
-
-#### Scenario: Direct request that a config carries better
-
-- **WHEN** a user asks directly for a skill that enforces something a linter or
-  config already expresses
-- **THEN** skill-writing names the fitter carrier and asks whether to proceed
-  before any draft is produced
-
-#### Scenario: Routing handoff skips the gate
-
-- **WHEN** codify or retro hands over a multi-step procedure per the shared
-  routing
-- **THEN** skill-writing proceeds to requirements gathering without re-asking
-  the carrier question
-
 ### Requirement: Invocation mode is decided, not defaulted
 
 Authoring SHALL establish whether the agent, or another skill, must reach the
@@ -192,17 +149,26 @@ SHALL stay model-invoked, and its description carries the triggers.
 
 ### Requirement: Editing an existing skill
 
-skill-writing SHALL support editing an existing skill, not only authoring a new
-one. An edit SHALL satisfy the same conventions, SHALL skip the registry
-collision check, and SHALL re-run the dry run against the scenario the edit was
-meant to fix.
+skill-writing SHALL support editing an existing skill, not only authoring a new one. An edit
+SHALL satisfy the same conventions, SHALL skip the naming and registry checks, and SHALL be
+run against **the pre-edit skill** on the scenario the edit was written to fix.
+
+**An edit that produces no behavior change on that scenario is a no-op and SHALL NOT land.**
+Comparing an edited skill against a naked agent is a test the skill already passed at birth
+and no edit can fail; it is how an instruction surface doubles while every step remains legal.
 
 #### Scenario: Audit fix routed for execution
 
-- **WHEN** skill-auditing routes an approved fix, or retro proposes an update to
-  a skill whose gap caused a mistake
-- **THEN** skill-writing edits that skill in place under the same conventions and
-  re-runs the dry run on the failing scenario, without a naming or registry step
+- **WHEN** skill-auditing routes an approved fix, or retro proposes an update to a skill whose
+  gap caused a mistake
+- **THEN** skill-writing edits that skill in place and runs the failing scenario against the
+  pre-edit version, without a naming or registry step
+
+#### Scenario: An edit that teaches nothing
+
+- **WHEN** the edited skill and the pre-edit skill behave identically on the scenario the edit
+  was written for
+- **THEN** the edit is reported as a no-op and is not landed
 
 ### Requirement: Bounded requirements interrogation
 
@@ -294,118 +260,145 @@ publicly.
 
 ### Requirement: The draft is run before it is finalized
 
-After drafting and before final review, skill-writing SHALL run the draft in a
-fresh-context subagent on a real scenario and present the result to the user.
-The run SHALL NOT depend on skill-testing being installed.
+skill-writing SHALL run the draft in a fresh context on a real scenario, **against a control,
+always**, and present the raw output of both to the user.
 
-The main path SHALL also be run once against a control, unless the skill is
-low-stakes. The control is the strongest alternative the user actually has: a
-skill installed at the destination that already performs the step, where one
-exists; the agent with no skill at all otherwise. A control of nothing answers
-only "is this better than nothing", while the question that decides whether the
-skill should exist is "is this better than what I already have". What the control
-gets wrong is what the skill has to teach; everything else in the draft is padding.
-When the control does as well, skill-writing SHALL report that the skill may not
-need to exist.
+**The control depends on the path:**
 
-Scenarios SHALL be drawn from situations the user states have actually happened
-or are about to, and SHALL be capped at three: the main path (always), one where
-a precondition is absent, and one where the skill should not fire.
+- **A new skill** — the control is the strongest alternative the user actually has: an
+  installed skill that already performs a step of the draft, where one exists; the agent with
+  no skill at all otherwise. **A control that does as well means the skill may not need to
+  exist, and skill-writing SHALL say so before finalizing.**
+- **An edit** — the control is **the skill as it stood before the edit**, run on **the scenario
+  the edit was written to fix**. The question an edit must answer is not whether the skill
+  beats nothing — that was settled at birth, and it is a test no edit can fail — but whether
+  **this edit teaches anything**. **An edit that does not change behavior on its own scenario
+  is a no-op and SHALL NOT land.**
 
-The user SHALL be shown what the agent produced — the raw output, not a verdict —
-and, specifically, every point where the agent improvised, because each such point
-marks something SKILL.md failed to state. Showing the output rather than a verdict
-is not a presentation preference: the agent grading these runs is the agent that
-wrote the draft, and that bias has no cheap fix short of an eval harness this skill
-does not build. Putting the raw output in front of the user is the safeguard.
+The control run is unconditional. It is the only thing that measures the behavior delta, and
+scaling it away on a low-stakes judgment is equivalent to deleting it. It costs one subagent.
+
+The run SHALL NOT depend on any sibling skill being installed: skill-writing authors into
+three destinations and must carry the method regardless.
+
+**What the control already does right is padding.** Every step of the draft that the control
+performed correctly without being told SHALL be cut — the control's output is a free
+per-step no-op signal, and no extra run is needed to read it.
+
+Scenarios SHALL be drawn from situations the user states have actually happened or are about
+to, and SHALL be capped at three: the main path (always), one where a precondition is absent,
+and one where the skill should not fire.
+
+The user SHALL be shown the raw output, not a verdict, and every point where the agent
+improvised — each such point marks something SKILL.md failed to state. This is not a
+presentation preference: the agent grading these runs is the agent that wrote the draft.
 Findings SHALL be folded into the draft before it is finalized.
+
+#### Scenario: An edit changes nothing
+
+- **WHEN** the pre-edit skill, run on the scenario the edit was written to fix, produces the
+  same behavior as the edited skill
+- **THEN** the edit is a no-op and does not land
 
 #### Scenario: The agent improvises mid-run
 
 - **WHEN** the subagent invents an assumption the draft never stated
-- **THEN** that point is reported to the user as a gap, and the draft is amended
-  before finalizing
+- **THEN** that point is reported to the user as a gap, and the draft is amended before
+  finalizing
+
+#### Scenario: The control already does a drafted step
+
+- **WHEN** the control performs one of the draft's steps correctly without being told
+- **THEN** that step is padding and is cut from the draft
 
 #### Scenario: An imagined edge case
 
-- **WHEN** a proposed scenario is one the user cannot say has happened or is
-  about to
+- **WHEN** a proposed scenario is one the user cannot say has happened or is about to
 - **THEN** it is not run, and the draft is not lengthened to cover it
-
-#### Scenario: An installed skill is the fitter control
-
-- **WHEN** a skill installed at the destination already performs the step the
-  draft covers
-- **THEN** it is the control for that run, in place of the agent with no skill
 
 #### Scenario: The control does as well as the skill
 
-- **WHEN** the control produces the same quality of result as the run with the
-  draft
-- **THEN** skill-writing reports that the skill may be unnecessary before it is
-  finalized
+- **WHEN** the control produces the same quality of result as the run with the draft
+- **THEN** skill-writing reports that the skill may be unnecessary before it is finalized
 
 ### Requirement: Effort scales with the cost of being wrong
 
-The depth of interrogation and the number of dry runs SHALL scale with what it
-costs when the skill is wrong — established during gathering, not discovered
-later. A low-stakes skill (a wrong result is merely rework) SHALL be interrogated
-only where an answer changes the output, and SHALL run the main path once,
-without a control. A high-stakes skill (a wrong result is legal, financial,
-destructive, or reaches people outside the team) SHALL be interrogated on every
-subject, and SHALL run all three scenarios plus the control.
+Effort SHALL scale with what it costs when the skill is wrong — the depth of the
+decomposition, the depth of the interrogation, and the number of scenarios.
 
-A process heavier than the skill deserves is a process people route around, and a
-skill-writing that is routed around governs nothing.
+**The cost SHALL be derived from observable facts, not judged by anyone.** It is the
+destination combined with the blast radius:
 
-#### Scenario: A small personal skill
+| Fact | Cost |
+| --- | --- |
+| destination is a personal setup | low — one person, one line to fix |
+| destination is a project | medium — a team, and git remembers |
+| destination is a public package | high — strangers, and it cannot be recalled |
+| the skill writes files, deletes files, or calls an external service | one level up |
 
-- **WHEN** the skill's worst outcome is that the user redoes the work by hand
-- **THEN** interrogation stays minimal and one main-path run finishes it
+The destination is already established; the blast radius is read from the draft's
+`allowed-tools` and its scripts. An agent asked to rate the stakes of its own workload has an
+incentive to rate them low, and a user asked the same question has an incentive to rate them
+low so the work goes faster. **Nobody judges, so nobody cheats.**
 
-#### Scenario: A skill whose error carries legal exposure
+A low-stakes skill is decomposed in one question, interrogated only where an answer changes
+the output, and run on the main path. A high-stakes skill is decomposed fully, interrogated on
+every subject, and run on all three scenarios. **The control runs in both cases.**
 
-- **WHEN** a wrong result exposes the user to legal or financial consequence
-- **THEN** every interrogation subject is covered and all three scenarios plus the
-  control are run
+A process heavier than the skill deserves is a process people route around.
+
+#### Scenario: A personal skill with no destructive tools
+
+- **WHEN** the destination is the user's own skills directory and the draft writes no files
+- **THEN** the cost is low, the decomposition and interrogation stay minimal, and one main-path
+  run plus its control finishes it
+
+#### Scenario: A public skill that deletes files
+
+- **WHEN** the destination is a public package and the draft deletes files
+- **THEN** the cost is high, every subject is covered, and all three scenarios plus the control
+  are run
+
+#### Scenario: The agent would rather call it cheap
+
+- **WHEN** the agent has not established the destination or the blast radius
+- **THEN** it reads them rather than assuming the stakes are low
 
 ### Requirement: Definition of done
 
-A skill SHALL be treated as finished only when all three hold: it satisfies the
-conventions; its main-path dry run produced no improvisation at any point that
-would change the output — an improvisation on something immaterial does not
-block; and the user has seen the actual run output and accepted it.
+A skill SHALL be treated as finished only when all three hold: the conventions are satisfied;
+the main-path run produced no improvisation that would change the output — an improvisation on
+something immaterial does not block; and **the user has seen the raw output of both the run
+and its control, and accepted it.**
 
-Amending the draft and re-running SHALL be capped at two further runs on the same
-gap. The cap does not license shipping the gap: a gap that survives two amendments
-is a gap that adding sentences will not close, and skill-writing SHALL switch
-tactics rather than continue. It SHALL put three exits to the user, and SHALL NOT
-finish by leaving the gap unaddressed:
+A control that does as well is not a pass. It is the finding, and it SHALL be reported before
+the skill is finalized.
 
-1. **Narrow the skill** — drop the branch the agent keeps improvising on, or split
-   it into its own skill. Narrowing restarts the cap, because the result is a
-   smaller skill rather than a third attempt at the same one.
-2. **Turn the gap into an explicit handoff** — state in the skill that on reaching
-   this situation the agent stops and asks. An unhandled hole becomes a handled
-   one: the agent no longer guesses, it asks.
-3. **Abandon the skill** — the evidence now says what the carrier gate suspected.
+Amending the draft and re-running SHALL be capped at two further runs on the same gap. A gap
+that survives two amendments is a gap that adding sentences will not close. skill-writing SHALL
+put three exits to the user and SHALL NOT finish by leaving the gap unaddressed:
 
-A limitation the user accepts SHALL be written into the skill itself, not left in
-the conversation, so that the agent meeting that situation later knows to stop
-rather than improvise.
+1. **Narrow the skill** — drop the branch the agent keeps improvising on, or split it out.
+   Narrowing restarts the cap.
+2. **Turn the gap into an explicit handoff** — the skill states that on reaching this situation
+   the agent stops and asks.
+3. **Abandon the skill** — the evidence now says what the decomposition suspected.
+
+A limitation the user accepts SHALL be written into the skill itself, not left in the
+conversation.
 
 #### Scenario: Material gap survives the cap
 
-- **WHEN** the draft has been amended and re-run twice and the agent still
-  improvises on something that changes the output
-- **THEN** skill-writing stops amending, names the surviving gap, and puts the
-  three exits to the user
+- **WHEN** the draft has been amended and re-run twice and the agent still improvises on
+  something that changes the output
+- **THEN** skill-writing stops amending, names the surviving gap, and puts the three exits to
+  the user
 
 #### Scenario: An accepted limitation
 
 - **WHEN** the user accepts a limitation rather than narrowing the skill
-- **THEN** the skill states that limitation, and instructs the agent to stop and
-  ask when it is reached
+- **THEN** the skill states that limitation, and instructs the agent to stop and ask when it is
+  reached
 
 #### Scenario: Immaterial improvisation
 
@@ -426,31 +419,24 @@ should be committed for the rest of the team.
 
 ### Requirement: How a question is asked
 
-skill-writing SHALL follow, and SHALL teach any skill it authors whose job includes
-drawing something out of a human, these rules for asking. They hold in both modes,
-because they are facts about attention in a serial conversation:
+skill-writing SHALL follow, and SHALL teach any skill it authors whose job includes drawing
+something out of a human, these rules for asking. They hold in both interview modes, because
+they are facts about attention in a serial conversation:
 
-- **One question at a time.** A batch of questions is bewildering, and it destroys
-  the ordering: an early answer reshapes which questions still matter.
-- **Every question carries a recommended answer, with its reason.** Producing an
-  answer is expensive; reacting to one is cheap. The recommendation is a reaction
-  surface, and it exposes the agent's model of the problem so the user can correct it.
-  A neutral label offers nothing to push against; an argued position can be refuted,
-  and the refusal is where the truth arrives. This matters more when the user has not
-  thought the thing through, not less — they cannot author an answer, but they can
-  always react to one.
-- **A question states what it decides** — what changes depending on the answer, not
-  only what the options are.
-- **Facts are looked up, never asked.** A question the agent could answer for itself
-  spends the user's attention on nothing. Only decisions — where the user is the sole
-  possible source — earn a question.
-- **Stop when nothing further would change the result**, and never by hitting a
-  count. A long interview on an under-specified idea is the interview working; a long
-  interview of low-value questions is a defect in the questions, and a cap would hide
-  the difference.
+- **One question at a time.** A batch destroys the ordering: an early answer reshapes which
+  questions still matter.
+- **Every question carries a recommended answer, with its reason.** Producing an answer is
+  expensive; reacting to one is cheap. The recommendation exposes the agent's model of the
+  problem so the user can correct it — and this matters more, not less, when the user has not
+  thought the thing through.
+- **A question states what it decides.**
+- **Facts are looked up, never asked.**
+- **A question that cannot be phrased precisely is parked** in a holding list and revisited
+  when a later answer sharpens it. An unphrasable question asked early returns a vague answer,
+  and a vague answer gets treated as settled.
+- **Stop when nothing further would change the result**, never by hitting a count.
 
-Whatever skill-writing models, the skills it authors reproduce. The rules therefore
-govern its own interrogation as well as the skills it writes.
+Whatever skill-writing models, the skills it authors reproduce.
 
 #### Scenario: A fork exists
 
@@ -459,34 +445,13 @@ govern its own interrogation as well as the skills it writes.
 
 #### Scenario: An authored skill interviews a user
 
-- **WHEN** the skill being authored elicits ideas, requirements, or decisions from a
-  human
+- **WHEN** the skill being authored elicits ideas, requirements, or decisions from a human
 - **THEN** its interview step carries these rules, so it does not ask in menus
 
 #### Scenario: The answer is discoverable
 
 - **WHEN** the agent could establish something by reading the project itself
 - **THEN** it reads, and does not spend a question on it
-
-### Requirement: Step-level comparison against installed skills
-
-Once the draft's steps are known, skill-writing SHALL compare each step against
-the skills installed at the destination, and SHALL surface a step that an
-installed skill already performs better. Overlap at the level of a whole job is
-what the duplicate check catches; overlap at the level of a single step is not,
-and it is the common case — an installed skill may do one step of the drafted
-skill far better while doing nothing else it does.
-
-The drafted step SHALL then at least meet that skill's bar. skill-writing SHALL
-NOT make the authored skill depend on it: an installed skill cannot be assumed
-present wherever the authored skill later runs.
-
-#### Scenario: An installed skill does one step better
-
-- **WHEN** a skill installed at the destination already performs one of the
-  drafted skill's steps better than the draft does
-- **THEN** it is named to the user, it becomes the control for that step, and the
-  draft is held to its standard rather than calling out to it
 
 ### Requirement: The dry run matches the skill's shape
 
@@ -612,34 +577,6 @@ the user the exact prompt before it is sent.
 - **WHEN** a dry run is about to be dispatched
 - **THEN** the exact prompt is shown to the user first
 
-### Requirement: Two checkpoints
-
-skill-writing SHALL stop and show its understanding twice, and SHALL wait for the
-user each time.
-
-**After interrogation, before naming or drafting**, it restates what it understood
-— the job, the steps, the triggers, the artifacts it writes, and the decisions
-taken from the answers — and asks what is missing. Interrogation asks one question
-at a time, so the user never sees the whole; this is where they do, and it is the
-cheapest moment to catch a misunderstanding, because nothing has been written yet.
-
-**After the draft, before the run**, it presents what it wrote and asks for the
-go-ahead. A run spends subagent turns, and for an elicitation skill it spends the
-user's own time; spending them on a draft the user would have rejected on sight is
-waste.
-
-#### Scenario: Understanding is confirmed before drafting
-
-- **WHEN** interrogation has answered everything that would change the output
-- **THEN** skill-writing restates the job, steps, triggers, artifacts and decisions,
-  asks what is missing, and waits — no name is proposed and no draft is written
-  until the user answers
-
-#### Scenario: The draft is confirmed before it is run
-
-- **WHEN** the draft is written
-- **THEN** it is presented to the user and the run waits for their go-ahead
-
 ### Requirement: A scenario is a use of the skill, not the request for it
 
 A dry-run scenario SHALL be an actual instance of the job the skill does, drawn
@@ -666,62 +603,44 @@ scenario hides that instead of reporting it.
 
 ### Requirement: Elicitation has two modes
 
-A step that elicits from a human SHALL establish which mode it is in, because the
-rules invert between them.
+A step that elicits from a human SHALL establish which mode it is in, because the rules invert
+between them.
 
-- **Adversarial** — an existing claim is pressed until it holds. Questions follow
-  the dependency tree depth-first; pressure is contradiction, held side by side and
-  put to the user as a choice; progress shrinks the space; the interview ends when
-  the plan is agreed.
+- **Adversarial** — an existing claim is pressed until it holds. Questions follow the dependency
+  tree depth-first; pressure is contradiction, held side by side and put to the user as a
+  choice; progress shrinks the space.
 - **Generative** — something half-formed is drawn out. Questions enumerate the space
-  **breadth-first before any branch is resolved**, because depth-first presupposes a
-  tree that does not exist yet and commits the user to whichever branch their opening
-  sentence happened to name. Pressure is manufactured concreteness: with nothing to
-  contradict, the agent offers a specific and possibly wrong proposal so the user has
-  something to push against. **Progress may widen the space** — a question that opens
-  three branches has advanced the work. The interview ends at saturation, when new
-  questions stop yielding new material.
+  **breadth-first before any branch is resolved**, because depth-first presupposes a tree that
+  does not exist yet. Pressure is manufactured concreteness: a specific and possibly wrong
+  proposal, offered so the user has something to push against. **Progress may widen the space.**
 
-A skill that both expands and then presses SHALL run the generative pass first: an
-unmapped space collapses under pressure.
+skill-writing SHALL also settle, for the skill being authored, whether it opens a space, closes
+one, or does both — and both is allowed only as two named phases in order, **generative first**.
+An unmapped space collapses under pressure, and a request that silently wants both carries a
+contradiction that surfaces later as a rewrite.
 
 #### Scenario: A skill that shapes a vague idea
 
-- **WHEN** the authored skill's job is to draw out an inspiration the user has not
-  thought through
-- **THEN** its interview enumerates the space before resolving any branch, offers
-  concrete proposals to react against rather than contradictions to defend, and
-  treats a question that opens new branches as progress
+- **WHEN** the authored skill's job is to draw out an inspiration the user has not thought
+  through
+- **THEN** its interview enumerates the space before resolving any branch, and treats a question
+  that opens new branches as progress
 
-#### Scenario: A skill that stress-tests a plan
+#### Scenario: The request wants both without noticing
 
-- **WHEN** the authored skill's job is to press an existing claim
-- **THEN** its interview follows the dependency tree depth-first and applies pressure
-  by holding contradictions side by side
-
-### Requirement: A question that cannot be phrased is parked
-
-A question SHALL be asked only when it can be **stated** precisely — not when it can
-be answered precisely. A question that cannot yet be phrased SHALL be held in a
-list and revisited when a later answer sharpens it.
-
-An unphrasable question asked early returns a vague answer, and a vague answer gets
-treated as settled. The holding list is what lets the agent record that a question
-exists before it can articulate it.
-
-#### Scenario: A question is sensed but not yet sharp
-
-- **WHEN** the agent perceives an unresolved area it cannot state as a precise
-  question
-- **THEN** it is recorded in the holding list rather than asked, and revisited after
-  the answers that would sharpen it
+- **WHEN** the opening request asks for free exploration and for an output that could be built
+  from
+- **THEN** skill-writing names the tension and settles it before drafting
 
 ### Requirement: The user ratifies the exit
 
-The agent SHALL NOT supply the user's side of a question it asked, and SHALL NOT
-declare the interview complete on its own authority — a shared understanding is a
-two-party state, and only the user can confirm the second party. It SHALL NOT proceed
-to act until they do.
+The agent SHALL NOT supply the user's side of a question it asked, and SHALL NOT declare a
+shared understanding complete on its own authority. It SHALL NOT act until they confirm.
+
+Where the exit is the root of a decomposition, ratification is the **second symptom the user
+supplies**, not their assent — assent can be nodded through, and a model that has invented a
+root will be nodded past. Where no second symptom exists, the actionability criterion settles
+it instead.
 
 The bar the interview aims at SHALL be checkable: the result is complete when someone
 downstream could act on it without asking a single question.
@@ -738,27 +657,28 @@ downstream could act on it without asking a single question.
 
 ### Requirement: A rule records the failure that bought it
 
-A rule written into a skill SHALL record the failure it exists to prevent, in a clause
-where the rule lives. A rule that cannot name one is a rule that was never paid for,
-and it is a candidate for removal at the next audit.
+A rule written into a skill SHALL be payable: whoever writes it MUST be able to name the
+failure it prevents. A rule that can name none SHALL NOT be written — the model would likely
+have done it anyway.
 
-This is what makes a later audit survivable. A rule can be cut safely only by someone
-who knows why it is there, and the memory of the failure does not persist; the record
-of it does. Without it the realistic outcome is not over-cutting but paralysis — no
-one dares remove anything, and the skill swells until the cap pushes it into a
-reference, where it swells unseen.
+**The record of that failure belongs in the change history, not in the skill's runtime text.**
+The runtime text carries the rule; a reader who needs to know why it exists reads the change
+that introduced it. Rationale in the skill is loaded on every run, teaches nothing, and blunts
+the rules that do teach.
 
-A rule needing a paragraph of justification is a rule worth questioning.
+**An absolute rule carries no reason at all**: where no judgment is being made, a reason is
+pure cost.
 
 #### Scenario: A rule is authored
 
 - **WHEN** a rule goes into a skill
-- **THEN** it carries the failure it prevents, in a clause
+- **THEN** the failure it prevents is stated in the change that introduces it, and the skill
+  carries the rule alone
 
 #### Scenario: A rule with nothing behind it
 
 - **WHEN** a proposed rule names no failure, and none can be produced
-- **THEN** it is not written — the model would likely have done it anyway
+- **THEN** it is not written
 
 ### Requirement: Runtime text names no third-party skill
 
@@ -783,50 +703,6 @@ read by people is unaffected.
 - **THEN** it names that skill to the user — a discovered name is evidence, not a
   shipped recommendation
 
-### Requirement: The premise is pressed before the procedure
-
-skill-writing SHALL press the nouns of the user's opening request before it
-interrogates the procedure they describe. The artifact, its format, its language, and
-the name of the process are proposals — the vocabulary the user arrived with — and a
-question asked inside a premise can never reach the premise.
-
-Each such noun SHALL be given one concrete alternative to push against, with a reason,
-and SHALL be pressed once. A user who keeps their premise keeps it and the flow
-continues: what matters is that they chose it rather than inheriting it from their own
-first sentence.
-
-The agent SHALL NOT do to the request what it is forbidden to do to an answer — accept
-it as given.
-
-#### Scenario: The request names an artifact
-
-- **WHEN** the opening request names an output ("a PRD", "a mindmap")
-- **THEN** each is offered a concrete alternative to react against before the procedure
-  is interrogated, and the choice is the user's
-
-#### Scenario: The user keeps the premise
-
-- **WHEN** the user hears the alternative and keeps what they said
-- **THEN** it is not raised again, and the flow moves on
-
-### Requirement: Divergent or convergent is settled early
-
-skill-writing SHALL establish whether the skill being authored opens a space, closes
-one, or does both, as part of pressing the premise. A skill may do both — several
-legitimately must — but only as two named phases in order, generative first, with a
-boundary between them.
-
-An opening request that silently wants both carries a contradiction: roaming freely and
-producing a buildable specification are not the same skill, and the contradiction
-surfaces later as a rewrite. An unmapped space collapses under pressure.
-
-#### Scenario: The request wants both without noticing
-
-- **WHEN** the opening request asks for free exploration and for an output that could be
-  built from
-- **THEN** skill-writing names the tension and settles it before drafting — one, or both
-  as ordered phases
-
 ### Requirement: A premise that falls voids what was built on it
 
 When the user overturns a premise, skill-writing SHALL return to the understanding
@@ -841,3 +717,158 @@ draft around the new premise keeps the dead decisions alive and hides them.
 - **WHEN** the user rejects a premise the draft was built on
 - **THEN** skill-writing stops, returns to the checkpoint, states what is void and what
   survives, and does not touch the draft until they are renegotiated
+
+### Requirement: The problem is decomposed before candidates are drawn
+
+skill-writing SHALL establish the problem the user is trying to solve — not the solution they
+asked for — and derive candidate solutions from it. The opening request names a solution; the
+skill it names is one candidate among the several the problem admits, and it may win.
+
+The depth of the decomposition SHALL scale with the cost of being wrong.
+
+#### Scenario: The requested solution is not the derived one
+
+- **WHEN** the user asks for a skill that converts meeting notes into a PRD, and the
+  decomposition finds that the acceptance criteria the engineers keep asking for were never
+  produced at the meeting
+- **THEN** the candidate list carries the derived solutions, the requested converter is among
+  them, and the reason it fails is stated
+
+#### Scenario: The problem is exactly the one stated
+
+- **WHEN** the decomposition confirms the user's problem is the one their request already
+  names
+- **THEN** the requested solution stands, the flow proceeds, and no alternative is
+  manufactured to demonstrate that a derivation occurred
+
+### Requirement: Information conservation strikes a hallucination machine
+
+Each candidate SHALL declare, for every field of its output, where that information comes
+from, drawn from a closed set: **the input, a person, a file, or a tool**. "Inferred",
+"common sense", and the model's own knowledge SHALL NOT be accepted as a source. A skill can
+move, filter, structure, or fetch information; it cannot create it.
+
+A candidate whose output requires information its input does not contain, and which it never
+fetches, SHALL be struck: it can only produce that information by inventing it, and it will
+invent it convincingly.
+
+This check exists because supplying the missing difference is the model's default behavior,
+not its lapse — the failure is silent, and the user signs off on it.
+
+#### Scenario: The input cannot carry the output
+
+- **WHEN** a candidate transforms meeting notes into a document whose fields include
+  acceptance criteria, and the notes contain none
+- **THEN** the candidate is struck unless it fetches them from a person, a file, or a tool
+
+#### Scenario: An illegal source
+
+- **WHEN** a candidate declares that a field will be "inferred from the codebase" rather than
+  read from a named file or produced by a named tool
+- **THEN** the source is rejected as illegal and the candidate is struck or amended
+
+### Requirement: Each candidate is asked whether the information can be produced upstream
+
+skill-writing SHALL ask, of each candidate, **whether the missing information could be
+produced further upstream**, and SHALL carry any such candidate into the list.
+
+Information conservation governs the input-output axis and cannot see the time axis: told
+that the information is absent from the input, its only escape is to fetch it at run time,
+never to arrange for it to exist earlier.
+
+#### Scenario: The upstream candidate is the better one
+
+- **WHEN** conservation shows a document's fields are absent from its input and could be
+  fetched from the user at run time
+- **THEN** skill-writing also asks whether they could be produced at their source, and
+  surfaces that candidate alongside the run-time one
+
+### Requirement: Each candidate names the layer of the decomposition it attacks
+
+Every candidate SHALL name the layer of the decomposition it attacks. A candidate that can
+name none SHALL NOT count — it is a straw man, floated to satisfy a quota rather than grown
+from the problem.
+
+A countable floor ("at least one non-skill carrier") is satisfied by exactly the thing it was
+meant to prevent: a weak non-skill candidate, raised and struck. A straw man can fake the
+*shape* of a carrier; it cannot fake a causal link to the root, because the root is material
+the user supplied.
+
+A non-skill carrier then follows as an inference rather than a rule: the deepest layer almost
+always lies outside any skill's run time, so the candidate that attacks it is almost always
+not a skill. The list is grown, not ticked.
+
+#### Scenario: A candidate that attacks nothing
+
+- **WHEN** a candidate cannot be tied to any layer of the decomposition
+- **THEN** it is discarded rather than counted
+
+#### Scenario: The root lies outside a skill's run time
+
+- **WHEN** the deepest layer names something that happens before the skill would ever run
+- **THEN** the candidate attacking it is a non-skill carrier, and it is surfaced with the rest
+
+### Requirement: The decomposition stops on a second symptom, or on unactionability
+
+skill-writing SHALL stop the decomposition when **either** criterion is met, and SHALL NOT
+require both:
+
+1. **A second symptom, supplied by the user.** A real root explains more than the symptom in
+   hand. Ask **where else this root hurts them**; a second symptom they name themselves is
+   proof the decomposition reached bottom. The model cannot supply it, which is why it cannot
+   be nodded through.
+2. **Unactionability.** When a layer lands on something the user has no power to change, stop
+   and back up one.
+
+**Finding no second symptom SHALL NOT be treated as grounds to keep digging.** Single-symptom
+true roots exist. Used as a continue-trigger, the first criterion would manufacture the
+over-decomposition it exists to prevent.
+
+#### Scenario: The root explains more than what was brought
+
+- **WHEN** the user names a second, unmentioned symptom the root also explains
+- **THEN** the decomposition stops there and candidates are drawn
+
+#### Scenario: No second symptom, but the layer is still actionable
+
+- **WHEN** the user can name nothing else the root explains, and the layer is something they
+  could act on
+- **THEN** the decomposition may stop; the absence of a second symptom is not a reason to
+  continue
+
+#### Scenario: The layer lands outside the user's power
+
+- **WHEN** a layer names something the user cannot change
+- **THEN** the decomposition stops and backs up one layer
+
+### Requirement: The destination's governance may forbid the write
+
+skill-writing SHALL establish whether the destination gates writes — a spec-driven directory,
+a review requirement, a protected path — and SHALL NOT write the draft into a destination
+whose governance forbids an unproposed file. Where the write is gated, skill-writing SHALL
+produce the draft, name the gate, and stop.
+
+The failure this prevents: instructed to "write SKILL.md at the destination", an agent
+authoring into a spec-governed group drops an unproposed file into it and reports success.
+
+#### Scenario: A spec-gated destination
+
+- **WHEN** the destination requires a proposal before a skill lands
+- **THEN** skill-writing produces the draft, states that the destination is gated and what the
+  gate requires, and does not write the file
+
+### Requirement: A duplicate candidate may also be the control
+
+skill-writing SHALL say so when the skill found by the duplicate check and the skill chosen as
+the control are the same skill. That coincidence is evidence, not an error: an installed skill
+that covers the job is by definition the strongest alternative the user has.
+
+When they coincide, the control run answers the duplicate question directly — if the
+installed skill does as well, the draft is the duplicate the check suspected.
+
+#### Scenario: The duplicate candidate wins the control run
+
+- **WHEN** the skill named by the duplicate check, run as the control, produces a result as
+  good as the draft's
+- **THEN** skill-writing reports that the draft duplicates it and offers to edit that skill
+  instead
