@@ -21,7 +21,7 @@ Minimal, with pre-authorization so the run completes:
 > Follow the skill at `<repo>/skills/codify/SKILL.md` to codify the project
 > at `<sandbox>`. I pre-approve your proposed config/doc writes; for any
 > convention needing my confirmation, state the question and assume it IS a
-> team convention. rule-writing and skill-writing are not installed. Write
+> team convention. rule-writing is not installed. Write
 > your routing report to `<sandbox>/codify-report.md`.
 
 ## Mechanical checks (on the report and the sandbox)

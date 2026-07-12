@@ -1,40 +1,6 @@
-# skill-auditing Specification
+# skill-auditing (delta)
 
-## Purpose
-
-Two-layer staleness audit (format and content facts) of any skills directory.
-
-## Requirements
-
-### Requirement: Two audit layers, reported separately
-
-The skill SHALL audit on two layers: format (frontmatter shape,
-description trigger sentence, body length, references integrity — checked
-offline against the authoring conventions file) and content facts
-(commands, APIs, versions, paths referenced by the skill — verified
-against live documentation). Findings SHALL be reported per layer with
-severity and the evidence or source for each.
-
-#### Scenario: Outdated content fact
-
-- **WHEN** a skill instructs a command or API usage that current official docs contradict
-- **THEN** the finding cites the current doc as the source
-
-#### Scenario: Unverifiable claim
-
-- **WHEN** a content fact cannot be confirmed or denied from available sources
-- **THEN** it is listed as unverifiable, not guessed
-
-### Requirement: Generic target
-
-The skill SHALL default to auditing the current project's installed
-skills and accept any directory path, including this repo's own
-`skills/`.
-
-#### Scenario: Explicit path
-
-- **WHEN** the user names a directory
-- **THEN** that directory's skills are audited instead of the default
+## MODIFIED Requirements
 
 ### Requirement: Fix routing
 

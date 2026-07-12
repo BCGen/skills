@@ -38,4 +38,4 @@ body restates a reference it tells the agent to read on the same line.
 - the rule with no provenance is reported as a **candidate**, with reasoning — not as
   a defect, and not deleted
 - the restated passage is reported as a no-op without further evidence
-- nothing is edited; approved fixes route to skill-writing
+- nothing is edited without consent; an approved fix is applied in place

@@ -28,12 +28,11 @@ npx skills@latest update
 
 ## Agent harness & skill authoring
 
-Skills that make an agent learn from a project and from its own mistakes,
-plus the toolchain for authoring skills themselves. A coherent set —
-[read the full story](docs/ai-harness-skills.md).
+Skills that make an agent learn from a project and from its own mistakes.
+A coherent set — [read the full story](docs/ai-harness-skills.md).
 
 **In scope:** capturing conventions, routing lessons into durable rules,
-writing and testing skills.
+and auditing skills.
 **Out of scope:** anything tied to one language, framework, or product.
 
 | Skill | What it does | When to use it |
@@ -42,8 +41,17 @@ writing and testing skills.
 | [codify](skills/codify/SKILL.md) | Captures a project's existing conventions so the agent follows them from the first run. | First on an existing project, before the agent's first real task. Re-run as things evolve — it reconciles, never duplicates, and proposes upgrades when placed artifacts fall short of current standards. |
 | [retro](skills/retro/SKILL.md) | After a task, turns your corrections into durable improvements, with your consent. | At the end of every task — especially one where you corrected the agent. Saying done or wrap up triggers it too. |
 | [rule-writing](skills/rule-writing/SKILL.md) | The one place rules get written — filtered, budgeted, provenance-stamped. | Mostly invoked by codify/retro handing it drafts; call it directly when you already know a landmine worth a rule. |
-| [skill-writing](skills/skill-writing/SKILL.md) | Authors or edits a skill — decomposing the problem behind the request, then running the draft against a control before you trust it. An edit is run against the version it replaces: if behaviour does not change, the edit taught nothing. | When a procedure is worth capturing as a skill — your own idea, or a codify/retro handoff. |
 | [skill-auditing](skills/skill-auditing/SKILL.md) | Audits a skills directory for stale format or facts. | Periodically, or when a skill seems outdated. |
+
+## Writing a skill
+
+We don't ship one for this. Claude understands the SKILL.md format natively — ask it to
+write one. When you want the draft **measured** rather than trusted:
+
+| | |
+| --- | --- |
+| [skill-creator](https://skills.sh/anthropics/skills/skill-creator) | Anthropic's own. Evals against a baseline, benchmarking, description tuning. |
+| [writing-great-skills](https://skills.sh/mattpocock/skills/writing-great-skills) | A style reference — the vocabulary that makes a skill predictable. |
 
 ## Contributing
 

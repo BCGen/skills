@@ -41,7 +41,7 @@ Apply the routing table in the reference. Key decisions:
 - **Judgment / tribal** → a code pattern is only a CLUE. ASK the user
   whether it is a required convention. Once confirmed, prefer a project doc
   over a rule (see Step 3).
-- **Procedure / build-step structure** → hand to skill-writing.
+- **Procedure / build-step structure** → write a project-local skill directly.
 - **Must-never / agent-behavior / file-generator** → paste-ready pointer.
 - **Conflict** → authority order settles cross-tier drift silently; ask the
   user only on a same-tier tie. Never write a prose precedence rule.
@@ -75,8 +75,8 @@ option-prompt tool when it has one (Claude Code: AskUserQuestion). On approval:
   hand-written content); a second run produces no further change.
 - **Rule** → hand to rule-writing (single write path). Not installed → print
   the draft, mention the install option at most once.
-- **Procedure / structure** → hand to skill-writing. Not installed →
-  summarize as a pointer.
+- **Procedure / structure** → write the project-local skill directly. The
+  SKILL.md format is native; no delegate is needed.
 - **Pointer** → output the paste-ready snippet; do not wire it.
 
 ## Commit conventions (an absorbed dimension, not a separate skill)

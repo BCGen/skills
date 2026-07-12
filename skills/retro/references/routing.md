@@ -46,8 +46,8 @@ rule.
 | Mechanically enforceable, not yet enforced | generate a declarative config artifact |
 | Mechanically enforceable, already enforced by config | nothing (already prevented) |
 | Judgment / tribal (confirmed) | project doc first, rule last — see below |
-| Multi-step procedure | hand to skill-writing (project-local skill) |
-| Structural default as build steps | hand to skill-writing |
+| Multi-step procedure | write a project-local skill directly |
+| Structural default as build steps | write a project-local skill directly |
 | Structural default needing a file generator | pointer (plop/hygen snippet) |
 | Must-never / agent-behavior setting | pointer (hook/permission/CI snippet) |
 | Conflicting | authority order; ask only same-tier ties |
@@ -194,6 +194,7 @@ Two invariants:
 ## Delegation
 
 - Rules → rule-writing (single write path; unchanged filter and budget).
-- Procedures / build-step structure → skill-writing (project-local skill).
-- If a delegate skill is not installed, print the drafted content and
-  mention the install option at most once.
+  Not installed → print the drafted rule and mention the install option at
+  most once.
+- Procedures / build-step structure → write a project-local skill directly.
+  The SKILL.md format is native to the model; there is no delegate.

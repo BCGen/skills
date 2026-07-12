@@ -17,7 +17,7 @@ that reads `AGENTS.md`.
 
 ```sh
 npx skills@latest add BCGen/skills -s harness-sync codify retro rule-writing \
-  skill-writing skill-testing skill-auditing
+  skill-auditing
 ```
 
 Without the skill-authoring toolchain:
