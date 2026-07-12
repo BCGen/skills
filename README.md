@@ -46,12 +46,13 @@ and auditing skills.
 ## Writing a skill
 
 We don't ship one for this. Claude understands the SKILL.md format natively — ask it to
-write one. When you want the draft **measured** rather than trusted:
+write one. The tools worth reaching for are already out there:
 
 | | |
 | --- | --- |
-| [skill-creator](https://skills.sh/anthropics/skills/skill-creator) | Anthropic's own. Evals against a baseline, benchmarking, description tuning. |
+| [grilling](https://skills.sh/mattpocock/skills/grilling) | One question at a time, each carrying a recommended answer for you to push against. The hardest part of writing a skill is getting the procedure out of a human's head. |
 | [writing-great-skills](https://skills.sh/mattpocock/skills/writing-great-skills) | A style reference — the vocabulary that makes a skill predictable. |
+| [skill-creator](https://skills.sh/anthropics/skills/skill-creator) | Anthropic's own. Evals against a baseline, benchmarking, description tuning — for when you want the draft measured rather than trusted. |
 
 ## Contributing
 
